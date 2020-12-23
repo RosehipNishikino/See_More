@@ -4,7 +4,7 @@ using System.IO;
 using DATOS_SEEMORE;
 using MODELOS_SEEMORE;
 
-namespace See_more
+namespace See_More
 {
     public partial class Iniciar_Sesion : Form
     {

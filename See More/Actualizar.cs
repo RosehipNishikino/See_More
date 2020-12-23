@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using DATOS_SEEMORE;
 using MODELOS_SEEMORE;
 
-namespace See_more
+namespace See_More
 {
     public partial class Actualizar : Form
     {

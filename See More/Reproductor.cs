@@ -6,11 +6,11 @@ using System.IO;
 using MODELOS_SEEMORE;
 using DATOS_SEEMORE;
 
-namespace See_more
+namespace See_More
 {
-    public partial class Form1 : Form
+    public partial class Reproductor : Form
     {
-        public Form1()
+        public Reproductor()
         {
             InitializeComponent();
             Boolean acabo = false, actua = false;

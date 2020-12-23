@@ -1,6 +1,6 @@
-﻿namespace See_more
+﻿namespace See_More
 {
-    partial class Form1
+    partial class Reproductor
     {
         /// <summary>
         /// Variable del diseñador necesaria.

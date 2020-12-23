@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 
-namespace See_more
+namespace See_More
 {
     public partial class Imagenes_de_fondo : Form
     {

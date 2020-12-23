@@ -5,7 +5,7 @@ using System.IO;
 using MODELOS_SEEMORE;
 using DATOS_SEEMORE;
 
-namespace See_more
+namespace See_More
 {
     public partial class Crear_Cuenta : Form
     {

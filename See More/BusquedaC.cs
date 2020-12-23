@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using MODELOS_SEEMORE;
 using DATOS_SEEMORE;
 
-namespace See_more
+namespace See_More
 {
     public partial class BusquedaC : Form
     {

@@ -3,7 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace See_more
+namespace See_More
 {
     public partial class Historial : Form
     {

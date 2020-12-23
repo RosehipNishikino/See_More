@@ -1,4 +1,4 @@
-﻿namespace See_more
+﻿namespace See_More
 {
     partial class Imagenes_de_fondo
     {

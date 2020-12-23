@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using MODELOS_SEEMORE;
 using DATOS_SEEMORE;
 
-namespace See_more
+namespace See_More
 {
     public partial class Busqueda : Form
     {
@@ -25,7 +25,6 @@ namespace See_more
                 rd.Close();
             }
             catch (Exception) { }
-            var conn = Conexion.ObtenerConexion();
             if(Configuracion.existeConexion)
             {
                 dgvDatos.DataSource = DatosSeeMore.BuscarT();
