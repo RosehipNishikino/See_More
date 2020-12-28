@@ -81,6 +81,7 @@ namespace See_More
                     else
                     {
                         camino = caminos[0];
+                        rutaCamino = camino;
                     }
                     ultimarutavista = camino;
                     DirectoryInfo directory = new DirectoryInfo(camino);
@@ -155,6 +156,7 @@ namespace See_More
         String oracion = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
         String texto;
         String ultimarutavista = string.Empty;
+        String rutaCamino = string.Empty;
         private void mousemove(object mouse, MouseEventArgs args)
         {
             ((Button)mouse).BackColor = Color.White;
@@ -172,11 +174,11 @@ namespace See_More
 
                 for (int j = 0; j < 1; j++)
                 {
-                    oracion = oracion + @"\" + texto;
-                    ultimarutavista = oracion;
+                        rutaCamino = rutaCamino + @"\" + texto;
+                        ultimarutavista = rutaCamino;
                 }
                 int t = 45, l = 0;
-                DirectoryInfo directory = new DirectoryInfo(oracion);
+                DirectoryInfo directory = new DirectoryInfo(rutaCamino);
 
                 FileInfo[] files = directory.GetFiles("*.mp4");
 
@@ -417,7 +419,7 @@ namespace See_More
         private void regresarARaizToolStripMenuItem_Click(object sender, EventArgs e)
         {
             pnlRespaldo.Controls.Clear();
-            oracion = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
+            rutaCamino = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
             try
             {
                 int t = 45, l = 0;
@@ -788,7 +790,7 @@ namespace See_More
             try
             {
                 int t = 45, l = 0;
-                DirectoryInfo directory = new DirectoryInfo(oracion);
+                DirectoryInfo directory = new DirectoryInfo(rutaCamino);
 
                 FileInfo[] files = directory.GetFiles("*."+cboFiltros.SelectedItem.ToString());
 
