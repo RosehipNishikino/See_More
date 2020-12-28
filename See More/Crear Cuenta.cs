@@ -113,12 +113,12 @@ namespace See_More
                             if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Imagen.txt") &&
                                 !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Busqueda.txt") &&
                                 !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Animes.txt") &&
-                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Inte"))
+                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Inte.txt"))
                             {
                                 File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Imagen.txt");
                                 File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Busqueda.txt");
                                 File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Animes.txt");
-                                File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Inte");
+                                File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Inte.txt");
                             }
    
                             MessageBox.Show("Se ha creado su cuenta, proceda a loguearse en la parte Iniciar Sesión");
@@ -157,12 +157,12 @@ namespace See_More
                         if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Imagen.txt") &&
                             !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Busqueda.txt") &&
                             !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Animes.txt") &&
-                            !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Inte"))
+                            !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Inte.txt"))
                         {
                             File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Imagen.txt");
                             File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Busqueda.txt");
                             File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Animes.txt");
-                            File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Inte");
+                            File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Inte.txt");
                         }
 
                         MessageBox.Show("Se ha creado su cuenta, proceda a loguearse en la parte Iniciar Sesión");
