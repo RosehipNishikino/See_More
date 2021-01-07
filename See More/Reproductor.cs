@@ -10,6 +10,28 @@ namespace See_More
 {
     public partial class Reproductor : Form
     {
+        int volumen = 50;
+        public Seemore AnimeActual { get; set; }
+        public Boolean respuesta { get; set; }
+        public String NombreVideo1 { get; set; }
+        public String RutaVideo1 { get; set; }
+        public String UsuarioRegistrado1 { get; set; }
+        public String UsuarioImagen1 { get; set; }
+        public Boolean intercambio { get; set; }
+        public String UserTemp { get; set; }
+        StreamWriter sw;
+        StreamWriter sw2; String todo; String extension = string.Empty; String usuario;
+        StreamWriter sw3;
+        int contador = 1;
+        bool entra = true;
+        bool nombre = true; String ruta;
+        Boolean pantallaCompleta = true;
+        Boolean autopausa = false;
+        Boolean autorepetir = false;
+        String auxiliarNombre = string.Empty;
+        String duracionFinal = string.Empty;
+        Boolean cerro = false;
+        Boolean primerAviso = false, ultimoAviso = false;
         public Reproductor()
         {
             InitializeComponent();
@@ -102,11 +124,6 @@ namespace See_More
                 }
             }    
         }
-        //async void AbrirCon()
-        //{
-        //    var openPicker = new FileOpenPicker();
-        //    StorageFile 
-        //}
         private void Form1_MouseWheel(object sender, MouseEventArgs e)
         {
             if (e.Delta < 0)
@@ -128,21 +145,9 @@ namespace See_More
             }
             else { }
         }
-        int volumen = 50;
-        public Seemore AnimeActual { get; set; }
-        public Boolean respuesta { get; set; }
-        public String NombreVideo1 { get; set; }
-        public String RutaVideo1 { get; set; }
-        public String UsuarioRegistrado1 { get; set; }
-        public String UsuarioImagen1 { get; set; }
-        public Boolean intercambio { get; set; }
-        public String UserTemp { get; set; }
         private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-        }
-        StreamWriter sw;
-        StreamWriter sw2;String todo; String extension = string.Empty; String usuario;
-        StreamWriter sw3;     
+        }    
         private void cerrarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Imagenes_de_fondo frm = new Imagenes_de_fondo();
@@ -250,14 +255,11 @@ namespace See_More
                 else { }
             } 
         }
-        int contador = 1;
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Historial frm = new Historial();
             frm.ShowDialog();
         }
-        bool entra = true;
-        bool nombre = true; String ruta;
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
                 String c = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
@@ -519,9 +521,6 @@ namespace See_More
             catch (Exception) { }
             
         }
-        Boolean pantallaCompleta = true;
-        Boolean autopausa = false;
-        Boolean autorepetir = false;
         private void axWindowsMediaPlayer1_KeyUpEvent(object sender, _WMPOCXEvents_KeyUpEvent e)
         {
             if ((e.nKeyCode) == (char)(Keys.Right))
@@ -803,8 +802,6 @@ namespace See_More
             Nuevo frm = new Nuevo();
             frm.ShowDialog();
         }
-        String auxiliarNombre = string.Empty;
-        String duracionFinal = string.Empty;
         private void buscarToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Buscar frm = new Buscar();
@@ -907,10 +904,8 @@ namespace See_More
                                 sw3.Close();
                             }
                         }
-                    }
-                    
+                    }                   
                     catch (Exception ex) { MessageBox.Show(ex.Message); }
-                    
                 }
                 else
                 {
@@ -991,8 +986,7 @@ namespace See_More
                                 sw3.Close();
                             }
                         }
-                        catch (Exception ex) { MessageBox.Show(ex.Message); }
-                        
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }                      
                     }
                 }
             }
@@ -1042,7 +1036,6 @@ namespace See_More
             Evento();
             cerro = false;
         }
-        Boolean cerro = false;
         private void cerrarLaSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (cerro == false)
@@ -1081,19 +1074,16 @@ namespace See_More
             Evento();
             cerro = false;
         }
-
         private void tmrProceso_Tick(object sender, EventArgs e)
         {
             tmrProceso.Stop();
             lblAutoPausa.Text = "";
             lblAutoRepetir.Text = "";
         }
-
         private void wmpCentral_Enter(object sender, EventArgs e)
         {
 
         }
-
         private void tmrEstadoActual_Tick(object sender, EventArgs e)
         {
             if(wmpCentral.playState == WMPLib.WMPPlayState.wmppsPlaying)
@@ -1129,14 +1119,11 @@ namespace See_More
                     else
                         this.Text = "Detenido - " + todo;
                 }
-            }
-                
+            }               
         }
-
         private void wmpCentral_PlayStateChange(object sender, _WMPOCXEvents_PlayStateChangeEvent e)
         {
         }
-        String nombres = string.Empty;
         private void tmrProgreso_Tick(object sender, EventArgs e)
         {
             duracionFinal = wmpCentral.currentMedia.durationString;
@@ -1157,11 +1144,9 @@ namespace See_More
                 tmrProgreso.Stop();
             }
         }
-
         private void Form1_Activated(object sender, EventArgs e)
         {
         }
-        Boolean primerAviso = false, ultimoAviso = false;
         private void tmrBateria_Tick(object sender, EventArgs e)
         {
             String strBateria; float Bateria = 0;
@@ -1212,68 +1197,15 @@ namespace See_More
                 }
             }
         }
-
         private void tmrGuardarAuto_Tick(object sender, EventArgs e)
         {
             if (wmpCentral.playState == WMPLib.WMPPlayState.wmppsPlaying)
             {
-                //if (usuario != "")
-                //{
-                //    String[] porVer = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
-                //    String[] vacio;
-                //    foreach (String linea in porVer)
-                //    {
-                //        vacio = linea.Split('{');
-                //        if (vacio[0] == auxiliarNombre)
-                //        {
-                //            StreamWriter sw = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
-                //            sw.WriteLine(auxiliarNombre + "{" + wmpCentral.Ctlcontrols.currentPosition);
-                //            sw.Close();
-                //        }
-                //        else
-                //        {
-                //            StreamWriter escribir = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
-                //            escribir.WriteLine(vacio[0] + "{" + vacio[1]);
-                //            escribir.Close();
-                //        }
-                //    }
-                //    File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
-                //    File.Move(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt", Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
-                //    if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt"))
-                //    {
-                //        File.CreateText(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
-                //    }
-                //}
+               
             }
             if (wmpCentral.playState == WMPLib.WMPPlayState.wmppsPaused)
             {
-                //if (usuario != "")
-                //{
-                //    String[] porVer = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
-                //    String[] vacio;
-                //    foreach (String linea in porVer)
-                //    {
-                //        vacio = linea.Split('{');
-                //        if (vacio[0] == auxiliarNombre)
-                //        {
-                //            StreamWriter sw = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
-                //            sw.WriteLine(auxiliarNombre + "{" + wmpCentral.Ctlcontrols.currentPosition);
-                //            sw.Close();
-                //        }
-                //        else
-                //        {
-                //            StreamWriter escribir = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
-                //            escribir.WriteLine(vacio[0] + "{" + vacio[1]);
-                //            escribir.Close();
-                //        }
-                //    }
-                //    File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
-                //    File.Move(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt", Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
-                //    if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt"))
-                //    {
-                //        File.CreateText(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
-                //    }
-                //}
+               
             }
         }
     }

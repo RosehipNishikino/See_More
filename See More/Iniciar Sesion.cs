@@ -8,6 +8,11 @@ namespace See_More
 {
     public partial class Iniciar_Sesion : Form
     {
+        public Cuenta usuarioSeleccionado { get; set; }
+        public String Usuario { get; set; }
+        public String Imagen { get; set; }
+        public String Sexo { get; set; }
+        public String Contraseña { get; set; }
         int tamaño;
         public Iniciar_Sesion()
         {
@@ -33,15 +38,6 @@ namespace See_More
                 contador += 1;
             }
         }
-        private void LoCerro_FormClosing(object sender, FormClosedEventArgs args)
-        {
-
-        }
-        public Cuenta usuarioSeleccionado { get; set; }
-        public String Usuario { get; set; }
-        public String Imagen { get; set; }
-        public String Sexo { get; set; }
-        public String Contraseña { get; set; }
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
@@ -64,8 +60,6 @@ namespace See_More
                         Configuracion.contraseña = txtContraseña.Text;
                         this.Close();
                     }
-
-
                 }
                 else
                 {
@@ -99,21 +93,15 @@ namespace See_More
                 {
                     MessageBox.Show("El Usuario y/o Contraseña estan mal, intente de nuevo");
                 }
-
             }
             finally
             {
 
             }
-            
         }
-
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
         {
-            
-            
         }
-
         private void Iniciar_Sesion_Load(object sender, EventArgs e)
         {
             if (Configuracion.usuario != "" && Configuracion.contraseña != "")
@@ -123,21 +111,13 @@ namespace See_More
                 iniciarSesiónToolStripMenuItem.PerformClick();
             }
         }
-
         private void Iniciar_Sesion_FormClosed(object sender, FormClosedEventArgs e)
         {
             Tu_perfil fmr = new Tu_perfil();
             fmr.Close();
         }
-
         private void Iniciar_Sesion_FormClosing(object sender, FormClosingEventArgs e)
         {
-        }
-
-        private void cancelarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Configuracion.loCerroelUsuario = true;
-            this.Close();
         }
     }
 }

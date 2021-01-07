@@ -9,6 +9,7 @@ namespace See_More
 {
     public partial class Eliminar : Form
     {
+        public Seemore eliminar { get; set; }
         public Eliminar()
         {
             InitializeComponent();
@@ -20,8 +21,8 @@ namespace See_More
             {
                 StreamReader rd = new StreamReader(Application.StartupPath + @"\See More\Configuraciones SeeMore\eliminar.txt");
                 line = rd.ReadLine();
-                            this.BackgroundImage = Image.FromFile(line);
-                            this.BackgroundImageLayout = ImageLayout.Stretch;
+                this.BackgroundImage = Image.FromFile(line);
+                this.BackgroundImageLayout = ImageLayout.Stretch;
                 rd.Close();
             }
             catch (Exception) { }
@@ -33,18 +34,6 @@ namespace See_More
 
             }
         }
-        public Seemore eliminar { get; set; }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void buscarArchivoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(Configuracion.existeConexion)
@@ -66,14 +55,12 @@ namespace See_More
                 MessageBox.Show("No hay conexion estable");
             }
         }
-
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (txtNombre.Text != "" && txtURL.Text != "")
             {
                 if(Configuracion.existeConexion)
-                {
-                    
+                {                
                     if (txtApartado.Text == "")
                     {
                         if (MessageBox.Show("¿Desea eliminar la siguiente URL?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
@@ -129,7 +116,6 @@ namespace See_More
                 MessageBox.Show("Tengo dos posibles, ¿Estas intentando eliminar el nombre directo? ó los datos no llegaron bien");
             }
         }
-
         private void Eliminar_Load(object sender, EventArgs e)
         {
             if (!Configuracion.existeConexion)

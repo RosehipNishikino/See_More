@@ -8,6 +8,8 @@ namespace See_More
 {
     public partial class BusquedaC : Form
     {
+        public Cuenta cuentaseleccionada { get; set; }
+        public String NombreUsuario { get; set; }
         int tamaño;
         public BusquedaC()
         {
@@ -43,8 +45,6 @@ namespace See_More
                 }
             }
         }
-        public Cuenta cuentaseleccionada { get; set; }
-        public String NombreUsuario { get; set; }
         private void button1_Click(object sender, EventArgs e)
         {
             if(Configuracion.existeConexion)

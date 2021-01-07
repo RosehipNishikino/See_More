@@ -9,6 +9,26 @@ namespace See_More
 {
     public partial class Buscar : Form
     {
+        public Seemore AnimeSeleccionado { get; set; }
+        public Cuenta cuentaSeleccionado { get; set; }
+        public String respaldo { get; set; }
+        public String respa { get; set; }
+        public String NombreVideo { get; set; }
+        public String RutaVideo { get; set; }
+        public String UsuarioRegistrado { get; set; }
+        public String UsuarioImagen { get; set; }
+        public Boolean hayIntercambio { get; set; }
+        public String UsuarioTemporal { get; set; }
+        Boolean esUnico = true;
+        StreamWriter sw1, sw2;
+        Boolean esApartado = false;
+        String oracion = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
+        String texto;
+        String ultimarutavista = string.Empty;
+        String rutaCamino = string.Empty;
+        int tamaño;
+        Boolean buscar = false, buscarListas = false, buscarApartado = false;
+        string decision = "";
         public Buscar()
         {
             InitializeComponent();
@@ -33,8 +53,8 @@ namespace See_More
             {
                 StreamReader rd = new StreamReader(Application.StartupPath+@"\See More\Configuraciones SeeMore\buscar.txt");
                 line = rd.ReadLine(); 
-                            this.BackgroundImage = Image.FromFile(line);
-                            this.BackgroundImageLayout = ImageLayout.Stretch;
+                this.BackgroundImage = Image.FromFile(line);
+                this.BackgroundImageLayout = ImageLayout.Stretch;
                 rd.Close();
             }
             catch (Exception) { }
@@ -77,6 +97,7 @@ namespace See_More
                     if (caminos[0] == null)
                     {     
                         camino = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
+                        rutaCamino = camino;
                     }
                     else
                     {
@@ -85,13 +106,10 @@ namespace See_More
                     }
                     ultimarutavista = camino;
                     DirectoryInfo directory = new DirectoryInfo(camino);
-
                     FileInfo[] files = directory.GetFiles("*.mp4");
-
                     DirectoryInfo[] directories = directory.GetDirectories();
                     Button button, button2;
                     for (int i = 0; i < directories.Length; i++)
-
                     {
                         for (int j = 0; j < 4; j++)
                         {
@@ -121,7 +139,6 @@ namespace See_More
                     l = 0;
                     t += 45;
                     for (int i = 0; i < files.Length; i++)
-
                     {
                         for (int j = 0; j < 4; j++)
                         {
@@ -153,10 +170,6 @@ namespace See_More
                 catch (Exception) { }
             }
         }
-        String oracion = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
-        String texto;
-        String ultimarutavista = string.Empty;
-        String rutaCamino = string.Empty;
         private void mousemove(object mouse, MouseEventArgs args)
         {
             ((Button)mouse).BackColor = Color.White;
@@ -179,13 +192,10 @@ namespace See_More
                 }
                 int t = 45, l = 0;
                 DirectoryInfo directory = new DirectoryInfo(rutaCamino);
-
                 FileInfo[] files = directory.GetFiles("*.mp4");
-
                 DirectoryInfo[] directories = directory.GetDirectories();
                 Button button, button2;
                 for (int i = 0; i < directories.Length; i++)
-
                 {
                     for (int j = 0; j < 4; j++)
                     {
@@ -214,7 +224,6 @@ namespace See_More
                 l = 0;
                 t += 45;
                 for (int i = 0; i < files.Length; i++)
-
                 {
                     for (int j = 0; j < 4; j++)
                     {
@@ -244,7 +253,6 @@ namespace See_More
             }
             catch (Exception) { }
         }
-        int tamaño;
         private void click_de_boton2(object boton, EventArgs args)
         {
             Boolean sinCoencidencia = false;
@@ -291,21 +299,7 @@ namespace See_More
             {
                 MessageBox.Show("El Usuario y/o Contraseña estan mal, intente de nuevo");
             }
-
         }
-        public Seemore AnimeSeleccionado { get; set; }
-        public Cuenta cuentaSeleccionado { get; set; }
-        public String respaldo { get; set; }
-        public String respa { get; set; }
-        public String NombreVideo { get; set; }
-        public String RutaVideo { get; set; }
-        public String UsuarioRegistrado { get; set; }
-        public String UsuarioImagen { get; set; }
-        public Boolean hayIntercambio { get; set; }
-        public String UsuarioTemporal { get; set; }
-        Boolean esUnico = true;
-        StreamWriter sw1, sw2;
-        Boolean esApartado = false;
         private void Buscar_Load(object sender, EventArgs e)
         {
             String[] users = File.ReadAllLines(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
@@ -327,20 +321,7 @@ namespace See_More
                 Configuracion.UsuariosSexo[contador] = Configuracion.Usuarios[3];
                 contador += 1;
             }
-        }
-        Boolean buscar = false, buscarListas = false, buscarApartado = false; 
-        private void buscarTodasLasListasToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            
-        }
-        private void buscarPorNombreDeListasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-        private void buscarUltimaListaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
+        } 
         private void buscarEnElApartadoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Configuracion.existeConexion)
@@ -410,12 +391,6 @@ namespace See_More
                 }
             }
         }
-
-        private void buscarPorOrdenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void regresarARaizToolStripMenuItem_Click(object sender, EventArgs e)
         {
             pnlRespaldo.Controls.Clear();
@@ -424,13 +399,10 @@ namespace See_More
             {
                 int t = 45, l = 0;
                 DirectoryInfo directory = new DirectoryInfo(@"C:\Users\" + Configuracion.UsuarioActual + @"\Videos");
-
                 FileInfo[] files = directory.GetFiles("*.mp4");
-
                 DirectoryInfo[] directories = directory.GetDirectories();
                 Button button;
                 for (int i = 0; i < directories.Length; i++)
-
                 {
                     for (int j = 0; j < 4; j++)
                     {
@@ -459,8 +431,7 @@ namespace See_More
                 }
             }
             catch (Exception) { }
-        }
-        
+        }       
         private void button1_Click(object sender, EventArgs e)
         {
             hayIntercambio = false;
@@ -485,8 +456,6 @@ namespace See_More
                 }
             }
         }
-        string decision = "";
-
         private void comoFuncionaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("La ventana Busca de See More cuenta con las siguientes opciones\n" +
@@ -502,27 +471,22 @@ namespace See_More
                 "Para salir de los comandos presione {ESC}\n" +
                 "                                                                                    See More.", "Ayuda de See More al usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
         private void button1_MouseMove(object sender, MouseEventArgs e)
         {
 
         }
-
         private void button1_MouseLeave(object sender, EventArgs e)
         {
 
         }
-
         private void tmrRefresco_Tick(object sender, EventArgs e)
         {
             //pnlRespaldo.Refresh();
         }
-
         private void pnlRespaldo_Scroll(object sender, ScrollEventArgs e)
         {
             pnlRespaldo.BackColor = Color.Transparent;
         }
-
         private void txtNombreSerie_KeyUp(object sender, KeyEventArgs e)
         {
             if((e.KeyCode) == Keys.Enter)
@@ -547,13 +511,10 @@ namespace See_More
                         {
                             int t = 45, l = 0;
                             DirectoryInfo directory = new DirectoryInfo(@"C:\Users\" + Configuracion.UsuarioActual + @"\Videos");
-
                             FileInfo[] files = directory.GetFiles("*.mp4");
-
                             DirectoryInfo[] directories = directory.GetDirectories();
                             Button button, button2;
                             for (int i = 0; i < directories.Length; i++)
-
                             {
                                 for (int j = 0; j < 4; j++)
                                 {
@@ -583,7 +544,6 @@ namespace See_More
                             l = 0;
                             t += 45;
                             for (int i = 0; i < files.Length; i++)
-
                             {
                                 for (int j = 0; j < 4; j++)
                                 {
@@ -736,8 +696,7 @@ namespace See_More
                 if (Configuracion.existeConexion)
                 {
                     if (txtNombreSerie.Text != "")
-                    {
-                        
+                    {                    
                             dgvDatos.DataSource = DatosSeeMore.BuscarNombre(txtNombreSerie.Text);
                             esUnico = true;
                             esApartado = false;
@@ -751,8 +710,7 @@ namespace See_More
                             else
                             {
                                 MessageBox.Show("No hemos encontrado a un usuario con el nombre " + txtUsuario.Text + ", ingrese con uno existente");
-                            }
-                        
+                            }                      
                     }
                 }
                 else
@@ -762,8 +720,7 @@ namespace See_More
                 buscar = true;
                 buscarListas = false;
                 buscarApartado = false;
-            }
-            
+            } 
             if(decision == "l-n")
             {
                 if (Configuracion.existeConexion)
@@ -783,7 +740,6 @@ namespace See_More
                 }
             }
         }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             pnlRespaldo.Controls.Clear();
@@ -791,13 +747,10 @@ namespace See_More
             {
                 int t = 45, l = 0;
                 DirectoryInfo directory = new DirectoryInfo(rutaCamino);
-
                 FileInfo[] files = directory.GetFiles("*."+cboFiltros.SelectedItem.ToString());
-
                 DirectoryInfo[] directories = directory.GetDirectories();
                 Button button, button2;
                 for (int i = 0; i < directories.Length; i++)
-
                 {
                     for (int j = 0; j < 4; j++)
                     {
@@ -827,7 +780,6 @@ namespace See_More
                 l = 0;
                 t += 45;
                 for (int i = 0; i < files.Length; i++)
-
                 {
                     for (int j = 0; j < 4; j++)
                     {

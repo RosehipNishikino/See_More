@@ -8,6 +8,11 @@ namespace See_More
 {
     public partial class Comprobar : Form
     {
+        public Cuenta usuarioSeleccionado { get; set; }
+        public String Usuario { get; set; }
+        public String Imagen { get; set; }
+        public String Sexo { get; set; }
+        public String Contraseña { get; set; }
         int tamaño;
         public Comprobar()
         {
@@ -30,11 +35,6 @@ namespace See_More
                 contador += 1;
             }
         }
-        public Cuenta usuarioSeleccionado { get; set; }
-        public String Usuario { get; set; }
-        public String Imagen { get; set; }
-        public String Sexo { get; set; }
-        public String Contraseña { get; set; }
         private void inicioDeComprabacionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (txtUsuario.Text == Configuracion.usuario && txtContraseña.Text == Configuracion.contraseña)
@@ -96,15 +96,8 @@ namespace See_More
                 MessageBox.Show("Hay un error en la comprobación del usuario, datos incorrectos");
             }
         }
-
         private void Comprobar_FormClosing(object sender, FormClosingEventArgs e)
         {
-        }
-
-        private void cancelarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Configuracion.loCerroelUsuario = true;
-            this.Close();
         }
     }
 }

@@ -9,17 +9,24 @@ namespace See_More
 {
     public partial class Tu_perfil : Form
     {
-        
-        public Tu_perfil()
-        {
-            InitializeComponent();
-        }
         public Cuenta usuarioActual { get; set; }
         public String Usuario1 { get; set; }
         public String Imagen1 { get; set; }
         public String Sexo1 { get; set; }
         public String Contraseña1 { get; set; }
-       // String ruta2 = ""+SeeMoreAAA.ObtenerImagen(Configuracion.nombre);
+        Boolean entraSINO = false;
+        StreamWriter sw1 = null, sw2 = null;
+        String genero = "";
+        String usuarioAct;
+        String imagenConConexion;
+        String imagenSinConexion;
+        String rutadeImagen;
+        Boolean regresarHistorial = true;
+        String imagenPerfil = string.Empty;
+        public Tu_perfil()
+        {
+            InitializeComponent();
+        }
         private void Tu_perfil_Load(object sender, EventArgs e)
         {
             iniciarSesiónToolStripMenuItem.PerformClick();
@@ -38,25 +45,12 @@ namespace See_More
                 }
             }
         }
-
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
                 String ruta = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + ".txt";
                 rtxHistorialUsuario.SaveFile(ruta, RichTextBoxStreamType.PlainText);
-                rtxHistorialUsuario.LoadFile(ruta, RichTextBoxStreamType.PlainText);
-            
+                rtxHistorialUsuario.LoadFile(ruta, RichTextBoxStreamType.PlainText);          
         }
-        Boolean entraSINO = false;
-        StreamWriter sw1 = null, sw2 = null;
-        //Boolean genero = false;
-        /*
-         * string result = string.Empty;
-           byte[] encryted = System.Text.Encoding.Unicode.GetBytes(_cadenaAencriptar);
-           result = Convert.ToBase64String(encryted);
-           return result;
-         * */
-        String genero = "";
-        String usuarioAct;
         private void iniciarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
             entraSINO = false;
@@ -99,11 +93,6 @@ namespace See_More
                         resultado = Convert.ToBase64String(encriptar);
                         sw2.WriteLine(resultado);
                         sw2.Close();
-                        // Configuracion.encriptacion = true;
-                        //sw3 = File.AppendText("C:\\Users\\sealt\\Configuraciones SeeMore\\encriptacion.txt");
-                        // sw3.WriteLine("true");
-                        //   sw3.Close();
-
                         if (frm.usuarioSeleccionado.genero == "Hombre")
                         {
                             genero = "Hombre";
@@ -127,10 +116,8 @@ namespace See_More
                         res = System.Text.Encoding.Unicode.GetString(decryted);
                         picUsuario.Image = Image.FromFile(res);
                         picUsuario.BackgroundImageLayout = ImageLayout.Stretch;
-
                         lblUsuario.Text = "Este es tu historial de videos - " + frm.usuarioSeleccionado.usuario;
                         String ruta = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + ".txt";
-
                         rtxHistorialUsuario.LoadFile(ruta, RichTextBoxStreamType.PlainText);
                         if (rtxHistorialUsuario.Text == "")
                         {
@@ -143,10 +130,7 @@ namespace See_More
                         String line; StreamReader rd = new StreamReader(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Imagen.txt");
                         try
                         {
-
                             line = rd.ReadLine();
-
-
                             this.BackgroundImage = Image.FromFile(line);
                             this.BackgroundImageLayout = ImageLayout.Stretch;
                             rd.Close();
@@ -156,8 +140,7 @@ namespace See_More
                     }
                 }
                 catch (Exception) { }
-            }
-            
+            }  
             else
             {
                 try
@@ -213,10 +196,8 @@ namespace See_More
                         res = System.Text.Encoding.Unicode.GetString(decryted);
                         picUsuario.Image = Image.FromFile(res);
                         picUsuario.BackgroundImageLayout = ImageLayout.Stretch;
-
                         lblUsuario.Text = "Este es tu historial de videos - " + frm.Usuario;
                         String ruta = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + ".txt";
-
                         rtxHistorialUsuario.LoadFile(ruta, RichTextBoxStreamType.PlainText);
                         if (rtxHistorialUsuario.Text == "")
                         {
@@ -232,8 +213,6 @@ namespace See_More
                         {
                             rd = new StreamReader(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Imagen.txt");
                             line = rd.ReadLine();
-
-
                             this.BackgroundImage = Image.FromFile(line);
                             this.BackgroundImageLayout = ImageLayout.Stretch;
                             rd.Close();
@@ -243,10 +222,8 @@ namespace See_More
                     }
                 }
                 catch (Exception) { }
-            }
-            
+            }           
         }
-
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -270,8 +247,6 @@ namespace See_More
                 sw.Close();
             }
         }
-        String imagenConConexion;
-        String imagenSinConexion;
         private void editarPerfilToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Comprobar frm = new Comprobar();
@@ -367,10 +342,8 @@ namespace See_More
                     }
                 }
                 catch (Exception) { }
-            }
-            
+            }           
         }
-        String rutadeImagen;
         private void actualizarPerfilToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (txtContraseña.Text == txtConfirmarContraseña.Text)
@@ -537,10 +510,8 @@ namespace See_More
                         MessageBox.Show("Ha ocurrido un error al intentar actualizar el usuario");
                     }
                 }
-            }
-            
+            }           
         }
-
         private void textBox4_KeyUp(object sender, KeyEventArgs e)
         {
         }
@@ -570,10 +541,8 @@ namespace See_More
                     escritor.Close();
                     txtSeries.Clear();
                 }
-            }
-            
+            }   
         }
-        Boolean regresarHistorial=true;
         private void mostrarAnimesVistosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (regresarHistorial == true)
@@ -595,7 +564,6 @@ namespace See_More
                 regresarHistorial = true;
             }
         }
-        String imagenPerfil = string.Empty;
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             if (entraSINO == true)
@@ -613,7 +581,6 @@ namespace See_More
                 }
             }
         }
-
         private void textBox3_KeyUp(object sender, KeyEventArgs e)
         {
             if (txtContraseña.Text == txtConfirmarContraseña.Text)
@@ -625,12 +592,10 @@ namespace See_More
                 lblComprobacion.Text = "La contraseña no es igual";
             }
         }
-
         private void rtxHistorialUsuario_TextChanged(object sender, EventArgs e)
         {
 
         }
-
         private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
             guardarToolStripMenuItem.Enabled = false;

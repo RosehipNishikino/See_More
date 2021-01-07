@@ -11,6 +11,8 @@ namespace See_More
     {
         public Boolean cerrar { get; set; }
         public Cuenta cuentaActual { get; set; }
+        public String nombreUsuario { get; set; }
+        String imagenPerfil = string.Empty;
         public Crear_Cuenta()
         {
             InitializeComponent();
@@ -23,42 +25,16 @@ namespace See_More
             {
                 StreamReader rd = new StreamReader(Application.StartupPath + @"\See More\Configuraciones SeeMore\crearcuenta.txt");
                 line = rd.ReadLine();
-                            this.BackgroundImage = Image.FromFile(line);
-                            this.BackgroundImageLayout = ImageLayout.Stretch;
+                this.BackgroundImage = Image.FromFile(line);
+                this.BackgroundImageLayout = ImageLayout.Stretch;
                 rd.Close();
             }
             catch (Exception) { }
         }
-        public Cuenta cuentaSeleccionada { get; set; }
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
             
         }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            
-        }
-        public Cuenta eliminar { get; set; }
-        private void button5_Click(object sender, EventArgs e)
-        {
-            
-        }
-        
         private void crearUsuarioNuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             String nombre = "";
@@ -120,10 +96,8 @@ namespace See_More
                                 File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Animes.txt");
                                 File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Inte.txt");
                             }
-   
                             MessageBox.Show("Se ha creado su cuenta, proceda a loguearse en la parte Iniciar Sesión");
                         }
-
                         else
                         {
                             MessageBox.Show("Ha ocurrido un error");
@@ -164,7 +138,6 @@ namespace See_More
                             File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Animes.txt");
                             File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Inte.txt");
                         }
-
                         MessageBox.Show("Se ha creado su cuenta, proceda a loguearse en la parte Iniciar Sesión");
                     }
                 }
@@ -173,14 +146,7 @@ namespace See_More
             {
                 MessageBox.Show("Hay un campo vacio, busquelo");
             }
-            //File.Move(@"C:\Users\sealt\" + nombre + ".txt", @"C:\" + nombre + ".txt");
         }
-
-        private void buscarImagenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-        public String nombreUsuario { get; set; }
         private void buscarUnUsuarioCreadoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BusquedaC frm = new BusquedaC();
@@ -202,7 +168,6 @@ namespace See_More
                 }
             }
         }
-
         private void eliminarElUsuarioCreadoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(Configuracion.existeConexion)
@@ -294,7 +259,6 @@ namespace See_More
                 }
             }
         }
-
         private void textBox3_KeyUp(object sender, KeyEventArgs e)
         {
             if (txtContraseña.Text == txtRepetirContraseña.Text)
@@ -306,7 +270,6 @@ namespace See_More
                 lblComprobacion.Text = "La contraseña no es igual";
             }
         }
-        String imagenPerfil = string.Empty;
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             OpenFileDialog abrir = new OpenFileDialog();
@@ -317,21 +280,17 @@ namespace See_More
             {
                 string direccion = abrir.FileName;
                 imagenPerfil = direccion;
-
                 picImagen.Image = Image.FromFile(direccion);
             }
         }
-
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
             txtOtro.Enabled = true;
         }
-
         private void rdoMujer_CheckedChanged(object sender, EventArgs e)
         {
             txtOtro.Enabled = false;
         }
-
         private void rdoHombre_CheckedChanged(object sender, EventArgs e)
         {
             txtOtro.Enabled = false;

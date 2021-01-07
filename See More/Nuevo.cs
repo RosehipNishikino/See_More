@@ -10,6 +10,7 @@ namespace See_More
 {
     public partial class Nuevo : Form
     {
+        WindowsMediaPlayer sonido = new WindowsMediaPlayer();
         public Nuevo()
         {
             InitializeComponent();
@@ -22,9 +23,8 @@ namespace See_More
             {
                 StreamReader rd = new StreamReader(Application.StartupPath + @"\See More\Configuraciones SeeMore\nuevo.txt");
                 line = rd.ReadLine();
-
-                            this.BackgroundImage = Image.FromFile(line);
-                            this.BackgroundImageLayout = ImageLayout.Stretch;
+                this.BackgroundImage = Image.FromFile(line);
+                this.BackgroundImageLayout = ImageLayout.Stretch;
                 rd.Close();
             }
             catch (Exception) { }
@@ -37,12 +37,10 @@ namespace See_More
                 txtApartado.Enabled = false;
                 chkGeneral.Enabled = false;
                 chkApartado.Enabled = false;
-                MessageBox.Show("No hay una conexión a la BD, esto no es impedimento\n See More puede funcionar sin necesidad de guardar elementos a un respaldo","See More");
-                
+                MessageBox.Show("No hay una conexión a la BD, esto no es impedimento\n See More puede funcionar sin necesidad de guardar elementos a un respaldo","See More");               
             }
         }
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
-
         {
             if (txtNombre.Text != "" && txtURL.Text != "")
             {
@@ -50,8 +48,6 @@ namespace See_More
                 {
                     if (txtURL.Text.StartsWith(@"C:\") || txtURL.Text.StartsWith(@"D:\"))
                     {
-
-
                         if (Configuracion.existeConexion)
                         {
                             if (chkGeneral.Checked == true)
@@ -124,7 +120,6 @@ namespace See_More
                              // StreamWriter sw = new StreamWriter("C:\\respaldo.txt",true);
                                 StreamWriter sw = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\respaldo.txt");
                                 sw.WriteLine(txtNombre.Text + " " + txtURL.Text);
-
                                 sw.Close();
                             }
                             catch (Exception ex)
@@ -160,18 +155,14 @@ namespace See_More
                 MessageBox.Show("URL y nombre estan vacios, por favor llenelos");
             }
         }
-
         private void guardarListaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (txtNombre.Text != "" && txtURL.Text != "")
-            {
-                
+            {             
                    if (txtURL.Text.EndsWith(".wpl"))
                     {
                         if (txtURL.Text.StartsWith(@"C:\"))
-                        {
-                        
-
+                        {         
                             if(Configuracion.existeConexion)
                             {
                                 if (chkGeneral.Checked == true)
@@ -244,7 +235,6 @@ namespace See_More
                                  // StreamWriter sw = new StreamWriter("C:\\respaldo.txt",true);
                                     StreamWriter sw = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\respaldo.txt");
                                     sw.WriteLine(txtNombre.Text + " " + txtURL.Text);
-
                                     sw.Close();
                                 }
                                 catch (Exception ex)
@@ -255,10 +245,7 @@ namespace See_More
                                 {
                                     //MessageBox.Show("Respaldo guardado");
                                 }
-                            }
-                        
-                            
-                            
+                            }                        
                         }
                         else
                         {
@@ -287,7 +274,6 @@ namespace See_More
                 MessageBox.Show("URL y nombre estan vacios, por favor llenelos");
             }
         }
-
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             
@@ -347,15 +333,9 @@ namespace See_More
                     guardarToolStripMenuItem.Enabled = false;
                 }
                     //axWindowsMediaPlayer1.URL = direccion;
-                    txtURL.Text = direccion;
-                
+                    txtURL.Text = direccion;              
             }
         }
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        WindowsMediaPlayer sonido = new WindowsMediaPlayer();
         private void txtURL_KeyDown(object sender, KeyEventArgs e)
         {
 
@@ -393,7 +373,6 @@ namespace See_More
                 guardarToolStripMenuItem.Enabled = false;
             }
         }
-
         private void Nuevo_Load(object sender, EventArgs e)
         {
             if (!Configuracion.existeConexion)
@@ -401,78 +380,5 @@ namespace See_More
                 this.Close();
             }
         }
-        //private void axWindowsMediaPlayer1_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
-        //{
-        //    switch (e.newState)
-        //    {
-        //        case 0://Undefined
-        //            break;
-        //        case 1://Stopped
-        //            if (textBox2.Text.EndsWith(".mp4") || textBox2.Text.EndsWith(".avi") || textBox2.Text.EndsWith(".wmv") || textBox2.Text.EndsWith(".mkv"))
-        //            {
-        //                pictureBox1.Image = Image.FromFile(@"C:\Users\" + Configuracion.UsuarioActual + @"\See More\Configuraciones SeeMore\paloma-verde.png");
-        //                pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-
-        //            }
-        //            else if (textBox2.Text.EndsWith(".wpl"))
-        //            {
-        //                pictureBox1.Image = Image.FromFile(@"C:\Users\" + Configuracion.UsuarioActual + @"\See More\Configuraciones SeeMore\paloma-verde.png");
-        //                pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-
-        //            }
-        //            break;
-        //        case 2://Paused
-        //            break;
-        //        case 3://Playing
-        //               if (textBox2.Text.EndsWith(".mp4") || textBox2.Text.EndsWith(".avi") || textBox2.Text.EndsWith(".wmv") || textBox2.Text.EndsWith(".mkv"))
-        //               {
-        //                    pictureBox1.Image = Image.FromFile(@"C:\Users\" + Configuracion.UsuarioActual + @"\See More\Configuraciones SeeMore\paloma-verde.png");
-        //                    pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-        //                    label9.Text = "El video se encontro";
-        //               }else if (textBox2.Text.EndsWith(".wpl"))
-        //            {
-        //                pictureBox1.Image = Image.FromFile(@"C:\Users\" + Configuracion.UsuarioActual + @"\See More\Configuraciones SeeMore\paloma-verde.png");
-        //                pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-        //                label9.Text = "La lista se encontro";
-        //            }
-        //            existe = true;
-        //            break;
-        //        case 4://ScanFoward
-        //            break;
-        //        case 5://ScanReverse
-        //            break;
-        //        case 6://Buffering
-        //            break;
-        //        case 7://Waiting
-        //            break;
-        //        case 8://MediaEnded
-        //            break;
-        //        case 9://Transitioning
-        //            pictureBox1.Image = Image.FromFile(@"C:\Users\" + Configuracion.UsuarioActual + @"\See More\Configuraciones SeeMore\cargando.gif");
-        //            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-        //            break;
-        //        case 10://Ready
-        //            if (textBox2.Text.EndsWith(".mp4") || textBox2.Text.EndsWith(".avi") || textBox2.Text.EndsWith(".wmv") || textBox2.Text.EndsWith(".mkv"))
-        //            {
-        //                pictureBox1.Image = Image.FromFile(@"C:\Users\" + Configuracion.UsuarioActual + @"\See More\Configuraciones SeeMore\tache-rojo.jpg");
-        //                pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-        //                label9.Text = "El video no se encontro";
-        //            }
-        //            else if (textBox2.Text.EndsWith(".wpl"))
-        //            {
-        //                pictureBox1.Image = Image.FromFile(@"C:\Users\" + Configuracion.UsuarioActual + @"\See More\Configuraciones SeeMore\tache-rojo.jpg");
-        //                pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-        //                label9.Text = "La lista no se encontro";
-        //            }
-        //            existe = false;
-        //            break;
-        //        case 11://Reconnecting
-        //            break;
-        //        case 12://Last
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
     }
 }

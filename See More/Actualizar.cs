@@ -15,6 +15,7 @@ namespace See_More
 {
     public partial class Actualizar : Form
     {
+        public Seemore AnimeAC { get; set; }
         public Actualizar()
         {
             InitializeComponent();
@@ -26,8 +27,8 @@ namespace See_More
             {
                 StreamReader rd = new StreamReader(Application.StartupPath+@"\See More\Configuraciones SeeMore\actualizar.txt");
                 line = rd.ReadLine();
-                            this.BackgroundImage = Image.FromFile(line);
-                            this.BackgroundImageLayout = ImageLayout.Stretch;
+                this.BackgroundImage = Image.FromFile(line);
+                this.BackgroundImageLayout = ImageLayout.Stretch;
                 rd.Close();
             }
             catch (Exception) { }
@@ -35,31 +36,9 @@ namespace See_More
             {
                 buscarArchivoFaltanteToolStripMenuItem.Enabled = false;
                 actualizarToolStripMenuItem.Enabled = false;
-                MessageBox.Show("No hay conexión, pero no te preocupes\nSee More es capaz de funcionar sin una conexión, pero no puedes actualizar pues no la necesita", "See More");
-               
+                MessageBox.Show("No hay conexión, pero no te preocupes\nSee More es capaz de funcionar sin una conexión, pero no puedes actualizar pues no la necesita", "See More");              
             }
         }
-        public Seemore AnimeAC { get; set; }       
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void buscarTablaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void buscarArchivoFaltanteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(Configuracion.existeConexion)
@@ -81,7 +60,6 @@ namespace See_More
                 MessageBox.Show("No se puede realizar una busqueda, no se puede usar el respaldo");
             }
         }
-
         private void actualizarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (txtNombre.Text != "" && txtURL.Text != "")
@@ -153,18 +131,6 @@ namespace See_More
                 MessageBox.Show("Falta el nombre, ¿el episodio o anime cambio de nombre?, bueno, ingrese el nuevo nombre");
             }
         }
-
-        private void moverDatosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-
-        }
-        
-        private void actualizarALaNuevaTablaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void Actualizar_Load(object sender, EventArgs e)
         {
             if (!Configuracion.existeConexion)

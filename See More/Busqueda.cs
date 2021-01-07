@@ -9,6 +9,8 @@ namespace See_More
 {
     public partial class Busqueda : Form
     {
+        public Seemore AnimeSE { get; set; }
+        Boolean esApartado = false;
         public Busqueda()
         {
             InitializeComponent();
@@ -20,8 +22,8 @@ namespace See_More
             {
                 StreamReader rd = new StreamReader(Application.StartupPath + @"\See More\Configuraciones SeeMore\busqueda.txt");
                 line = rd.ReadLine();
-                            this.BackgroundImage = Image.FromFile(line);
-                            this.BackgroundImageLayout = ImageLayout.Stretch;
+                this.BackgroundImage = Image.FromFile(line);
+                this.BackgroundImageLayout = ImageLayout.Stretch;
                 rd.Close();
             }
             catch (Exception) { }
@@ -30,17 +32,6 @@ namespace See_More
                 dgvDatos.DataSource = DatosSeeMore.BuscarT();
             }
         }
-        public Seemore AnimeSE { get; set; }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
-        }
-        Boolean esApartado = false;
         private void aceptarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Configuracion.existeConexion)
@@ -69,7 +60,6 @@ namespace See_More
                 }
             }
         }
-
         private void buscarNombreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(Configuracion.existeConexion)
@@ -78,7 +68,6 @@ namespace See_More
                 dgvDatos.DataSource = DatosSeeMore.BuscarNombre(txtNombre.Text);
             }
         }
-
         private void buscarApartadoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(Configuracion.existeConexion)

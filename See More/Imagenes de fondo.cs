@@ -7,6 +7,7 @@ namespace See_More
 {
     public partial class Imagenes_de_fondo : Form
     {
+        StreamWriter sw;
         public Imagenes_de_fondo()
         {
             InitializeComponent();
@@ -17,14 +18,11 @@ namespace See_More
             String[] lineas = File.ReadAllLines(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt");
             try
             {
-
-
                 this.BackgroundImage = Image.FromFile(lineas[lineas.Length - 1]);
                 this.BackgroundImageLayout = ImageLayout.Stretch;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-        StreamWriter sw;
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog abrir = new OpenFileDialog();
@@ -42,8 +40,7 @@ namespace See_More
             if (txtNombre.Text != "" && txtRuta.Text != "")
             {
                 if (txtRuta.Text.EndsWith("jpg") || txtRuta.Text.EndsWith("png"))
-                {
-                    
+                {                   
                     sw = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt");
                     sw.WriteLine(txtRuta.Text);
                     sw.Close();
@@ -70,7 +67,6 @@ namespace See_More
                             }
                         }
                         rd.Close();
-
                     }
                     catch (Exception) { }
                     MessageBox.Show("URL de la imagen " + txtNombre.Text + " almacenado", "Guadado con éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -203,7 +199,6 @@ namespace See_More
         {
             picComprobacion.Visible = false;
         }
-
         private void guardarHistorialToolStripMenuItem_Click(object sender, EventArgs e)
         {
             rtxHistorialImagen.SaveFile(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt", RichTextBoxStreamType.PlainText);
