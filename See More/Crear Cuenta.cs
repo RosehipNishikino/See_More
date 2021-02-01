@@ -89,12 +89,14 @@ namespace See_More
                             if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Imagen.txt") &&
                                 !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Busqueda.txt") &&
                                 !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Animes.txt") &&
-                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Inte.txt"))
+                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Inte.txt") && 
+                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Ruta.txt"))
                             {
                                 File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Imagen.txt");
                                 File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Busqueda.txt");
                                 File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Animes.txt");
                                 File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Inte.txt");
+                                File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Ruta.txt");
                             }
                             MessageBox.Show("Se ha creado su cuenta, proceda a loguearse en la parte Iniciar Sesión");
                         }
@@ -131,12 +133,14 @@ namespace See_More
                         if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Imagen.txt") &&
                             !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Busqueda.txt") &&
                             !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Animes.txt") &&
-                            !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Inte.txt"))
+                            !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Inte.txt") &&
+                            !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Ruta.txt"))
                         {
                             File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Imagen.txt");
                             File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Busqueda.txt");
                             File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Animes.txt");
                             File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Inte.txt");
+                            File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Ruta.txt");
                         }
                         MessageBox.Show("Se ha creado su cuenta, proceda a loguearse en la parte Iniciar Sesión");
                     }
@@ -186,13 +190,15 @@ namespace See_More
                                 File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Imagen.txt") &&
                                 File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Busqueda.txt") &&
                                 File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Animes.txt") &&
-                                File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Inte.txt"))
+                                File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Inte.txt") &&
+                                File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Ruta.txt"))
                             {
                                 File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + ".txt");
                                 File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Imagen.txt");
                                 File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Busqueda.txt");
                                 File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Animes.txt");
                                 File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Inte.txt");
+                                File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Ruta.txt");
                             }
                             MessageBox.Show("Se ha eliminado la Cuenta exitosamente", "Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -247,13 +253,15 @@ namespace See_More
                                     File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtEliminarUser.Text.Trim() + "Imagen.txt") &&
                                     File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtEliminarUser.Text.Trim() + "Busqueda.txt") &&
                                     File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtEliminarUser.Text.Trim() + "Animes.txt") &&
-                                    File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtEliminarUser.Text.Trim() + "Inte.txt"))
+                                    File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtEliminarUser.Text.Trim() + "Inte.txt") &&
+                                    File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtEliminarUser.Text.Trim() + "Ruta.txt"))
                     {
                         File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtEliminarUser.Text.Trim() + ".txt");
                         File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtEliminarUser.Text.Trim() + "Imagen.txt");
                         File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtEliminarUser.Text.Trim() + "Busqueda.txt");
                         File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtEliminarUser.Text.Trim() + "Animes.txt");
                         File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtEliminarUser.Text.Trim() + "Inte.txt");
+                        File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtEliminarUser.Text.Trim() + "Ruta.txt");
                     }
                     MessageBox.Show("Se ha eliminado la Cuenta exitosamente", "Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
