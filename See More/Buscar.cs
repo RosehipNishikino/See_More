@@ -87,7 +87,7 @@ namespace See_More
                 try
                 {
                     int t = 45, l = 0; String camino = string.Empty;
-                    String[] ruta = File.ReadAllLines(Application.StartupPath + @"\See More\Configuraciones SeeMore\ruta.txt");
+                    String[] ruta = File.ReadAllLines(Application.StartupPath + @"\See More\Configuraciones SeeMore\"+Configuracion.usuario+"Ruta.txt");
                     String[] caminos = new string[1]; String[] separar;
                     foreach(String linea in ruta)
                     {
@@ -287,9 +287,9 @@ namespace See_More
                     resultado = Convert.ToBase64String(encriptar);
                     sw2.WriteLine(resultado);
                     sw2.Close();
-                    StreamWriter ultimaruta = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\ruta.txt");
+                    StreamWriter ultimaruta = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\"+Configuracion.usuario+"Ruta.txt");
                     ultimaruta.Flush(); ultimaruta.Close();
-                    StreamWriter ultimaruta2 = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\ruta.txt");
+                    StreamWriter ultimaruta2 = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\"+Configuracion.usuario+"Ruta.txt");
                     ultimaruta2.WriteLine(ultimarutavista+";"); ultimaruta2.Close();
                     this.Close();
                     break;
