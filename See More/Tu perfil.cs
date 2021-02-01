@@ -401,17 +401,23 @@ namespace See_More
                     String ruta2 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Imagen.txt";
                     String ruta3 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Busqueda.txt";
                     String ruta4 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Animes";
-                    if (File.Exists(ruta) && File.Exists(ruta2) && File.Exists(ruta3) && File.Exists(ruta4))
+                    String ruta5 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Inte";
+                    String ruta6 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Ruta";
+                    if (File.Exists(ruta) && File.Exists(ruta2) && File.Exists(ruta3) && File.Exists(ruta4) && File.Exists(ruta5) && File.Exists(ruta6))
                     {
                         if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + ".txt") &&
                             !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Imagen.txt") &&
                             !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Busqueda.txt") &&
-                            !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Animes.txt"))
+                            !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Animes.txt") &&
+                            !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Inte.txt") &&
+                            !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Ruta.txt"))
                         {
                             File.Move(ruta, Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + ".txt");
                             File.Move(ruta2, Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Imagen.txt");
                             File.Move(ruta3, Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Busqueda.txt");
                             File.Move(ruta4, Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Animes.txt");
+                            File.Move(ruta5, Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Inte.txt");
+                            File.Move(ruta6, Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Ruta.txt");
                         }
                     }
                     File.Delete(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
@@ -481,17 +487,23 @@ namespace See_More
                         String ruta2 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Imagen.txt";
                         String ruta3 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Busqueda.txt";
                         String ruta4 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Animes";
-                        if (File.Exists(ruta) && File.Exists(ruta2) && File.Exists(ruta3) && File.Exists(ruta4))
+                        String ruta5 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Inte";
+                        String ruta6 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Ruta";
+                        if (File.Exists(ruta) && File.Exists(ruta2) && File.Exists(ruta3) && File.Exists(ruta4) && File.Exists(ruta5) && File.Exists(ruta6))
                         {
                             if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + ".txt") &&
                                 !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Imagen.txt") &&
                                 !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Busqueda.txt") &&
-                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Animes.txt"))
+                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Animes.txt") &&
+                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Inte.txt") &&
+                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Ruta.txt"))
                             {
                                 File.Move(ruta, Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + ".txt");
                                 File.Move(ruta2, Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Imagen.txt");
                                 File.Move(ruta3, Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Busqueda.txt");
                                 File.Move(ruta4, Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Animes.txt");
+                                File.Move(ruta5, Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Inte.txt");
+                                File.Move(ruta6, Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Ruta.txt");
                             }
                         }
                         File.Delete(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
