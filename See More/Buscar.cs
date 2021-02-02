@@ -87,7 +87,8 @@ namespace See_More
                 try
                 {
                     int t = 45, l = 0; String camino = string.Empty;
-                    String[] ruta = File.ReadAllLines(Application.StartupPath + @"\See More\Configuraciones SeeMore\"+Configuracion.usuario+"Ruta.txt");
+                    String[] ruta = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\"+Configuracion.usuario+"Ruta.txt");
+                    String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
                     String[] caminos = new string[1]; String[] separar;
                     foreach(String linea in ruta)
                     {
@@ -115,21 +116,33 @@ namespace See_More
                         {
                             try
                             {
-                                button = new Button();
-                                button.Width = 200;
-                                button.Height = 20;
-                                button.Text = ((DirectoryInfo)directories[i]).Name;
-                                button.Top = t;
-                                button.Left = l;
-                                button.FlatStyle = FlatStyle.Popup;
-                                button.MouseMove += new MouseEventHandler(mousemove);
-                                button.MouseLeave += new EventHandler(mouseleave);
-                                button.Click += new EventHandler(click_de_boton);
-                                pnlRespaldo.Controls.Add(button);
-                                //t += 45;
-                                l += 200;
-                                if (j != 3)
-                                    i += 1;
+                                foreach (String linea in animesVistos)
+                                {
+                                    if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
+                                    {
+                                        button = new Button();
+                                        button.Width = 200;
+                                        button.Height = 20;
+                                        button.Text = ((DirectoryInfo)directories[i]).Name;
+                                        button.Top = t;
+                                        button.Left = l;
+                                        button.FlatStyle = FlatStyle.Popup;
+                                        button.BackColor = Color.DarkGray;
+                                        button.MouseMove += new MouseEventHandler(mousemove);
+                                        button.MouseLeave += new EventHandler(mouseleave);
+                                        button.Click += new EventHandler(click_de_boton);
+                                        pnlRespaldo.Controls.Add(button);
+                                        //t += 45;
+                                        l += 200;
+                                        if (j != 3)
+                                            i += 1;
+                                    }
+                                    else
+                                    {
+                                        j -= 1;
+                                        i += 1;
+                                    }
+                                }
                             }
                             catch (Exception) { }
                         }
@@ -152,6 +165,7 @@ namespace See_More
                                 button2.Top = t;
                                 button2.Left = l;
                                 button2.FlatStyle = FlatStyle.Popup;
+                                button2.BackColor = Color.DarkGray;
                                 button2.MouseMove += new MouseEventHandler(mousemove);
                                 button2.MouseLeave += new EventHandler(mouseleave);
                                 button2.Click += new EventHandler(click_de_boton2);
@@ -172,15 +186,16 @@ namespace See_More
         }
         private void mousemove(object mouse, MouseEventArgs args)
         {
-            ((Button)mouse).BackColor = Color.White;
+            ((Button)mouse).BackColor = Color.Silver;
         }
         private void mouseleave(object mouse, EventArgs args)
         {
-            ((Button)mouse).BackColor = Color.Transparent;
+            ((Button)mouse).BackColor = Color.DarkGray;
         }
         private void click_de_boton(object boton, EventArgs args)
         {
             pnlRespaldo.Controls.Clear();
+            String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
             try
             {
                 texto = ((Button)boton).Text;
@@ -199,22 +214,34 @@ namespace See_More
                 {
                     for (int j = 0; j < 4; j++)
                     {
-                        try { 
-                            button = new Button();
-                            button.Width = 200;
-                            button.Height = 20;
-                            button.Text = ((DirectoryInfo)directories[i]).Name;
-                            button.Top = t;
-                            button.Left = l;
-                            button.FlatStyle = FlatStyle.Popup;
-                            button.MouseMove += new MouseEventHandler(mousemove);
-                            button.MouseLeave += new EventHandler(mouseleave);
-                            button.Click += new EventHandler(click_de_boton);
-                            pnlRespaldo.Controls.Add(button);
-                            //t += 45;
-                            l += 200;
-                            if(j!=3)
-                            i += 1;
+                        try {
+                            foreach (String linea in animesVistos)
+                            {
+                                if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
+                                {
+                                    button = new Button();
+                                    button.Width = 200;
+                                    button.Height = 20;
+                                    button.Text = ((DirectoryInfo)directories[i]).Name;
+                                    button.Top = t;
+                                    button.Left = l;
+                                    button.BackColor = Color.DarkGray;
+                                    button.FlatStyle = FlatStyle.Popup;
+                                    button.MouseMove += new MouseEventHandler(mousemove);
+                                    button.MouseLeave += new EventHandler(mouseleave);
+                                    button.Click += new EventHandler(click_de_boton);
+                                    pnlRespaldo.Controls.Add(button);
+                                    //t += 45;
+                                    l += 200;
+                                    if (j != 3)
+                                        i += 1;
+                                }
+                                else
+                                {
+                                    j -= 1;
+                                    i += 1;
+                                }
+                            }
                         }
                         catch (Exception) { }
                     }
@@ -235,6 +262,7 @@ namespace See_More
                             button2.Text = ((FileInfo)files[i]).Name;
                             button2.Top = t;
                             button2.Left = l;
+                            button2.BackColor = Color.DarkGray;
                             button2.FlatStyle = FlatStyle.Popup;
                             button2.MouseMove += new MouseEventHandler(mousemove);
                             button2.MouseLeave += new EventHandler(mouseleave);
@@ -287,9 +315,9 @@ namespace See_More
                     resultado = Convert.ToBase64String(encriptar);
                     sw2.WriteLine(resultado);
                     sw2.Close();
-                    StreamWriter ultimaruta = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\"+Configuracion.usuario+"Ruta.txt");
+                    StreamWriter ultimaruta = new StreamWriter(Application.StartupPath + @"\See More\Usuarios SeeMore\"+Configuracion.usuario+"Ruta.txt");
                     ultimaruta.Flush(); ultimaruta.Close();
-                    StreamWriter ultimaruta2 = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\"+Configuracion.usuario+"Ruta.txt");
+                    StreamWriter ultimaruta2 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\"+Configuracion.usuario+"Ruta.txt");
                     ultimaruta2.WriteLine(ultimarutavista+";"); ultimaruta2.Close();
                     this.Close();
                     break;
@@ -395,39 +423,81 @@ namespace See_More
         {
             pnlRespaldo.Controls.Clear();
             rutaCamino = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
+            String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
             try
             {
                 int t = 45, l = 0;
                 DirectoryInfo directory = new DirectoryInfo(@"C:\Users\" + Configuracion.UsuarioActual + @"\Videos");
                 FileInfo[] files = directory.GetFiles("*.mp4");
                 DirectoryInfo[] directories = directory.GetDirectories();
-                Button button;
+                Button button, button2;
                 for (int i = 0; i < directories.Length; i++)
                 {
                     for (int j = 0; j < 4; j++)
                     {
                         try
                         {
-                            button = new Button();
-                            button.Width = 200;
-                            button.Height = 20;
-                            button.Text = ((DirectoryInfo)directories[i]).Name;
-                            button.Top = t;
-                            button.Left = l;
-                            button.FlatStyle = FlatStyle.Popup;
-                            button.MouseMove += new MouseEventHandler(mousemove);
-                            button.MouseLeave += new EventHandler(mouseleave);
-                            button.Click += new EventHandler(click_de_boton);
-                            pnlRespaldo.Controls.Add(button);
-                            //t += 45;
-                            l += 200;
-                            if (j != 3)
-                                i += 1;
+                            foreach (String linea in animesVistos)
+                            {
+                                if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
+                                {
+                                    button = new Button();
+                                    button.Width = 200;
+                                    button.Height = 20;
+                                    button.Text = ((DirectoryInfo)directories[i]).Name;
+                                    button.Top = t;
+                                    button.Left = l;
+                                    button.BackColor = Color.DarkGray;
+                                    button.FlatStyle = FlatStyle.Popup;
+                                    button.MouseMove += new MouseEventHandler(mousemove);
+                                    button.MouseLeave += new EventHandler(mouseleave);
+                                    button.Click += new EventHandler(click_de_boton);
+                                    pnlRespaldo.Controls.Add(button);
+                                    //t += 45;
+                                    l += 200;
+                                    if (j != 3)
+                                        i += 1;
+                                }
+                                else
+                                {
+                                    j -= 1;
+                                    i += 1;
+                                }
+                            }
                         }
                         catch (Exception) { }
                     }
                     l = 0;
                     t += 45;
+                    for (int j = 0; j < files.Length; j++)
+                    {
+                        for (int k = 0; k < 4; k++)
+                        {
+                            try
+                            {
+                                button2 = new Button();
+                                button2.Width = 200;
+                                button2.Height = 20;
+                                button2.Name = ((FileInfo)files[j]).FullName;
+                                button2.Text = ((FileInfo)files[j]).Name;
+                                button2.Top = t;
+                                button2.Left = l;
+                                button2.BackColor = Color.DarkGray;
+                                button2.FlatStyle = FlatStyle.Popup;
+                                button2.MouseMove += new MouseEventHandler(mousemove);
+                                button2.MouseLeave += new EventHandler(mouseleave);
+                                button2.Click += new EventHandler(click_de_boton2);
+                                pnlRespaldo.Controls.Add(button2);
+                                //t += 45;
+                                l += 200;
+                                if (j != 3)
+                                    i += 1;
+                            }
+                            catch (Exception) { }
+                        }
+                        l = 0;
+                        t += 45;
+                    }
                 }
             }
             catch (Exception) { }
@@ -507,6 +577,7 @@ namespace See_More
                     {
                         pnlRespaldo.Controls.Clear();
                         oracion = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
+                        String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
                         try
                         {
                             int t = 45, l = 0;
@@ -520,21 +591,33 @@ namespace See_More
                                 {
                                     try
                                     {
-                                        button = new Button();
-                                        button.Width = 200;
-                                        button.Height = 20;
-                                        button.Text = ((DirectoryInfo)directories[i]).Name;
-                                        button.Top = t;
-                                        button.Left = l;
-                                        button.FlatStyle = FlatStyle.Popup;
-                                        button.MouseMove += new MouseEventHandler(mousemove);
-                                        button.MouseLeave += new EventHandler(mouseleave);
-                                        button.Click += new EventHandler(click_de_boton);
-                                        pnlRespaldo.Controls.Add(button);
-                                        //t += 45;
-                                        l += 200;
-                                        if (j != 3)
-                                            i += 1;
+                                        foreach (String linea in animesVistos)
+                                        {
+                                            if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
+                                            {
+                                                button = new Button();
+                                                button.Width = 200;
+                                                button.Height = 20;
+                                                button.Text = ((DirectoryInfo)directories[i]).Name;
+                                                button.Top = t;
+                                                button.Left = l;
+                                                button.BackColor = Color.DarkGray;
+                                                button.FlatStyle = FlatStyle.Popup;
+                                                button.MouseMove += new MouseEventHandler(mousemove);
+                                                button.MouseLeave += new EventHandler(mouseleave);
+                                                button.Click += new EventHandler(click_de_boton);
+                                                pnlRespaldo.Controls.Add(button);
+                                                //t += 45;
+                                                l += 200;
+                                                if (j != 3)
+                                                    i += 1;
+                                            }
+                                            else
+                                            {
+                                                j -= 1;
+                                                i += 1;
+                                            }
+                                        }
                                     }
                                     catch (Exception) { }
                                 }
@@ -556,6 +639,7 @@ namespace See_More
                                         button2.Text = ((FileInfo)files[i]).Name;
                                         button2.Top = t;
                                         button2.Left = l;
+                                        button2.BackColor = Color.DarkGray;
                                         button2.FlatStyle = FlatStyle.Popup;
                                         button2.MouseMove += new MouseEventHandler(mousemove);
                                         button2.MouseLeave += new EventHandler(mouseleave);
@@ -624,7 +708,7 @@ namespace See_More
                     }
                     else
                     {
-                        MessageBox.Show("Tristemente SeeMore no cuenta con el comando Series no Vistas", "SeeMore", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("No es necesario efectuar este comando pues See More lo hace de forma automatica", "SeeMore", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 if(decision == "b-u")
@@ -743,6 +827,7 @@ namespace See_More
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             pnlRespaldo.Controls.Clear();
+            String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
             try
             {
                 int t = 45, l = 0;
@@ -756,21 +841,33 @@ namespace See_More
                     {
                         try
                         {
-                            button = new Button();
-                            button.Width = 200;
-                            button.Height = 20;
-                            button.Text = ((DirectoryInfo)directories[i]).Name;
-                            button.Top = t;
-                            button.Left = l;
-                            button.FlatStyle = FlatStyle.Popup;
-                            button.MouseMove += new MouseEventHandler(mousemove);
-                            button.MouseLeave += new EventHandler(mouseleave);
-                            button.Click += new EventHandler(click_de_boton);
-                            pnlRespaldo.Controls.Add(button);
-                            //t += 45;
-                            l += 200;
-                            if (j != 3)
-                                i += 1;
+                            foreach (String linea in animesVistos)
+                            {
+                                if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
+                                {
+                                    button = new Button();
+                                    button.Width = 200;
+                                    button.Height = 20;
+                                    button.Text = ((DirectoryInfo)directories[i]).Name;
+                                    button.Top = t;
+                                    button.Left = l;
+                                    button.BackColor = Color.DarkGray;
+                                    button.FlatStyle = FlatStyle.Popup;
+                                    button.MouseMove += new MouseEventHandler(mousemove);
+                                    button.MouseLeave += new EventHandler(mouseleave);
+                                    button.Click += new EventHandler(click_de_boton);
+                                    pnlRespaldo.Controls.Add(button);
+                                    //t += 45;
+                                    l += 200;
+                                    if (j != 3)
+                                        i += 1;
+                                }
+                                else
+                                {
+                                    j -= 1;
+                                    i += 1;
+                                }
+                            }
                         }
                         catch (Exception) { }
                     }
@@ -792,6 +889,7 @@ namespace See_More
                             button2.Text = ((FileInfo)files[i]).Name;
                             button2.Top = t;
                             button2.Left = l;
+                            button2.BackColor = Color.DarkGray;
                             button2.FlatStyle = FlatStyle.Popup;
                             button2.MouseMove += new MouseEventHandler(mousemove);
                             button2.MouseLeave += new EventHandler(mouseleave);

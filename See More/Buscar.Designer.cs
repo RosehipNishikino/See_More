@@ -174,6 +174,7 @@
             // button1
             // 
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.button1.Location = new System.Drawing.Point(12, 279);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(129, 23);
