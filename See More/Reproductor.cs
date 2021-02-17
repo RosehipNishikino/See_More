@@ -184,7 +184,6 @@ namespace See_More
                     this.Text = "En pausa - " + wmpCentral.currentMedia.name;
                 }
                 wmpCentral.Ctlcontrols.pause();
-                picPausa.Visible = true;
             }else if(wmpCentral.playState == WMPLib.WMPPlayState.wmppsPaused)
             {
                 tmrProgreso.Start();
@@ -204,7 +203,6 @@ namespace See_More
                     this.Text = "Viendo - " + wmpCentral.currentMedia.name;
                 }
                 wmpCentral.Ctlcontrols.play();
-                picPausa.Visible = false;
             }
             else { }
         }
@@ -230,7 +228,6 @@ namespace See_More
                         this.Text = "En pausa - " + wmpCentral.currentMedia.name;
                     }
                     wmpCentral.Ctlcontrols.pause();
-                    picPausa.Visible = true;
                 }
                 else if (wmpCentral.playState == WMPLib.WMPPlayState.wmppsPaused)
                 {
@@ -251,7 +248,6 @@ namespace See_More
                         this.Text = "Viendo - " + wmpCentral.currentMedia.name;
                     }
                     wmpCentral.Ctlcontrols.play();
-                    picPausa.Visible = false;
                 }
                 else { }
             } 
@@ -337,7 +333,6 @@ namespace See_More
                                 this.Text = "Viendo - " + wmpCentral.currentMedia.name;
                             }
                             wmpCentral.Ctlcontrols.play();
-                            picPausa.Visible = false;
                         }
                 }
                 else if (this.WindowState == FormWindowState.Maximized)
@@ -360,7 +355,6 @@ namespace See_More
                                 this.Text = "Viendo - " + wmpCentral.currentMedia.name;
                             }
                             wmpCentral.Ctlcontrols.play();
-                            picPausa.Visible = false;
                         }
                 }
                 else { }
@@ -635,7 +629,6 @@ namespace See_More
                         this.Text = "Detenido - " + wmpCentral.currentMedia.name;
                     }
                     wmpCentral.Ctlcontrols.stop();
-                    picPausa.Visible = false;
                     lblSinUso.Text = "";
                 }
                 else
@@ -866,19 +859,16 @@ namespace See_More
                     if (extension.EndsWith("wpl"))
                     {
                         wmpCentral.URL = result;
-                        picPausa.Visible = false;
                         this.Text = "Viendo - " + todo + " Capitulo: " + contador;
                     }
                     else if (extension.EndsWith("avi"))
                     {
                         wmpCentral.URL = result;
-                        picPausa.Visible = false;
                         this.Text = "Viendo - " + todo;
                     }
                     else
                     {
                         wmpCentral.URL = result;
-                        picPausa.Visible = false;
                         this.Text = "Viendo - " + todo;
                     }
                     tmrProgreso.Start();
@@ -963,13 +953,11 @@ namespace See_More
                         if (extension.EndsWith("wpl"))
                         {
                             wmpCentral.URL = frm.RutaVideo;
-                            picPausa.Visible = false;
                             this.Text = "Viendo - " + todo + " Capitulo: " + contador;
                         }
                         else
                         {
                             wmpCentral.URL = frm.RutaVideo;
-                            picPausa.Visible = false;
                             this.Text = "Viendo - " + todo;
                         }
                         tmrProgreso.Start();

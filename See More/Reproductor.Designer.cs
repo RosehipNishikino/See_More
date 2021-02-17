@@ -50,7 +50,6 @@
             this.lblSinUso = new System.Windows.Forms.Label();
             this.lblSinUso2 = new System.Windows.Forms.Label();
             this.ofdAbrir = new System.Windows.Forms.OpenFileDialog();
-            this.picPausa = new System.Windows.Forms.PictureBox();
             this.picUsuario = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblDuracionInicial = new System.Windows.Forms.Label();
@@ -67,7 +66,6 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.wmpCentral)).BeginInit();
             this.mspMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picPausa)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picUsuario)).BeginInit();
             this.SuspendLayout();
             // 
@@ -244,19 +242,6 @@
             // 
             this.ofdAbrir.FileName = "openFileDialog1";
             // 
-            // picPausa
-            // 
-            this.picPausa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.picPausa.BackColor = System.Drawing.Color.Transparent;
-            this.picPausa.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picPausa.Location = new System.Drawing.Point(0, 381);
-            this.picPausa.Name = "picPausa";
-            this.picPausa.Size = new System.Drawing.Size(176, 60);
-            this.picPausa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.picPausa.TabIndex = 9;
-            this.picPausa.TabStop = false;
-            this.picPausa.Visible = false;
-            // 
             // picUsuario
             // 
             this.picUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -364,7 +349,6 @@
             this.Controls.Add(this.lblDuracionFinal);
             this.Controls.Add(this.lblDuracionInicial);
             this.Controls.Add(this.lblSinUso2);
-            this.Controls.Add(this.picPausa);
             this.Controls.Add(this.lblSinUso);
             this.Controls.Add(this.lblVolumen);
             this.Controls.Add(this.picUsuario);
@@ -380,7 +364,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.wmpCentral)).EndInit();
             this.mspMenu.ResumeLayout(false);
             this.mspMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picPausa)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picUsuario)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -396,7 +379,6 @@
         private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cerrarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.PictureBox picPausa;
         private System.Windows.Forms.Label lblVolumen;
         private System.Windows.Forms.Label lblSinUso;
         private System.Windows.Forms.Label lblSinUso2;
