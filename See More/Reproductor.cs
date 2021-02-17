@@ -22,6 +22,7 @@ namespace See_More
         StreamWriter sw;
         StreamWriter sw2; String todo; String extension = string.Empty; String usuario;
         StreamWriter sw3;
+        StreamWriter sw4;
         int contador = 1;
         bool entra = true;
         bool nombre = true; String ruta;
@@ -389,82 +390,122 @@ namespace See_More
             if(!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\buscar.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\buscar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\busqueda.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\busqueda.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\crearcuenta.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\crearcuenta.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\eliminar.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\eliminar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\history.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\history.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\nuevo.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\nuevo.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\reproductor.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\reproductor.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\respaldo.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\respaldo.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if(!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\actuaTemp.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\actuaTemp.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\creaTemp.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\creaTemp.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\temp.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\temp.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\creaciones.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\creaciones.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\actualizaciones.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\actualizaciones.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4.Close();
             }
         }
         private void Form1_Load(object sender, EventArgs e)
