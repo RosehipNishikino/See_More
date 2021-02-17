@@ -274,13 +274,16 @@
             this.txtContraseña.PasswordChar = '*';
             this.txtContraseña.Size = new System.Drawing.Size(247, 20);
             this.txtContraseña.TabIndex = 38;
+            this.txtContraseña.Visible = false;
             // 
             // txtUsuario
             // 
+            this.txtUsuario.Enabled = false;
             this.txtUsuario.Location = new System.Drawing.Point(16, 95);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(247, 20);
             this.txtUsuario.TabIndex = 37;
+            this.txtUsuario.Visible = false;
             // 
             // lblDatoInfo
             // 
@@ -301,6 +304,7 @@
             this.lblContraseña.Size = new System.Drawing.Size(64, 13);
             this.lblContraseña.TabIndex = 35;
             this.lblContraseña.Text = "Contraseña:";
+            this.lblContraseña.Visible = false;
             // 
             // lblUsuario
             // 
@@ -311,6 +315,7 @@
             this.lblUsuario.Size = new System.Drawing.Size(46, 13);
             this.lblUsuario.TabIndex = 34;
             this.lblUsuario.Text = "Usuario:";
+            this.lblUsuario.Visible = false;
             // 
             // lblIniciarSesion
             // 
@@ -321,6 +326,7 @@
             this.lblIniciarSesion.Size = new System.Drawing.Size(68, 13);
             this.lblIniciarSesion.TabIndex = 33;
             this.lblIniciarSesion.Text = "Iniciar sesión";
+            this.lblIniciarSesion.Visible = false;
             // 
             // txtSerie
             // 

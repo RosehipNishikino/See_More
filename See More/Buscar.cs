@@ -73,6 +73,7 @@ namespace See_More
                 lblApartadoE.Visible = false;
                 lblNombreApar.Visible = false;
                 lblSerie.Visible = false;
+                lblDatoInfo.Visible = false;
                 txtCrearApartado.Visible = false;
                 txtBuscarApartado.Visible = false;
                 txtNombreApartado.Visible = false;
@@ -326,6 +327,11 @@ namespace See_More
             if (sinCoencidencia == false)
             {
                 MessageBox.Show("El Usuario y/o Contraseña estan mal, intente de nuevo");
+                lblIniciarSesion.Visible = true;
+                lblUsuario.Visible = true;
+                lblContraseña.Visible = true;
+                txtUsuario.Visible = true;
+                txtContraseña.Visible = true;
             }
         }
         private void Buscar_Load(object sender, EventArgs e)
