@@ -64,6 +64,11 @@
             this.tmrBateria = new System.Windows.Forms.Timer(this.components);
             this.tmrGuardarAuto = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.personalizaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.iniciarSesiónToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.wmpCentral)).BeginInit();
             this.mspMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUsuario)).BeginInit();
@@ -108,7 +113,10 @@
             this.nuevoToolStripMenuItem1,
             this.buscarToolStripMenuItem1,
             this.actualizarToolStripMenuItem1,
-            this.eliminarToolStripMenuItem1});
+            this.eliminarToolStripMenuItem1,
+            this.toolStripMenuItem3,
+            this.personalizaciónToolStripMenuItem,
+            this.iniciarSesiónToolStripMenuItem1});
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
             this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.nuevoToolStripMenuItem.Text = "See More";
@@ -211,8 +219,7 @@
             // 
             // lblVolumen
             // 
-            this.lblVolumen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblVolumen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblVolumen.AutoSize = true;
             this.lblVolumen.Location = new System.Drawing.Point(1196, 6);
             this.lblVolumen.Name = "lblVolumen";
@@ -221,8 +228,7 @@
             // 
             // lblSinUso
             // 
-            this.lblSinUso.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSinUso.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSinUso.AutoSize = true;
             this.lblSinUso.Location = new System.Drawing.Point(963, 6);
             this.lblSinUso.Name = "lblSinUso";
@@ -294,9 +300,7 @@
             // 
             // lblInicio
             // 
-            this.lblInicio.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInicio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblInicio.AutoSize = true;
             this.lblInicio.Location = new System.Drawing.Point(1052, 7);
             this.lblInicio.Name = "lblInicio";
@@ -305,9 +309,7 @@
             // 
             // lblFinal
             // 
-            this.lblFinal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblFinal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblFinal.AutoSize = true;
             this.lblFinal.Location = new System.Drawing.Point(1122, 9);
             this.lblFinal.Name = "lblFinal";
@@ -336,6 +338,46 @@
             // notifyIcon1
             // 
             this.notifyIcon1.Visible = true;
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem3.Text = "|||||||||";
+            this.toolStripMenuItem3.Visible = false;
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // personalizaciónToolStripMenuItem
+            // 
+            this.personalizaciónToolStripMenuItem.Name = "personalizaciónToolStripMenuItem";
+            this.personalizaciónToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.personalizaciónToolStripMenuItem.Text = "Personalización";
+            this.personalizaciónToolStripMenuItem.Visible = false;
+            this.personalizaciónToolStripMenuItem.Click += new System.EventHandler(this.personalizaciónToolStripMenuItem_Click);
+            // 
+            // iniciarSesiónToolStripMenuItem1
+            // 
+            this.iniciarSesiónToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuToolStripMenuItem1,
+            this.cerrarSesiónToolStripMenuItem});
+            this.iniciarSesiónToolStripMenuItem1.Name = "iniciarSesiónToolStripMenuItem1";
+            this.iniciarSesiónToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.iniciarSesiónToolStripMenuItem1.Text = "Iniciar Sesión";
+            this.iniciarSesiónToolStripMenuItem1.Visible = false;
+            // 
+            // menuToolStripMenuItem1
+            // 
+            this.menuToolStripMenuItem1.Name = "menuToolStripMenuItem1";
+            this.menuToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.menuToolStripMenuItem1.Text = "Menu";
+            this.menuToolStripMenuItem1.Click += new System.EventHandler(this.menuToolStripMenuItem1_Click);
+            // 
+            // cerrarSesiónToolStripMenuItem
+            // 
+            this.cerrarSesiónToolStripMenuItem.Name = "cerrarSesiónToolStripMenuItem";
+            this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cerrarSesiónToolStripMenuItem.Text = "Cerrar Sesión";
+            this.cerrarSesiónToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesiónToolStripMenuItem_Click);
             // 
             // Reproductor
             // 
@@ -406,6 +448,11 @@
         private System.Windows.Forms.Timer tmrBateria;
         private System.Windows.Forms.Timer tmrGuardarAuto;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem personalizaciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem iniciarSesiónToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem cerrarSesiónToolStripMenuItem;
     }
 }
 

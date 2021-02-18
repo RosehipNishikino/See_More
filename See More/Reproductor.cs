@@ -286,10 +286,37 @@ namespace See_More
         }
         private void Form1_Resize(object sender, EventArgs e)
         {
-            if (autopausa == true)
+            if (this.Width <= 900)
             {
+                toolStripMenuItem1.Visible = false;
+                toolStripMenuItem3.Visible = true;
             }
-            else
+            if (this.Width > 900)
+            {
+                toolStripMenuItem1.Visible = true;
+                toolStripMenuItem3.Visible = false;
+            }
+            if (this.Width <= 800)
+            {
+                cerrarToolStripMenuItem.Visible = false;
+                personalizaciónToolStripMenuItem.Visible = true;
+            }
+            if (this.Width > 800)
+            {
+                cerrarToolStripMenuItem.Visible = true;
+                personalizaciónToolStripMenuItem.Visible = false;
+            }
+            if (this.Width <= 700)
+            {
+                iniciarSesiónToolStripMenuItem.Visible = false;
+                iniciarSesiónToolStripMenuItem1.Visible = true;
+            }
+            if (this.Width > 700)
+            {
+                iniciarSesiónToolStripMenuItem.Visible = true;
+                iniciarSesiónToolStripMenuItem1.Visible = false;
+            }
+            if (!autopausa)
             {
                 if (this.WindowState == FormWindowState.Minimized)
                 {
@@ -534,11 +561,15 @@ namespace See_More
             {
                 iniciarSesiónToolStripMenuItem.Text = Configuracion.usuario;
                 menuToolStripMenuItem.Text = "Ir a perfil de " + Configuracion.usuario;
+                iniciarSesiónToolStripMenuItem1.Text = Configuracion.usuario;
+                menuToolStripMenuItem1.Text = "Ir a perfil de " + Configuracion.usuario;
             }
             else
             {
                 iniciarSesiónToolStripMenuItem.Text = "Iniciar Sesión";
                 menuToolStripMenuItem.Text = "Iniciar Sesión";
+                iniciarSesiónToolStripMenuItem1.Text = "Iniciar Sesión";
+                menuToolStripMenuItem1.Text = "Iniciar Sesión";
             }
             this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
             String line; String line2;
@@ -1224,6 +1255,68 @@ namespace See_More
                     primerAviso = false;
                     ultimoAviso = false;
                 }
+            }
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            Historial frm = new Historial();
+            frm.ShowDialog();
+        }
+
+        private void personalizaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Imagenes_de_fondo frm = new Imagenes_de_fondo();
+            frm.ShowDialog();
+            String line;
+            try
+            {
+                StreamReader rd = new StreamReader(Application.StartupPath + @"\See More\Configuraciones SeeMore\reproductor.txt");
+                line = rd.ReadLine();
+                this.BackgroundImage = Image.FromFile(line);
+                this.BackgroundImageLayout = ImageLayout.Stretch;
+                rd.Close();
+            }
+            catch (Exception) { }
+        }
+
+        private void menuToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            new Tu_perfil().Show();
+            Evento2();
+            cerro = false;
+        }
+
+        private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (cerro == false)
+            {
+                StreamWriter sw = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
+                sw.Flush(); sw.Close();
+                StreamWriter sw2 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
+                sw2.Flush(); sw2.Close();
+                Configuracion.usuario = "";
+                Configuracion.contraseña = "";
+                iniciarSesiónToolStripMenuItem1.Text = "Iniciar Sesión";
+                menuToolStripMenuItem1.Text = "Iniciar Sesión";
+                Evento2();
+                cerro = true;
+            }
+            else
+            {
+            }
+        }
+        public void Evento2()
+        {
+            if (Configuracion.usuario != "")
+            {
+                iniciarSesiónToolStripMenuItem1.Text = Configuracion.usuario;
+                menuToolStripMenuItem1.Text = "Ir a perfil de " + Configuracion.usuario;
+            }
+            else
+            {
+                iniciarSesiónToolStripMenuItem1.Text = "Iniciar Sesión";
+                menuToolStripMenuItem1.Text = "Iniciar Sesión";
             }
         }
         private void tmrGuardarAuto_Tick(object sender, EventArgs e)
