@@ -475,35 +475,37 @@ namespace See_More
                     }
                     l = 0;
                     t += 45;
-                    for (int j = 0; j < files.Length; j++)
+                }
+                l = 0;
+                t += 45;
+                for (int j = 0; j < files.Length; j++)
+                {
+                    for (int k = 0; k < 4; k++)
                     {
-                        for (int k = 0; k < 4; k++)
+                        try
                         {
-                            try
-                            {
-                                button2 = new Button();
-                                button2.Width = 200;
-                                button2.Height = 20;
-                                button2.Name = ((FileInfo)files[j]).FullName;
-                                button2.Text = ((FileInfo)files[j]).Name;
-                                button2.Top = t;
-                                button2.Left = l;
-                                button2.BackColor = Color.DarkGray;
-                                button2.FlatStyle = FlatStyle.Popup;
-                                button2.MouseMove += new MouseEventHandler(mousemove);
-                                button2.MouseLeave += new EventHandler(mouseleave);
-                                button2.Click += new EventHandler(click_de_boton2);
-                                pnlRespaldo.Controls.Add(button2);
-                                //t += 45;
-                                l += 200;
-                                if (j != 3)
-                                    i += 1;
-                            }
-                            catch (Exception) { }
+                            button2 = new Button();
+                            button2.Width = 200;
+                            button2.Height = 20;
+                            button2.Name = ((FileInfo)files[j]).FullName;
+                            button2.Text = ((FileInfo)files[j]).Name;
+                            button2.Top = t;
+                            button2.Left = l;
+                            button2.BackColor = Color.DarkGray;
+                            button2.FlatStyle = FlatStyle.Popup;
+                            button2.MouseMove += new MouseEventHandler(mousemove);
+                            button2.MouseLeave += new EventHandler(mouseleave);
+                            button2.Click += new EventHandler(click_de_boton2);
+                            pnlRespaldo.Controls.Add(button2);
+                            //t += 45;
+                            l += 200;
+                            if (k != 3)
+                                j += 1;
                         }
-                        l = 0;
-                        t += 45;
+                        catch (Exception) { }
                     }
+                    l = 0;
+                    t += 45;
                 }
             }
             catch (Exception) { }
