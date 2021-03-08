@@ -40,107 +40,116 @@ namespace See_More
                 {
                     if(Configuracion.existeConexion)
                     {
-                        Cuenta cuenta = new Cuenta();
-                        cuenta.usuario = txtUsuario.Text.Trim();
-                        cuenta.contraseña = txtContraseña.Text.Trim();
-                        string result = string.Empty;
-                        byte[] encryted = System.Text.Encoding.Unicode.GetBytes(imagenPerfil);
-                        result = Convert.ToBase64String(encryted);
-                        cuenta.imagen = result.Trim();
-                        if (rdoHombre.Checked)
+                        if (!ExisteUsuario(txtUsuario.Text))
                         {
-                            cuenta.genero = rdoHombre.Text.Trim();
-                        }
-                        if (rdoMujer.Checked)
-                        {
-                            cuenta.genero = rdoMujer.Text.Trim();
-                        }
-                        if (rdoOtro.Checked)
-                        {
-                            cuenta.genero = txtOtro.Text.Trim();
-                        }
-                        nombre = cuenta.usuario;
-                        string resultado1 = string.Empty;
-                        byte[] encrytedo1 = System.Text.Encoding.Unicode.GetBytes(txtContraseña.Text);
-                        resultado1 = Convert.ToBase64String(encrytedo1);
-                        string result1 = string.Empty;
-                        byte[] encryted1 = System.Text.Encoding.Unicode.GetBytes(imagenPerfil);
-                        result1 = Convert.ToBase64String(encryted1);
-                        StreamWriter sw = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
-                        if (rdoHombre.Checked)
-                            sw.WriteLine(txtUsuario.Text.Trim() + ";" + resultado1.Trim() + ";" + result1.Trim() + ";" + rdoHombre.Text.Trim());
-                        if (rdoMujer.Checked)
-                            sw.WriteLine(txtUsuario.Text.Trim() + ";" + resultado1.Trim() + ";" + result1.Trim() + ";" + rdoMujer.Text.Trim());
-                        if (rdoOtro.Checked)
-                            sw.WriteLine(txtUsuario.Text.Trim() + ";" + resultado1.Trim() + ";" + result1.Trim() + ";" + txtOtro.Text.Trim());
-                        sw.Close();
-                        int resultado = CuentaSeeMore.AgregarC(cuenta);
-                        if (resultado > 0)
-                        {
-                            //No sirve pero deberia   richTextBox1.SaveFile("C:\\" + cuenta.usuario + ".txt", RichTextBoxStreamType.PlainText);
-                            //No sirve pero deberia   File.CreateText("C:\\" + cuenta.usuario + ".txt");
-                            //No sirve pero deberia   File.AppendText("C:\\" + cuenta.usuario + ".txt");
-                            //No sirve pero deberia   File.WriteAllText(@"C:\" + cuenta.usuario + ".txt","Bienvenido, puedes borrar esta linea y guardar");
-                            File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + ".txt");
-                            if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Imagen.txt") &&
-                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Busqueda.txt") &&
-                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Animes.txt") &&
-                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Inte.txt") && 
-                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Ruta.txt"))
+                            Cuenta cuenta = new Cuenta();
+                            cuenta.usuario = txtUsuario.Text.Trim();
+                            cuenta.contraseña = txtContraseña.Text.Trim();
+                            string result = string.Empty;
+                            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(imagenPerfil);
+                            result = Convert.ToBase64String(encryted);
+                            cuenta.imagen = result.Trim();
+                            if (rdoHombre.Checked)
                             {
-                                File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Imagen.txt");
-                                File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Busqueda.txt");
-                                File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Animes.txt");
-                                File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Inte.txt");
-                                File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Ruta.txt");
+                                cuenta.genero = rdoHombre.Text.Trim();
                             }
-                            MessageBox.Show("Se ha creado su cuenta, proceda a loguearse en la parte Iniciar Sesión");
-                            Limpiar();
+                            if (rdoMujer.Checked)
+                            {
+                                cuenta.genero = rdoMujer.Text.Trim();
+                            }
+                            if (rdoOtro.Checked)
+                            {
+                                cuenta.genero = txtOtro.Text.Trim();
+                            }
+                            nombre = cuenta.usuario;
+                            string resultado1 = string.Empty;
+                            byte[] encrytedo1 = System.Text.Encoding.Unicode.GetBytes(txtContraseña.Text);
+                            resultado1 = Convert.ToBase64String(encrytedo1);
+                            string result1 = string.Empty;
+                            byte[] encryted1 = System.Text.Encoding.Unicode.GetBytes(imagenPerfil);
+                            result1 = Convert.ToBase64String(encryted1);
+                            StreamWriter sw = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
+                            if (rdoHombre.Checked)
+                                sw.WriteLine(txtUsuario.Text.Trim() + ";" + resultado1.Trim() + ";" + result1.Trim() + ";" + rdoHombre.Text.Trim());
+                            if (rdoMujer.Checked)
+                                sw.WriteLine(txtUsuario.Text.Trim() + ";" + resultado1.Trim() + ";" + result1.Trim() + ";" + rdoMujer.Text.Trim());
+                            if (rdoOtro.Checked)
+                                sw.WriteLine(txtUsuario.Text.Trim() + ";" + resultado1.Trim() + ";" + result1.Trim() + ";" + txtOtro.Text.Trim());
+                            sw.Close();
+                            int resultado = CuentaSeeMore.AgregarC(cuenta);
+                            if (resultado > 0)
+                            {
+                                //No sirve pero deberia   richTextBox1.SaveFile("C:\\" + cuenta.usuario + ".txt", RichTextBoxStreamType.PlainText);
+                                //No sirve pero deberia   File.CreateText("C:\\" + cuenta.usuario + ".txt");
+                                //No sirve pero deberia   File.AppendText("C:\\" + cuenta.usuario + ".txt");
+                                //No sirve pero deberia   File.WriteAllText(@"C:\" + cuenta.usuario + ".txt","Bienvenido, puedes borrar esta linea y guardar");
+                                File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + ".txt");
+                                if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Imagen.txt") &&
+                                    !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Busqueda.txt") &&
+                                    !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Animes.txt") &&
+                                    !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Inte.txt") &&
+                                    !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Ruta.txt"))
+                                {
+                                    File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Imagen.txt");
+                                    File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Busqueda.txt");
+                                    File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Animes.txt");
+                                    File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Inte.txt");
+                                    File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Ruta.txt");
+                                }
+                                MessageBox.Show("Se ha creado su cuenta, proceda a loguearse en la parte Iniciar Sesión");
+                                Limpiar();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Ha ocurrido un error");
+                            }
                         }
                         else
-                        {
-                            MessageBox.Show("Ha ocurrido un error");
-                        }
+                            MessageBox.Show("El usuario ya ha sido creado", "Error al crear nuevo usuario");
                     }
                     else
                     {
-                        string resultado = string.Empty;
-                        byte[] encrytedo = System.Text.Encoding.Unicode.GetBytes(txtContraseña.Text);
-                        resultado = Convert.ToBase64String(encrytedo);
-                        string result = string.Empty;
-                        byte[] encryted = System.Text.Encoding.Unicode.GetBytes(imagenPerfil);
-                        result = Convert.ToBase64String(encryted);
-                        StreamWriter sw = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
-                        if (rdoHombre.Checked)
-                            sw.WriteLine(txtUsuario.Text.Trim() + ";" + resultado.Trim() + ";" + result.Trim() + ";" + rdoHombre.Text.Trim());
-                        if (rdoMujer.Checked)
-                            sw.WriteLine(txtUsuario.Text.Trim() + ";" + resultado.Trim() + ";" + result.Trim() + ";" + rdoMujer.Text.Trim());
-                        if (rdoOtro.Checked)
-                            sw.WriteLine(txtUsuario.Text.Trim() + ";" + resultado.Trim() + ";" + result.Trim() + ";" + txtOtro.Text.Trim());
-                        sw.Close();
-                        StreamWriter creaciones = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\creaciones.txt");
-                        if (rdoHombre.Checked)
-                            creaciones.WriteLine(txtUsuario.Text.Trim() + ";" + txtContraseña.Text.Trim() + ";" + result.Trim() + ";" + rdoHombre.Text.Trim());
-                        if (rdoMujer.Checked)
-                            creaciones.WriteLine(txtUsuario.Text.Trim() + ";" + txtContraseña.Text.Trim() + ";" + result.Trim() + ";" + rdoMujer.Text.Trim());
-                        if (rdoOtro.Checked)
-                            creaciones.WriteLine(txtUsuario.Text.Trim() + ";" + txtContraseña.Text.Trim() + ";" + result.Trim() + ";" + txtOtro.Text.Trim());
-                        creaciones.Close();
-                        File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + ".txt");
-                        if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Imagen.txt") &&
-                            !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Busqueda.txt") &&
-                            !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Animes.txt") &&
-                            !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Inte.txt") &&
-                            !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Ruta.txt"))
+                        if (!ExisteUsuario(txtUsuario.Text))
                         {
-                            File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Imagen.txt");
-                            File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Busqueda.txt");
-                            File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Animes.txt");
-                            File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Inte.txt");
-                            File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Ruta.txt");
-                        }
-                        MessageBox.Show("Se ha creado su cuenta, proceda a loguearse en la parte Iniciar Sesión");
-                        Limpiar();
+                            string resultado = string.Empty;
+                            byte[] encrytedo = System.Text.Encoding.Unicode.GetBytes(txtContraseña.Text);
+                            resultado = Convert.ToBase64String(encrytedo);
+                            string result = string.Empty;
+                            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(imagenPerfil);
+                            result = Convert.ToBase64String(encryted);
+                            StreamWriter sw = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
+                            if (rdoHombre.Checked)
+                                sw.WriteLine(txtUsuario.Text.Trim() + ";" + resultado.Trim() + ";" + result.Trim() + ";" + rdoHombre.Text.Trim());
+                            if (rdoMujer.Checked)
+                                sw.WriteLine(txtUsuario.Text.Trim() + ";" + resultado.Trim() + ";" + result.Trim() + ";" + rdoMujer.Text.Trim());
+                            if (rdoOtro.Checked)
+                                sw.WriteLine(txtUsuario.Text.Trim() + ";" + resultado.Trim() + ";" + result.Trim() + ";" + txtOtro.Text.Trim());
+                            sw.Close();
+                            StreamWriter creaciones = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\creaciones.txt");
+                            if (rdoHombre.Checked)
+                                creaciones.WriteLine(txtUsuario.Text.Trim() + ";" + txtContraseña.Text.Trim() + ";" + result.Trim() + ";" + rdoHombre.Text.Trim());
+                            if (rdoMujer.Checked)
+                                creaciones.WriteLine(txtUsuario.Text.Trim() + ";" + txtContraseña.Text.Trim() + ";" + result.Trim() + ";" + rdoMujer.Text.Trim());
+                            if (rdoOtro.Checked)
+                                creaciones.WriteLine(txtUsuario.Text.Trim() + ";" + txtContraseña.Text.Trim() + ";" + result.Trim() + ";" + txtOtro.Text.Trim());
+                            creaciones.Close();
+                            File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + ".txt");
+                            if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Imagen.txt") &&
+                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Busqueda.txt") &&
+                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Animes.txt") &&
+                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Inte.txt") &&
+                                !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Ruta.txt"))
+                            {
+                                File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Imagen.txt");
+                                File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Busqueda.txt");
+                                File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Animes.txt");
+                                File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Inte.txt");
+                                File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Ruta.txt");
+                            }
+                            MessageBox.Show("Se ha creado su cuenta, proceda a loguearse en la parte Iniciar Sesión");
+                            Limpiar();
+                        }else
+                            MessageBox.Show("El usuario ya ha sido creado", "Error al crear nuevo usuario");
                     }
                 }
             }
@@ -301,6 +310,24 @@ namespace See_More
         private void rdoHombre_CheckedChanged(object sender, EventArgs e)
         {
             txtOtro.Enabled = false;
+        }
+        public Boolean ExisteUsuario(String nombre)
+        {
+            Boolean exiUser = false;
+            String[] usuarios = File.ReadAllLines(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
+            foreach (String usuario in usuarios)
+            {
+                String[] var = usuario.Split(';');
+                if (var[0].Equals(nombre))
+                {
+                    exiUser = true;
+                    break;
+                }
+            }
+            if (exiUser)
+                return true;
+            else
+                return false;
         }
         public void Limpiar()
         {
