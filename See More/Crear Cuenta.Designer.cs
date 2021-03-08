@@ -97,7 +97,8 @@
             this.txtUsuario.Location = new System.Drawing.Point(64, 36);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(263, 20);
-            this.txtUsuario.TabIndex = 7;
+            this.txtUsuario.TabIndex = 1;
+            this.txtUsuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUsuario_KeyPress);
             // 
             // txtContraseña
             // 
@@ -105,7 +106,8 @@
             this.txtContraseña.Name = "txtContraseña";
             this.txtContraseña.PasswordChar = '*';
             this.txtContraseña.Size = new System.Drawing.Size(254, 20);
-            this.txtContraseña.TabIndex = 8;
+            this.txtContraseña.TabIndex = 2;
+            this.txtContraseña.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContraseña_KeyPress);
             // 
             // txtRepetirContraseña
             // 
@@ -113,7 +115,7 @@
             this.txtRepetirContraseña.Name = "txtRepetirContraseña";
             this.txtRepetirContraseña.PasswordChar = '*';
             this.txtRepetirContraseña.Size = new System.Drawing.Size(209, 20);
-            this.txtRepetirContraseña.TabIndex = 9;
+            this.txtRepetirContraseña.TabIndex = 3;
             this.txtRepetirContraseña.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
             this.txtRepetirContraseña.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyUp);
             // 
@@ -214,11 +216,12 @@
             this.rdoHombre.Location = new System.Drawing.Point(12, 118);
             this.rdoHombre.Name = "rdoHombre";
             this.rdoHombre.Size = new System.Drawing.Size(62, 17);
-            this.rdoHombre.TabIndex = 22;
+            this.rdoHombre.TabIndex = 4;
             this.rdoHombre.TabStop = true;
             this.rdoHombre.Text = "Hombre";
             this.rdoHombre.UseVisualStyleBackColor = true;
             this.rdoHombre.CheckedChanged += new System.EventHandler(this.rdoHombre_CheckedChanged);
+            this.rdoHombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rdoHombre_KeyPress);
             // 
             // rdoMujer
             // 
@@ -226,11 +229,12 @@
             this.rdoMujer.Location = new System.Drawing.Point(89, 118);
             this.rdoMujer.Name = "rdoMujer";
             this.rdoMujer.Size = new System.Drawing.Size(51, 17);
-            this.rdoMujer.TabIndex = 23;
+            this.rdoMujer.TabIndex = 5;
             this.rdoMujer.TabStop = true;
             this.rdoMujer.Text = "Mujer";
             this.rdoMujer.UseVisualStyleBackColor = true;
             this.rdoMujer.CheckedChanged += new System.EventHandler(this.rdoMujer_CheckedChanged);
+            this.rdoMujer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rdoMujer_KeyPress);
             // 
             // lblInfo
             // 
@@ -247,11 +251,12 @@
             this.rdoOtro.Location = new System.Drawing.Point(146, 119);
             this.rdoOtro.Name = "rdoOtro";
             this.rdoOtro.Size = new System.Drawing.Size(109, 17);
-            this.rdoOtro.TabIndex = 25;
+            this.rdoOtro.TabIndex = 6;
             this.rdoOtro.TabStop = true;
             this.rdoOtro.Text = "Otro (Especifique)";
             this.rdoOtro.UseVisualStyleBackColor = true;
             this.rdoOtro.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            this.rdoOtro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rdoOtro_KeyPress);
             // 
             // txtOtro
             // 
@@ -259,7 +264,8 @@
             this.txtOtro.Location = new System.Drawing.Point(146, 138);
             this.txtOtro.Name = "txtOtro";
             this.txtOtro.Size = new System.Drawing.Size(142, 20);
-            this.txtOtro.TabIndex = 26;
+            this.txtOtro.TabIndex = 7;
+            this.txtOtro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOtro_KeyPress);
             // 
             // Crear_Cuenta
             // 
@@ -287,6 +293,7 @@
             this.Controls.Add(this.mspMenu);
             this.MainMenuStrip = this.mspMenu;
             this.Name = "Crear_Cuenta";
+            this.Load += new System.EventHandler(this.Crear_Cuenta_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picImagen)).EndInit();
             this.mspMenu.ResumeLayout(false);
             this.mspMenu.PerformLayout();

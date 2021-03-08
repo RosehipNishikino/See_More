@@ -30,15 +30,11 @@ namespace See_More
                 rd.Close();
             }
             catch (Exception) { }
-        }
-        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
-        }
+        }        
         private void crearUsuarioNuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             String nombre = "";
-            if (txtUsuario.Text != "" && txtContraseña.Text != "" && txtRepetirContraseña.Text != "" && picImagen.Image != null)
+            if (txtUsuario.Text != "" && txtContraseña.Text != "" && txtRepetirContraseña.Text != "" && picImagen.Image != null && (rdoHombre.Checked || rdoMujer.Checked || (rdoOtro.Checked && txtOtro.Text != "")))
             {
                 if (txtContraseña.Text == txtRepetirContraseña.Text)
                 {
@@ -99,6 +95,7 @@ namespace See_More
                                 File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Ruta.txt");
                             }
                             MessageBox.Show("Se ha creado su cuenta, proceda a loguearse en la parte Iniciar Sesión");
+                            Limpiar();
                         }
                         else
                         {
@@ -143,6 +140,7 @@ namespace See_More
                             File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text.Trim() + "Ruta.txt");
                         }
                         MessageBox.Show("Se ha creado su cuenta, proceda a loguearse en la parte Iniciar Sesión");
+                        Limpiar();
                     }
                 }
             }
@@ -289,6 +287,7 @@ namespace See_More
                 string direccion = abrir.FileName;
                 imagenPerfil = direccion;
                 picImagen.Image = Image.FromFile(direccion);
+                txtUsuario.Focus();
             }
         }
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
@@ -302,6 +301,64 @@ namespace See_More
         private void rdoHombre_CheckedChanged(object sender, EventArgs e)
         {
             txtOtro.Enabled = false;
+        }
+        public void Limpiar()
+        {
+            txtUsuario.Clear();
+            txtContraseña.Clear();
+            txtRepetirContraseña.Clear();
+            rdoHombre.Checked = false;
+            rdoMujer.Checked = false;
+            rdoOtro.Checked = false;
+            txtOtro.Clear();
+            picImagen.Image = null; imagenPerfil = string.Empty;
+            txtEliminarUser.Clear();
+        }
+
+        private void Crear_Cuenta_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                crearUsuarioNuevoToolStripMenuItem.PerformClick();
+        }
+
+        private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                crearUsuarioNuevoToolStripMenuItem.PerformClick();
+        }
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                crearUsuarioNuevoToolStripMenuItem.PerformClick();
+        }
+
+        private void rdoHombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                crearUsuarioNuevoToolStripMenuItem.PerformClick();
+        }
+
+        private void rdoMujer_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                crearUsuarioNuevoToolStripMenuItem.PerformClick();
+        }
+
+        private void rdoOtro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                crearUsuarioNuevoToolStripMenuItem.PerformClick();
+        }
+
+        private void txtOtro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                crearUsuarioNuevoToolStripMenuItem.PerformClick();
         }
     }
 }
