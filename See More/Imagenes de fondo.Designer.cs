@@ -318,6 +318,7 @@
             this.Name = "Imagenes_de_fondo";
             this.Text = "Personalización";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Imagenes_de_fondo_FormClosing);
+            this.Load += new System.EventHandler(this.Imagenes_de_fondo_Load);
             this.mspMenu.ResumeLayout(false);
             this.mspMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picComprobacion)).EndInit();

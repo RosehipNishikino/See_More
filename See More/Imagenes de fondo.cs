@@ -21,7 +21,7 @@ namespace See_More
                 this.BackgroundImage = Image.FromFile(lineas[lineas.Length - 1]);
                 this.BackgroundImageLayout = ImageLayout.Stretch;
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) {  }
         }
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -46,27 +46,11 @@ namespace See_More
                     sw.Close();
                     Comprobar();
                     rtxHistorialImagen.LoadFile(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt", RichTextBoxStreamType.PlainText);
-                    String line;
                     try
                     {
-                        StreamReader rd = new StreamReader(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt");
-                        line = rd.ReadLine();
-                        while ((line = rd.ReadLine()) != null)
-                        {
-                            if (line == null)
-                            {
-                                this.Text = "Imagenes de fondo - No se ha encontrado una imagen";
-                            }
-                            else
-                            {
-                                if (rd.EndOfStream)
-                                {
-                                    this.BackgroundImage = Image.FromFile(line);
-                                    this.BackgroundImageLayout = ImageLayout.Stretch;
-                                }
-                            }
-                        }
-                        rd.Close();
+                        String[] fondo = File.ReadAllLines(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt");
+                        this.BackgroundImage = Image.FromFile(fondo[fondo.Length-1]);
+                        this.BackgroundImageLayout = ImageLayout.Stretch;
                     }
                     catch (Exception) { }
                     MessageBox.Show("URL de la imagen " + txtNombre.Text + " almacenado", "Guadado con éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -203,6 +187,11 @@ namespace See_More
         {
             rtxHistorialImagen.SaveFile(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt", RichTextBoxStreamType.PlainText);
             rtxHistorialImagen.LoadFile(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt", RichTextBoxStreamType.PlainText);
+        }
+
+        private void Imagenes_de_fondo_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
