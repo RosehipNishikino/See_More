@@ -26,7 +26,7 @@ namespace See_More
         String texto;
         String ultimarutavista = string.Empty;
         String rutaCamino = string.Empty;
-        int tamaño;
+        int tamaño, opcion = 3;
         Boolean buscar = false, buscarListas = false, buscarApartado = false, hayAnimes = false;
         string decision = "";
         public Buscar()
@@ -128,29 +128,42 @@ namespace See_More
                                     {
                                         if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
                                         {
-                                            button = new Button();
-                                            button.Width = 200;
-                                            button.Height = 20;
-                                            button.Text = ((DirectoryInfo)directories[i]).Name;
-                                            button.Top = t;
-                                            button.Left = l;
-                                            button.FlatStyle = FlatStyle.Popup;
-                                            button.BackColor = Color.DarkGray;
-                                            button.MouseMove += new MouseEventHandler(mousemove);
-                                            button.MouseLeave += new EventHandler(mouseleave);
-                                            button.Click += new EventHandler(click_de_boton);
-                                            pnlRespaldo.Controls.Add(button);
-                                            //t += 45;
-                                            l += 200;
-                                            if (j != 3)
-                                                i += 1;
+                                            if (opcion == 3)
+                                                opcion = 2;
                                         }
                                         else
                                         {
-                                            j -= 1;
-                                            i += 1;
+                                            if (opcion == 3)
+                                                opcion = 1;
+                                            if (opcion == 2)
+                                                opcion = 1;
                                         }
                                     }
+                                    if(opcion == 2)
+                                    {
+                                        button = new Button();
+                                        button.Width = 200;
+                                        button.Height = 20;
+                                        button.Text = ((DirectoryInfo)directories[i]).Name;
+                                        button.Top = t;
+                                        button.Left = l;
+                                        button.FlatStyle = FlatStyle.Popup;
+                                        button.BackColor = Color.DarkGray;
+                                        button.MouseMove += new MouseEventHandler(mousemove);
+                                        button.MouseLeave += new EventHandler(mouseleave);
+                                        button.Click += new EventHandler(click_de_boton);
+                                        pnlRespaldo.Controls.Add(button);
+                                        //t += 45;
+                                        l += 200;
+                                        if (j != 3)
+                                            i += 1;
+                                    }
+                                    if(opcion == 1)
+                                    {
+                                        j -= 1;
+                                        i += 1;
+                                    }
+                                    opcion = 3;
                                 }
                                 else
                                 {
@@ -248,29 +261,42 @@ namespace See_More
                                 {
                                     if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
                                     {
-                                        button = new Button();
-                                        button.Width = 200;
-                                        button.Height = 20;
-                                        button.Text = ((DirectoryInfo)directories[i]).Name;
-                                        button.Top = t;
-                                        button.Left = l;
-                                        button.BackColor = Color.DarkGray;
-                                        button.FlatStyle = FlatStyle.Popup;
-                                        button.MouseMove += new MouseEventHandler(mousemove);
-                                        button.MouseLeave += new EventHandler(mouseleave);
-                                        button.Click += new EventHandler(click_de_boton);
-                                        pnlRespaldo.Controls.Add(button);
-                                        //t += 45;
-                                        l += 200;
-                                        if (j != 3)
-                                            i += 1;
+                                        if (opcion == 3)
+                                            opcion = 2;
                                     }
                                     else
                                     {
-                                        j -= 1;
-                                        i += 1;
+                                        if (opcion == 3)
+                                            opcion = 1;
+                                        if (opcion == 2)
+                                            opcion = 1;
                                     }
                                 }
+                                if(opcion == 2)
+                                {
+                                    button = new Button();
+                                    button.Width = 200;
+                                    button.Height = 20;
+                                    button.Text = ((DirectoryInfo)directories[i]).Name;
+                                    button.Top = t;
+                                    button.Left = l;
+                                    button.BackColor = Color.DarkGray;
+                                    button.FlatStyle = FlatStyle.Popup;
+                                    button.MouseMove += new MouseEventHandler(mousemove);
+                                    button.MouseLeave += new EventHandler(mouseleave);
+                                    button.Click += new EventHandler(click_de_boton);
+                                    pnlRespaldo.Controls.Add(button);
+                                    //t += 45;
+                                    l += 200;
+                                    if (j != 3)
+                                        i += 1;
+                                }
+                                if(opcion == 1)
+                                {
+                                    j -= 1;
+                                    i += 1;
+                                }
+                                opcion = 3;
                             }
                             else
                             {
@@ -497,29 +523,42 @@ namespace See_More
                                 {
                                     if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
                                     {
-                                        button = new Button();
-                                        button.Width = 200;
-                                        button.Height = 20;
-                                        button.Text = ((DirectoryInfo)directories[i]).Name;
-                                        button.Top = t;
-                                        button.Left = l;
-                                        button.BackColor = Color.DarkGray;
-                                        button.FlatStyle = FlatStyle.Popup;
-                                        button.MouseMove += new MouseEventHandler(mousemove);
-                                        button.MouseLeave += new EventHandler(mouseleave);
-                                        button.Click += new EventHandler(click_de_boton);
-                                        pnlRespaldo.Controls.Add(button);
-                                        //t += 45;
-                                        l += 200;
-                                        if (j != 3)
-                                            i += 1;
+                                        if (opcion == 3)
+                                            opcion = 2;
                                     }
                                     else
                                     {
-                                        j -= 1;
-                                        i += 1;
+                                        if (opcion == 3)
+                                            opcion = 1;
+                                        if (opcion == 2)
+                                            opcion = 1;
                                     }
                                 }
+                                if(opcion == 2)
+                                {
+                                    button = new Button();
+                                    button.Width = 200;
+                                    button.Height = 20;
+                                    button.Text = ((DirectoryInfo)directories[i]).Name;
+                                    button.Top = t;
+                                    button.Left = l;
+                                    button.BackColor = Color.DarkGray;
+                                    button.FlatStyle = FlatStyle.Popup;
+                                    button.MouseMove += new MouseEventHandler(mousemove);
+                                    button.MouseLeave += new EventHandler(mouseleave);
+                                    button.Click += new EventHandler(click_de_boton);
+                                    pnlRespaldo.Controls.Add(button);
+                                    //t += 45;
+                                    l += 200;
+                                    if (j != 3)
+                                        i += 1;
+                                }
+                                if(opcion == 1)
+                                {
+                                    j -= 1;
+                                    i += 1;
+                                }
+                                opcion = 3;
                             }
                             else
                             {
@@ -675,29 +714,42 @@ namespace See_More
                                             {
                                                 if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
                                                 {
-                                                    button = new Button();
-                                                    button.Width = 200;
-                                                    button.Height = 20;
-                                                    button.Text = ((DirectoryInfo)directories[i]).Name;
-                                                    button.Top = t;
-                                                    button.Left = l;
-                                                    button.BackColor = Color.DarkGray;
-                                                    button.FlatStyle = FlatStyle.Popup;
-                                                    button.MouseMove += new MouseEventHandler(mousemove);
-                                                    button.MouseLeave += new EventHandler(mouseleave);
-                                                    button.Click += new EventHandler(click_de_boton);
-                                                    pnlRespaldo.Controls.Add(button);
-                                                    //t += 45;
-                                                    l += 200;
-                                                    if (j != 3)
-                                                        i += 1;
+                                                    if (opcion == 3)
+                                                        opcion = 2;
                                                 }
                                                 else
                                                 {
-                                                    j -= 1;
-                                                    i += 1;
+                                                    if (opcion == 3)
+                                                        opcion = 1;
+                                                    if (opcion == 2)
+                                                        opcion = 1;
                                                 }
                                             }
+                                            if(opcion == 2)
+                                            {
+                                                button = new Button();
+                                                button.Width = 200;
+                                                button.Height = 20;
+                                                button.Text = ((DirectoryInfo)directories[i]).Name;
+                                                button.Top = t;
+                                                button.Left = l;
+                                                button.BackColor = Color.DarkGray;
+                                                button.FlatStyle = FlatStyle.Popup;
+                                                button.MouseMove += new MouseEventHandler(mousemove);
+                                                button.MouseLeave += new EventHandler(mouseleave);
+                                                button.Click += new EventHandler(click_de_boton);
+                                                pnlRespaldo.Controls.Add(button);
+                                                //t += 45;
+                                                l += 200;
+                                                if (j != 3)
+                                                    i += 1;
+                                            }
+                                            if(opcion == 1)
+                                            {
+                                                j -= 1;
+                                                i += 1;
+                                            }
+                                            opcion = 3;
                                         }
                                         else
                                         {
@@ -947,29 +999,42 @@ namespace See_More
                                 {
                                     if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
                                     {
-                                        button = new Button();
-                                        button.Width = 200;
-                                        button.Height = 20;
-                                        button.Text = ((DirectoryInfo)directories[i]).Name;
-                                        button.Top = t;
-                                        button.Left = l;
-                                        button.BackColor = Color.DarkGray;
-                                        button.FlatStyle = FlatStyle.Popup;
-                                        button.MouseMove += new MouseEventHandler(mousemove);
-                                        button.MouseLeave += new EventHandler(mouseleave);
-                                        button.Click += new EventHandler(click_de_boton);
-                                        pnlRespaldo.Controls.Add(button);
-                                        //t += 45;
-                                        l += 200;
-                                        if (j != 3)
-                                            i += 1;
+                                        if (opcion == 3)
+                                            opcion = 2;
                                     }
                                     else
                                     {
-                                        j -= 1;
-                                        i += 1;
+                                        if (opcion == 3)
+                                            opcion = 1;
+                                        if (opcion == 2)
+                                            opcion = 1;
                                     }
                                 }
+                                if(opcion == 2)
+                                {
+                                    button = new Button();
+                                    button.Width = 200;
+                                    button.Height = 20;
+                                    button.Text = ((DirectoryInfo)directories[i]).Name;
+                                    button.Top = t;
+                                    button.Left = l;
+                                    button.BackColor = Color.DarkGray;
+                                    button.FlatStyle = FlatStyle.Popup;
+                                    button.MouseMove += new MouseEventHandler(mousemove);
+                                    button.MouseLeave += new EventHandler(mouseleave);
+                                    button.Click += new EventHandler(click_de_boton);
+                                    pnlRespaldo.Controls.Add(button);
+                                    //t += 45;
+                                    l += 200;
+                                    if (j != 3)
+                                        i += 1;
+                                }
+                                if(opcion == 1)
+                                {
+                                    j -= 1;
+                                    i += 1;
+                                }
+                                opcion = 3;
                             }
                             else
                             {
