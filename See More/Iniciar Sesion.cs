@@ -119,5 +119,17 @@ namespace See_More
         private void Iniciar_Sesion_FormClosing(object sender, FormClosingEventArgs e)
         {
         }
+
+        private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                iniciarSesiónToolStripMenuItem.PerformClick();
+        }
+
+        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                iniciarSesiónToolStripMenuItem.PerformClick();
+        }
     }
 }
