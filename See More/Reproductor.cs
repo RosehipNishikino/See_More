@@ -1102,6 +1102,10 @@ namespace See_More
         }
         private void cerrarLaSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            CerrarSesion();
+        }
+        public void CerrarSesion()
+        {
             if (cerro == false)
             {
                 StreamWriter sw = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
@@ -1112,11 +1116,10 @@ namespace See_More
                 Configuracion.contraseña = "";
                 iniciarSesiónToolStripMenuItem.Text = "Iniciar Sesión";
                 menuToolStripMenuItem.Text = "Iniciar Sesión";
+                iniciarSesiónToolStripMenuItem1.Text = "Iniciar Sesión";
+                menuToolStripMenuItem1.Text = "Iniciar Sesión";
                 Evento();
                 cerro = true;
-            }
-            else
-            { 
             }
         }
         public void Evento()
@@ -1125,18 +1128,26 @@ namespace See_More
             {
                 iniciarSesiónToolStripMenuItem.Text = Configuracion.usuario;
                 menuToolStripMenuItem.Text = "Ir a perfil de " + Configuracion.usuario;
+                iniciarSesiónToolStripMenuItem1.Text = Configuracion.usuario;
+                menuToolStripMenuItem1.Text = "Ir a perfil de " + Configuracion.usuario;
             }
             else
             {
                 iniciarSesiónToolStripMenuItem.Text = "Iniciar Sesión";
                 menuToolStripMenuItem.Text = "Iniciar Sesión";
+                iniciarSesiónToolStripMenuItem1.Text = "Iniciar Sesión";
+                menuToolStripMenuItem1.Text = "Iniciar Sesión";
             }
         }
-        private void menuToolStripMenuItem_Click(object sender, EventArgs e)
+        public void PerfilDe()
         {
             new Tu_perfil().Show();
             Evento();
             cerro = false;
+        }
+        private void menuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PerfilDe();
         }
         private void tmrProceso_Tick(object sender, EventArgs e)
         {
@@ -1286,42 +1297,12 @@ namespace See_More
 
         private void menuToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            new Tu_perfil().Show();
-            Evento2();
-            cerro = false;
+            PerfilDe();
         }
 
         private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (cerro == false)
-            {
-                StreamWriter sw = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
-                sw.Flush(); sw.Close();
-                StreamWriter sw2 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
-                sw2.Flush(); sw2.Close();
-                Configuracion.usuario = "";
-                Configuracion.contraseña = "";
-                iniciarSesiónToolStripMenuItem1.Text = "Iniciar Sesión";
-                menuToolStripMenuItem1.Text = "Iniciar Sesión";
-                Evento2();
-                cerro = true;
-            }
-            else
-            {
-            }
-        }
-        public void Evento2()
-        {
-            if (Configuracion.usuario != "")
-            {
-                iniciarSesiónToolStripMenuItem1.Text = Configuracion.usuario;
-                menuToolStripMenuItem1.Text = "Ir a perfil de " + Configuracion.usuario;
-            }
-            else
-            {
-                iniciarSesiónToolStripMenuItem1.Text = "Iniciar Sesión";
-                menuToolStripMenuItem1.Text = "Iniciar Sesión";
-            }
+            CerrarSesion();
         }
         private void tmrGuardarAuto_Tick(object sender, EventArgs e)
         {
