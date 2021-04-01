@@ -316,6 +316,10 @@ namespace See_More
                 iniciarSesiónToolStripMenuItem.Visible = true;
                 iniciarSesiónToolStripMenuItem1.Visible = false;
             }
+            if (this.Width <= 650)
+                this.Width = 650;
+            if (this.Height <= 380)
+                this.Height = 380;
             if (!autopausa)
             {
                 if (this.WindowState == FormWindowState.Minimized)
