@@ -18,6 +18,7 @@ namespace See_More
         {
             InitializeComponent();
             this.MaximizeBox = false;
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.Width = 393;
             this.Height = 136;
             String[] users = File.ReadAllLines(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");

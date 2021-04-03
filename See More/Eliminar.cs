@@ -16,6 +16,7 @@ namespace See_More
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             this.MaximizeBox = false;
+            this.StartPosition = FormStartPosition.CenterScreen;
             String line;
             try
             {

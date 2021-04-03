@@ -14,6 +14,7 @@ namespace See_More
             this.MaximizeBox = false;
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            this.StartPosition = FormStartPosition.CenterScreen;
             rtxHistorialImagen.LoadFile(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt", RichTextBoxStreamType.PlainText);
             String[] lineas = File.ReadAllLines(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt");
             try

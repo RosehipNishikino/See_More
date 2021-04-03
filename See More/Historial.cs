@@ -10,6 +10,7 @@ namespace See_More
         public Historial()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             lblHistorial.Text = "Este es tu historial";
             rtxHistorial.LoadFile(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt", RichTextBoxStreamType.PlainText);
             String line;

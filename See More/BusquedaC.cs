@@ -17,7 +17,8 @@ namespace See_More
             this.MaximizeBox = false;
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            if(Configuracion.existeConexion)
+            this.StartPosition = FormStartPosition.CenterScreen;
+            if (Configuracion.existeConexion)
             {
                 dgvDatos.DataSource = CuentaSeeMore.BuscarTC();
             }

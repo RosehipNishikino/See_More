@@ -26,6 +26,7 @@ namespace See_More
         public Tu_perfil()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
         private void Tu_perfil_Load(object sender, EventArgs e)
         {

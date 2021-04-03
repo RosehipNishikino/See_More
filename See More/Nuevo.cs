@@ -18,6 +18,7 @@ namespace See_More
             this.Width = 744;
             this.Height = 200;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            this.StartPosition = FormStartPosition.CenterScreen;
             String line;
             try
             {

@@ -17,6 +17,7 @@ namespace See_More
         public Comprobar()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             String[] users = File.ReadAllLines(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
             tamaño = (users.Length * 4) / 4;
             int contador = 0;

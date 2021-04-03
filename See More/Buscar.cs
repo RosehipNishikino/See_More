@@ -35,6 +35,7 @@ namespace See_More
             this.MaximizeBox = false;
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            this.StartPosition = FormStartPosition.CenterScreen;
             String line, leni;
             if(Configuracion.usuario != "" && Configuracion.contraseña != "")
             {

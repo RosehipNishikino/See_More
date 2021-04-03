@@ -36,6 +36,7 @@ namespace See_More
         public Reproductor()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             Boolean acabo = false, actua = false;
             if(Configuracion.existeConexion)
             {
