@@ -24,6 +24,7 @@ namespace See_More
         StreamWriter sw3;
         StreamWriter sw4;
         int contador = 1;
+        int opcion = 3;
         bool entra = true;
         bool nombre = true; String ruta;
         Boolean pantallaCompleta = true;
@@ -841,6 +842,10 @@ namespace See_More
                     notifyIcon1.ShowBalloonTip(100);
                 }
             }
+            /*if(e.nKeyCode == (char)(Keys.T))
+            {
+                
+            }*/
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -872,6 +877,10 @@ namespace See_More
             Nuevo frm = new Nuevo();
             frm.ShowDialog();
         }
+       /* public void HabilitarUsoCompleto()
+        {
+            wmpCentral.Size = new Size(wmpCentral.Width, wmpCentral.Height);
+        }*/
         private void buscarToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Buscar frm = new Buscar();
@@ -1089,8 +1098,9 @@ namespace See_More
                 "4.- Entra al modo pantalla completa con F y sal con la misma\n" +
                 "5.- Haz siguiente con N y regreso con B mientras haya una lista.\n" +
                 "6.- Activa y desactiva el auto-pausa con P\n" +
-                "7.- Activa y desactiva el auto-repetir con R" +
-                "                                                                                    See More.", "Ayuda de See More al usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                "7.- Activa y desactiva el auto-repetir con R\n" +
+                "8.- Proxima función (Habilita el uso completo de la pantalla con T)" +
+                "                                                                                               See More.", "Ayuda de See More al usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void iniciarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {   
@@ -1242,7 +1252,7 @@ namespace See_More
                 lblSinUso.Text = strBateria;
                 if (Bateria == 30)
                 {
-                    if (primerAviso == false)
+                    if (opcion == 3)
                     {
                         notifyIcon1.Icon = new Icon(Path.GetFullPath(@"seemore.ico"));
                         notifyIcon1.Text = "Aviso de Bateria";
@@ -1250,12 +1260,12 @@ namespace See_More
                         notifyIcon1.BalloonTipTitle = "Primer aviso de Bateria";
                         notifyIcon1.BalloonTipText = "La bateria se encuentra en " + Bateria + "%";
                         notifyIcon1.ShowBalloonTip(100);
-                        primerAviso = true;
+                        opcion = 2;
                     }
                 }
                 if (Bateria == 15)
                 {
-                    if (ultimoAviso == false)
+                    if (opcion == 2)
                     {
                         notifyIcon1.Icon = new Icon(Path.GetFullPath(@"seemore.ico"));
                         notifyIcon1.Text = "Aviso de Bateria";
@@ -1263,13 +1273,12 @@ namespace See_More
                         notifyIcon1.BalloonTipTitle = "Último aviso de Bateria";
                         notifyIcon1.BalloonTipText = "La bateria se encuentra en " + Bateria + "%";
                         notifyIcon1.ShowBalloonTip(100);
-                        ultimoAviso = true;
+                        opcion = 1;
                     }
                 }
-                if(Bateria > 90)
+                if(Bateria > 30)
                 {
-                    primerAviso = false;
-                    ultimoAviso = false;
+                    opcion = 3;
                 }
             }
         }

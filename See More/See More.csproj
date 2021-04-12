@@ -176,7 +176,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -255,6 +254,8 @@
     <None Include="Resources\logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\SeeMoreIcon.ico" />
+    <None Include="Resources\SeeMore.ico" />
     <Content Include="SeeMoreIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
