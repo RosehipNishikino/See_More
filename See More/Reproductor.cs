@@ -5,6 +5,9 @@ using AxWMPLib;
 using System.IO;
 using MODELOS_SEEMORE;
 using DATOS_SEEMORE;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
+using System.Linq;
 
 namespace See_More
 {
@@ -34,6 +37,13 @@ namespace See_More
         String duracionFinal = string.Empty;
         Boolean cerro = false;
         Boolean primerAviso = false, ultimoAviso = false;
+        [DllImport("user32.dll", EntryPoint = "SetForegroundWindow")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        private static extern Boolean ShowWindow(IntPtr hWnd, Int32 nCmdShow);
+        private const int SW_SHOWMAXIMIZED = 3;
+        private const int SW_SHOWNORMAL = 1;
         public Reproductor()
         {
             InitializeComponent();
@@ -269,6 +279,8 @@ namespace See_More
                 if (abrir.ShowDialog() == DialogResult.OK)
                 {
                     wmpCentral.URL = abrir.FileName;
+                    //axvlcControl.playlist.add("file:///"+abrir.FileName, abrir.SafeFileName,null);
+                    //axvlcControl.playlist.play();
                     ruta = abrir.FileName;
                     tmrProgreso.Start();
                     StreamWriter escribir = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
@@ -276,13 +288,16 @@ namespace See_More
                     sw = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
                     sw2 = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt");
                     sw.WriteLine(wmpCentral.currentMedia.name + " Video no guardado");
+                    //sw.WriteLine(axvlcControl.mediaDescription.title + " Video no guardado");
                     sw2.WriteLine(wmpCentral.currentMedia.name + " " + c + " Video no guardado");
+                    //sw2.WriteLine(axvlcControl.mediaDescription.title + " " + c + " Video no guardado");
                     sw.Close();
                     sw2.Close();
                     entra = false;
                     nombre = false;
                     extension = string.Empty;
                     todo = wmpCentral.currentMedia.name;
+                    //todo = axvlcControl.mediaDescription.title;
                     this.Text = "Viendo - " + todo;
                 }
         }
@@ -535,63 +550,114 @@ namespace See_More
                 sw4.Close();
             }
         }
+        public void Subtitles()
+        {
+            String algo = wmpCentral.closedCaption.SAMILang;
+            
+            MessageBox.Show(algo);
+        }
+        public void Verificar()
+        {
+            int dia = DateTime.Now.Day, mes = DateTime.Now.Month, año = DateTime.Now.Year;
+            if(dia == 1 && mes == 1)
+            {
+                String[] lines = File.ReadAllLines(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt");
+                foreach(String lineas in lines)
+                {
+                    año -= 1;
+                    String fecha = año + "/" + mes + "/" + dia;
+                    if (fecha.Contains(lineas))
+                    {
+
+                    }
+                }
+            }
+        }
+        public Boolean Instacia()
+        {
+            Process currentProcess = Process.GetCurrentProcess();
+
+            var runningProcess =
+                (
+                    from process in Process.GetProcesses()
+                    where process.Id != currentProcess.Id
+                        && process.ProcessName.Equals(currentProcess.ProcessName, StringComparison.Ordinal)
+                    select process
+                ).FirstOrDefault();
+            if (runningProcess != null)
+            {
+                ShowWindow(runningProcess.MainWindowHandle, SW_SHOWNORMAL);
+                SetForegroundWindow(runningProcess.MainWindowHandle);
+
+                return false;
+            }
+
+            return true;
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
-            DirectoriosExistentes();
-            ArchivosExistentes();
-            tmrEstadoActual.Start();
-            string result = string.Empty;
-            string resultado = string.Empty;
-            String linea;
-            String linea2;
-            try
+            if (Instacia())
             {
-                StreamReader rd = new StreamReader(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
-                StreamReader rd2 = new StreamReader(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
-                linea = rd.ReadLine();
-                linea2 = rd2.ReadLine();
-                byte[] decryted = Convert.FromBase64String(linea);
-                result = System.Text.Encoding.Unicode.GetString(decryted);
-                Configuracion.usuario = result;
-                byte[] decryted2 = Convert.FromBase64String(linea2);
-                resultado = System.Text.Encoding.Unicode.GetString(decryted2);
-                Configuracion.contraseña = resultado;
-            }
-            catch (Exception) { }
-            wmpCentral.settings.volume = 50;
-            wmpCentral.uiMode = "none";
-            wmpCentral.stretchToFit = true;
-            lblVolumen.Text = "Volumen: " + volumen;
-            tmrBateria.Start();
-            if (Configuracion.usuario != "")
-            {
-                iniciarSesiónToolStripMenuItem.Text = Configuracion.usuario;
-                menuToolStripMenuItem.Text = "Ir a perfil de " + Configuracion.usuario;
-                iniciarSesiónToolStripMenuItem1.Text = Configuracion.usuario;
-                menuToolStripMenuItem1.Text = "Ir a perfil de " + Configuracion.usuario;
+                DirectoriosExistentes();
+                ArchivosExistentes();
+                tmrEstadoActual.Start();
+                string result = string.Empty;
+                string resultado = string.Empty;
+                String linea;
+                String linea2;
+                try
+                {
+                    StreamReader rd = new StreamReader(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
+                    StreamReader rd2 = new StreamReader(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
+                    linea = rd.ReadLine();
+                    linea2 = rd2.ReadLine();
+                    byte[] decryted = Convert.FromBase64String(linea);
+                    result = System.Text.Encoding.Unicode.GetString(decryted);
+                    Configuracion.usuario = result;
+                    byte[] decryted2 = Convert.FromBase64String(linea2);
+                    resultado = System.Text.Encoding.Unicode.GetString(decryted2);
+                    Configuracion.contraseña = resultado;
+                }
+                catch (Exception) { }
+                wmpCentral.settings.volume = 50;
+                wmpCentral.uiMode = "none";
+                wmpCentral.stretchToFit = true;
+                lblVolumen.Text = "Volumen: " + volumen;
+                tmrBateria.Start();
+                if (Configuracion.usuario != "")
+                {
+                    iniciarSesiónToolStripMenuItem.Text = Configuracion.usuario;
+                    menuToolStripMenuItem.Text = "Ir a perfil de " + Configuracion.usuario;
+                    iniciarSesiónToolStripMenuItem1.Text = Configuracion.usuario;
+                    menuToolStripMenuItem1.Text = "Ir a perfil de " + Configuracion.usuario;
+                }
+                else
+                {
+                    iniciarSesiónToolStripMenuItem.Text = "Iniciar Sesión";
+                    menuToolStripMenuItem.Text = "Iniciar Sesión";
+                    iniciarSesiónToolStripMenuItem1.Text = "Iniciar Sesión";
+                    menuToolStripMenuItem1.Text = "Iniciar Sesión";
+                }
+                this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
+                String line; String line2;
+                try
+                {
+                    StreamReader rd = new StreamReader(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
+                    StreamReader rd2 = new StreamReader(Application.StartupPath + @"\See More\Configuraciones SeeMore\reproductor.txt");
+                    line = rd.ReadLine();
+                    line2 = rd2.ReadLine();
+                    this.Text = "Ultimo video visto: " + line;
+                    this.BackgroundImage = Image.FromFile(line2);
+                    this.BackgroundImageLayout = ImageLayout.Stretch;
+                    rd.Close();
+                }
+                catch (Exception) { }
             }
             else
             {
-                iniciarSesiónToolStripMenuItem.Text = "Iniciar Sesión";
-                menuToolStripMenuItem.Text = "Iniciar Sesión";
-                iniciarSesiónToolStripMenuItem1.Text = "Iniciar Sesión";
-                menuToolStripMenuItem1.Text = "Iniciar Sesión";
+                MessageBox.Show("Ya se ha abierto una instancia del reproductor", "Cerrando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
             }
-            this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
-            String line; String line2;
-            try
-            {
-                StreamReader rd = new StreamReader(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
-                StreamReader rd2 = new StreamReader(Application.StartupPath + @"\See More\Configuraciones SeeMore\reproductor.txt");
-                line = rd.ReadLine();
-                line2 = rd2.ReadLine();
-                            this.Text = "Ultimo video visto: " + line;
-                            this.BackgroundImage = Image.FromFile(line2);
-                            this.BackgroundImageLayout = ImageLayout.Stretch;
-                rd.Close();
-            }
-            catch (Exception) { }
-            
         }
         private void axWindowsMediaPlayer1_KeyUpEvent(object sender, _WMPOCXEvents_KeyUpEvent e)
         {
@@ -904,16 +970,19 @@ namespace See_More
                     if (extension.EndsWith("wpl"))
                     {
                         wmpCentral.URL = result;
+                        axvlcControl.BaseURL = result;
                         this.Text = "Viendo - " + todo + " Capitulo: " + contador;
                     }
                     else if (extension.EndsWith("avi"))
                     {
                         wmpCentral.URL = result;
+                        axvlcControl.BaseURL = result;
                         this.Text = "Viendo - " + todo;
                     }
                     else
                     {
                         wmpCentral.URL = result;
+                        axvlcControl.BaseURL = result;
                         this.Text = "Viendo - " + todo;
                     }
                     tmrProgreso.Start();
@@ -924,6 +993,7 @@ namespace See_More
                         if (vacio[0] == auxiliarNombre)
                         {
                             wmpCentral.Ctlcontrols.currentPosition = double.Parse(vacio[1]);
+                            axvlcControl.input.time = double.Parse(vacio[1]);
                         }
                         else
                         {
@@ -998,11 +1068,13 @@ namespace See_More
                         if (extension.EndsWith("wpl"))
                         {
                             wmpCentral.URL = frm.RutaVideo;
+                            axvlcControl.MRL = frm.RutaVideo;
                             this.Text = "Viendo - " + todo + " Capitulo: " + contador;
                         }
                         else
                         {
                             wmpCentral.URL = frm.RutaVideo;
+                            axvlcControl.playlist.add(frm.RutaVideo);
                             this.Text = "Viendo - " + todo;
                         }
                         tmrProgreso.Start();
@@ -1014,6 +1086,7 @@ namespace See_More
                             if (vacio[0] == auxiliarNombre)
                             {
                                 wmpCentral.Ctlcontrols.currentPosition = double.Parse(vacio[1]);
+                                axvlcControl.input.time = double.Parse(vacio[1]);
                             }
                             else
                             {
@@ -1022,6 +1095,7 @@ namespace See_More
                                 escribir.Close();
                             }
                         }
+                        //Subtitles();
                         File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
                         File.Move(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt", Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
                         if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt"))
