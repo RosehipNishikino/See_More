@@ -29,17 +29,6 @@ namespace See_More
                 rd.Close();
             }
             catch (Exception) { }
-            if(!Configuracion.existeConexion) {
-                guardarToolStripMenuItem.Enabled = false;
-                guardarListaToolStripMenuItem.Enabled = false;
-                abrirToolStripMenuItem.Enabled = false;
-                txtNombre.Enabled = false;
-                txtURL.Enabled = false;
-                txtApartado.Enabled = false;
-                chkGeneral.Enabled = false;
-                chkApartado.Enabled = false;
-                MessageBox.Show("No hay una conexión a la BD, esto no es impedimento\n See More puede funcionar sin necesidad de guardar elementos a un respaldo","See More");               
-            }
         }
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -378,6 +367,15 @@ namespace See_More
         {
             if (!Configuracion.existeConexion)
             {
+                guardarToolStripMenuItem.Enabled = false;
+                guardarListaToolStripMenuItem.Enabled = false;
+                abrirToolStripMenuItem.Enabled = false;
+                txtNombre.Enabled = false;
+                txtURL.Enabled = false;
+                txtApartado.Enabled = false;
+                chkGeneral.Enabled = false;
+                chkApartado.Enabled = false;
+                MessageBox.Show("No hay una conexión a la BD, esto no es impedimento\n See More puede funcionar sin necesidad de guardar elementos a un respaldo", "See More");
                 this.Close();
             }
         }

@@ -528,19 +528,6 @@ namespace See_More
         private void textBox4_KeyUp(object sender, KeyEventArgs e)
         {
         }
-        protected void Displaynotify()
-        {
-            try
-            {
-                notifyIcon1.Icon = new Icon(Path.GetFullPath(@"seemore.ico"));
-                notifyIcon1.Text = "Se guardo nuevo registro";
-                notifyIcon1.Visible = true;
-                notifyIcon1.BalloonTipTitle = "Se guardo el anime " + txtSeries.Text;
-                notifyIcon1.BalloonTipText = "El anime " + txtSeries.Text + " se ha almacenado";
-                notifyIcon1.ShowBalloonTip(100);
-            }
-            catch (Exception) { }
-        }
         StreamWriter escritor;
         private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -548,7 +535,7 @@ namespace See_More
             {
                 if (txtSeries.Text != "")
                 {
-                    Displaynotify();
+                    Program.Displaynotify(txtSeries.Text);
                     escritor = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Animes.txt");
                     escritor.WriteLine(txtSeries.Text);
                     escritor.Close();
