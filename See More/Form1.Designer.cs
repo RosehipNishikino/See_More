@@ -50,12 +50,14 @@ namespace See_More
             this.wmpCentral = new AxWMPLib.AxWindowsMediaPlayer();
             this.tmrProgreso = new System.Windows.Forms.Timer(this.components);
             this.tmrGuardarAuto = new System.Windows.Forms.Timer(this.components);
+            this.axvlcControl = new AxAXVLC.AxVLCPlugin2();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).BeginInit();
             this.panelTitle.SuspendLayout();
             this.panelDesktop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wmpCentral)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axvlcControl)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMenu
@@ -306,6 +308,7 @@ namespace See_More
             // panelDesktop
             // 
             this.panelDesktop.BackColor = System.Drawing.Color.Navy;
+            this.panelDesktop.Controls.Add(this.axvlcControl);
             this.panelDesktop.Controls.Add(this.wmpCentral);
             this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDesktop.Location = new System.Drawing.Point(220, 89);
@@ -322,6 +325,15 @@ namespace See_More
             this.wmpCentral.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("wmpCentral.OcxState")));
             this.wmpCentral.Size = new System.Drawing.Size(659, 427);
             this.wmpCentral.TabIndex = 0;
+            // 
+            // axvlcControl
+            // 
+            this.axvlcControl.Enabled = true;
+            this.axvlcControl.Location = new System.Drawing.Point(0, 0);
+            this.axvlcControl.Name = "axvlcControl";
+            this.axvlcControl.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axvlcControl.OcxState")));
+            this.axvlcControl.Size = new System.Drawing.Size(378, 272);
+            this.axvlcControl.TabIndex = 1;
             // 
             // Form1
             // 
@@ -342,6 +354,7 @@ namespace See_More
             this.panelTitle.PerformLayout();
             this.panelDesktop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.wmpCentral)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axvlcControl)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -367,6 +380,7 @@ namespace See_More
         private AxWMPLib.AxWindowsMediaPlayer wmpCentral;
         private System.Windows.Forms.Timer tmrProgreso;
         private System.Windows.Forms.Timer tmrGuardarAuto;
+        private AxAXVLC.AxVLCPlugin2 axvlcControl;
     }
 }
 
