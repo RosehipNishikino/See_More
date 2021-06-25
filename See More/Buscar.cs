@@ -26,9 +26,11 @@ namespace See_More
         String texto;
         String ultimarutavista = string.Empty;
         String rutaCamino = string.Empty;
-        int tamaño, opcion = 3;
+        String[] animesVis;
+        int tamaño, opcion = 3, left = 0, top = 45, cuentaCarpetas = 0, cuentas = 0;
         Boolean buscar = false, buscarListas = false, buscarApartado = false, hayAnimes = false;
         string decision = "";
+        Button carpeta, archivo;
         public Buscar()
         {
             InitializeComponent();
@@ -88,13 +90,15 @@ namespace See_More
                 tmrRefresco.Start();
                 try
                 {
-                    int t = 45, l = 0; String camino = string.Empty;
+                    String camino = string.Empty;
                     String[] ruta = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\"+Configuracion.usuario+"Ruta.txt");
+                    //Posible eliminacion
                     String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+                    animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
                     String[] caminos = new string[1]; String[] separar;
                     try
                     {
-                        if(animesVistos[0] != null) { hayAnimes = true; }
+                        if(animesVistos[0] != null && animesVis[0] != null) { hayAnimes = true; }
                     }
                     catch (Exception) { hayAnimes = false; }
                     foreach(String linea in ruta)
@@ -116,113 +120,144 @@ namespace See_More
                     DirectoryInfo directory = new DirectoryInfo(camino);
                     FileInfo[] files = directory.GetFiles("*.mp4");
                     DirectoryInfo[] directories = directory.GetDirectories();
-                    Button button, button2;
-                    for (int i = 0; i < directories.Length; i++)
+                    IteracionCarpetas(directories.Length, directories);
+                    IterarVideos(files.Length, files);
+                }
+                catch (Exception) { }
+            }
+        }
+        public void IteracionCarpetas(int n, DirectoryInfo[] directorios)
+        {
+            if(n != 0)
+            {
+                MostrarCarpetas(4, directorios);
+                left = 0; top += 45;
+                IteracionCarpetas(directorios.Length - cuentaCarpetas, directorios);
+            }
+            else
+            {
+                left = 0; top += 45; cuentaCarpetas = 0;
+                return;
+            }
+        }
+        public void MostrarCarpetas(int n, DirectoryInfo[] directorios)
+        {
+            if (n != 0)
+            {
+                try
+                {
+                    if (hayAnimes)
                     {
-                        for (int j = 0; j < 4; j++)
+                        foreach (String linea in animesVis)
                         {
-                            try
+                            if (!((DirectoryInfo)directorios[cuentaCarpetas]).Name.Contains(linea))
                             {
-                                if (hayAnimes)
-                                {
-                                    foreach (String linea in animesVistos)
-                                    {
-                                        if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
-                                        {
-                                            if (opcion == 3)
-                                                opcion = 2;
-                                        }
-                                        else
-                                        {
-                                            if (opcion == 3)
-                                                opcion = 1;
-                                            if (opcion == 2)
-                                                opcion = 1;
-                                        }
-                                    }
-                                    if(opcion == 2)
-                                    {
-                                        button = new Button();
-                                        button.Width = 200;
-                                        button.Height = 20;
-                                        button.Text = ((DirectoryInfo)directories[i]).Name;
-                                        button.Top = t;
-                                        button.Left = l;
-                                        button.FlatStyle = FlatStyle.Popup;
-                                        button.BackColor = Color.DarkGray;
-                                        button.MouseMove += new MouseEventHandler(mousemove);
-                                        button.MouseLeave += new EventHandler(mouseleave);
-                                        button.Click += new EventHandler(click_de_boton);
-                                        pnlRespaldo.Controls.Add(button);
-                                        //t += 45;
-                                        l += 200;
-                                        if (j != 3)
-                                            i += 1;
-                                    }
-                                    if(opcion == 1)
-                                    {
-                                        j -= 1;
-                                        i += 1;
-                                    }
-                                    opcion = 3;
-                                }
-                                else
-                                {
-                                    button = new Button();
-                                    button.Width = 200;
-                                    button.Height = 20;
-                                    button.Text = ((DirectoryInfo)directories[i]).Name;
-                                    button.Top = t;
-                                    button.Left = l;
-                                    button.FlatStyle = FlatStyle.Popup;
-                                    button.BackColor = Color.DarkGray;
-                                    button.MouseMove += new MouseEventHandler(mousemove);
-                                    button.MouseLeave += new EventHandler(mouseleave);
-                                    button.Click += new EventHandler(click_de_boton);
-                                    pnlRespaldo.Controls.Add(button);
-                                    l += 200;
-                                    if (j != 3)
-                                        i += 1;
-                                }
+                                if (opcion == 3)
+                                    opcion = 2;
                             }
-                            catch (Exception) { }
+                            else
+                            {
+                                if (opcion == 3)
+                                    opcion = 1;
+                                if (opcion == 2)
+                                    opcion = 1;
+                            }
                         }
-                        l = 0;
-                        t += 45;
+                        if (opcion == 2)
+                        {
+                            carpeta = new Button();
+                            carpeta.Width = 200;
+                            carpeta.Height = 20;
+                            carpeta.Text = ((DirectoryInfo)directorios[cuentaCarpetas]).Name;
+                            carpeta.Top = top;
+                            carpeta.Left = left;
+                            carpeta.FlatStyle = FlatStyle.Popup;
+                            carpeta.BackColor = Color.DarkGray;
+                            carpeta.MouseMove += new MouseEventHandler(mousemove);
+                            carpeta.MouseLeave += new EventHandler(mouseleave);
+                            carpeta.Click += new EventHandler(click_de_boton);
+                            pnlRespaldo.Controls.Add(carpeta);
+                            //t += 45;
+                            left += 200;
+                            if (n != 0)
+                                cuentaCarpetas += 1;
+                        }
+                        if (opcion == 1)
+                        {
+                            n += 1;
+                            cuentaCarpetas += 1;
+                        }
+                        opcion = 3;
                     }
-                    l = 0;
-                    t += 45;
-                    for (int i = 0; i < files.Length; i++)
+                    else
                     {
-                        for (int j = 0; j < 4; j++)
-                        {
-                            try
-                            {
-                                button2 = new Button();
-                                button2.Width = 200;
-                                button2.Height = 20;
-                                button2.Name = ((FileInfo)files[i]).FullName;
-                                button2.Text = ((FileInfo)files[i]).Name;
-                                button2.Top = t;
-                                button2.Left = l;
-                                button2.FlatStyle = FlatStyle.Popup;
-                                button2.BackColor = Color.DarkGray;
-                                button2.MouseMove += new MouseEventHandler(mousemove);
-                                button2.MouseLeave += new EventHandler(mouseleave);
-                                button2.Click += new EventHandler(click_de_boton2);
-                                pnlRespaldo.Controls.Add(button2);
-                                //t += 45;
-                                l += 200;
-                                if (j != 3)
-                                    i += 1;
-                            }
-                            catch (Exception) { }
-                        }
-                        l = 0;
-                        t += 45;
+                        carpeta = new Button();
+                        carpeta.Width = 200;
+                        carpeta.Height = 20;
+                        carpeta.Text = ((DirectoryInfo)directorios[cuentaCarpetas]).Name;
+                        carpeta.Top = top;
+                        carpeta.Left = left;
+                        carpeta.FlatStyle = FlatStyle.Popup;
+                        carpeta.BackColor = Color.DarkGray;
+                        carpeta.MouseMove += new MouseEventHandler(mousemove);
+                        carpeta.MouseLeave += new EventHandler(mouseleave);
+                        carpeta.Click += new EventHandler(click_de_boton);
+                        pnlRespaldo.Controls.Add(carpeta);
+                        left += 200;
+                        if (n != 0)
+                            cuentaCarpetas += 1;
                     }
                 }
                 catch (Exception) { }
+                MostrarCarpetas(n - 1, directorios);
+            }
+            else
+                return;
+        }
+        public void IterarVideos(int n, FileInfo[] archivos)
+        {
+            if(n != 0)
+            {
+                MostrarVideos(4, archivos);
+                top += 45; left = 0;
+                IterarVideos(archivos.Length - cuentas, archivos);
+            }
+            else
+            {
+                top = 45; left = 0; cuentas = 0;
+                return;
+            }
+        }
+        public void MostrarVideos(int n, FileInfo[] archivos)
+        {
+            if(n != 0)
+            {
+                try
+                {
+                    archivo = new Button();
+                    archivo.Width = 200;
+                    archivo.Height = 20;
+                    archivo.Name = ((FileInfo)archivos[cuentas]).FullName;
+                    archivo.Text = ((FileInfo)archivos[cuentas]).Name;
+                    archivo.Top = top;
+                    archivo.Left = left;
+                    archivo.FlatStyle = FlatStyle.Popup;
+                    archivo.BackColor = Color.DarkGray;
+                    archivo.MouseMove += new MouseEventHandler(mousemove);
+                    archivo.MouseLeave += new EventHandler(mouseleave);
+                    archivo.Click += new EventHandler(click_de_boton2);
+                    pnlRespaldo.Controls.Add(archivo);
+                    //t += 45;
+                    left += 200;
+                    if (n != 0)
+                        cuentas += 1;
+                }
+                catch (Exception) { }
+                MostrarVideos(n - 1, archivos);
+            }
+            else
+            {
+                return;
             }
         }
         private void mousemove(object mouse, MouseEventArgs args)
@@ -236,124 +271,20 @@ namespace See_More
         private void click_de_boton(object boton, EventArgs args)
         {
             pnlRespaldo.Controls.Clear();
-            String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+            animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
             try
             {
                 texto = ((Button)boton).Text;
-
                 for (int j = 0; j < 1; j++)
                 {
                         rutaCamino = rutaCamino + @"\" + texto;
                         ultimarutavista = rutaCamino;
                 }
-                int t = 45, l = 0;
                 DirectoryInfo directory = new DirectoryInfo(rutaCamino);
                 FileInfo[] files = directory.GetFiles("*.mp4");
                 DirectoryInfo[] directories = directory.GetDirectories();
-                Button button, button2;
-                for (int i = 0; i < directories.Length; i++)
-                {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        try {
-                            if (hayAnimes)
-                            {
-                                foreach (String linea in animesVistos)
-                                {
-                                    if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
-                                    {
-                                        if (opcion == 3)
-                                            opcion = 2;
-                                    }
-                                    else
-                                    {
-                                        if (opcion == 3)
-                                            opcion = 1;
-                                        if (opcion == 2)
-                                            opcion = 1;
-                                    }
-                                }
-                                if(opcion == 2)
-                                {
-                                    button = new Button();
-                                    button.Width = 200;
-                                    button.Height = 20;
-                                    button.Text = ((DirectoryInfo)directories[i]).Name;
-                                    button.Top = t;
-                                    button.Left = l;
-                                    button.BackColor = Color.DarkGray;
-                                    button.FlatStyle = FlatStyle.Popup;
-                                    button.MouseMove += new MouseEventHandler(mousemove);
-                                    button.MouseLeave += new EventHandler(mouseleave);
-                                    button.Click += new EventHandler(click_de_boton);
-                                    pnlRespaldo.Controls.Add(button);
-                                    //t += 45;
-                                    l += 200;
-                                    if (j != 3)
-                                        i += 1;
-                                }
-                                if(opcion == 1)
-                                {
-                                    j -= 1;
-                                    i += 1;
-                                }
-                                opcion = 3;
-                            }
-                            else
-                            {
-                                button = new Button();
-                                button.Width = 200;
-                                button.Height = 20;
-                                button.Text = ((DirectoryInfo)directories[i]).Name;
-                                button.Top = t;
-                                button.Left = l;
-                                button.BackColor = Color.DarkGray;
-                                button.FlatStyle = FlatStyle.Popup;
-                                button.MouseMove += new MouseEventHandler(mousemove);
-                                button.MouseLeave += new EventHandler(mouseleave);
-                                button.Click += new EventHandler(click_de_boton);
-                                pnlRespaldo.Controls.Add(button);
-                                //t += 45;
-                                l += 200;
-                                if (j != 3)
-                                    i += 1;
-                            }
-                        }
-                        catch (Exception) { }
-                    }
-                    l = 0;
-                    t += 45;
-                }
-                l = 0;
-                t += 45;
-                for (int i = 0; i < files.Length; i++)
-                {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        try { 
-                            button2 = new Button();
-                            button2.Width = 200;
-                            button2.Height = 20;
-                            button2.Name = ((FileInfo)files[i]).FullName;
-                            button2.Text = ((FileInfo)files[i]).Name;
-                            button2.Top = t;
-                            button2.Left = l;
-                            button2.BackColor = Color.DarkGray;
-                            button2.FlatStyle = FlatStyle.Popup;
-                            button2.MouseMove += new MouseEventHandler(mousemove);
-                            button2.MouseLeave += new EventHandler(mouseleave);
-                            button2.Click += new EventHandler(click_de_boton2);
-                            pnlRespaldo.Controls.Add(button2);
-                            //t += 45;
-                            l += 200;
-                            if(j!=3)
-                              i += 1;
-                        }
-                        catch (Exception) { }
-                    }
-                    l = 0;
-                    t += 45;
-                }
+                IteracionCarpetas(directories.Length, directories);
+                IterarVideos(files.Length, files);
             }
             catch (Exception) { }
         }
@@ -504,119 +435,15 @@ namespace See_More
         {
             pnlRespaldo.Controls.Clear();
             rutaCamino = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
-            String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+            animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
             try
             {
                 int t = 45, l = 0;
                 DirectoryInfo directory = new DirectoryInfo(@"C:\Users\" + Configuracion.UsuarioActual + @"\Videos");
                 FileInfo[] files = directory.GetFiles("*.mp4");
                 DirectoryInfo[] directories = directory.GetDirectories();
-                Button button, button2;
-                for (int i = 0; i < directories.Length; i++)
-                {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        try
-                        {
-                            if (hayAnimes)
-                            {
-                                foreach (String linea in animesVistos)
-                                {
-                                    if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
-                                    {
-                                        if (opcion == 3)
-                                            opcion = 2;
-                                    }
-                                    else
-                                    {
-                                        if (opcion == 3)
-                                            opcion = 1;
-                                        if (opcion == 2)
-                                            opcion = 1;
-                                    }
-                                }
-                                if(opcion == 2)
-                                {
-                                    button = new Button();
-                                    button.Width = 200;
-                                    button.Height = 20;
-                                    button.Text = ((DirectoryInfo)directories[i]).Name;
-                                    button.Top = t;
-                                    button.Left = l;
-                                    button.BackColor = Color.DarkGray;
-                                    button.FlatStyle = FlatStyle.Popup;
-                                    button.MouseMove += new MouseEventHandler(mousemove);
-                                    button.MouseLeave += new EventHandler(mouseleave);
-                                    button.Click += new EventHandler(click_de_boton);
-                                    pnlRespaldo.Controls.Add(button);
-                                    //t += 45;
-                                    l += 200;
-                                    if (j != 3)
-                                        i += 1;
-                                }
-                                if(opcion == 1)
-                                {
-                                    j -= 1;
-                                    i += 1;
-                                }
-                                opcion = 3;
-                            }
-                            else
-                            {
-                                button = new Button();
-                                button.Width = 200;
-                                button.Height = 20;
-                                button.Text = ((DirectoryInfo)directories[i]).Name;
-                                button.Top = t;
-                                button.Left = l;
-                                button.BackColor = Color.DarkGray;
-                                button.FlatStyle = FlatStyle.Popup;
-                                button.MouseMove += new MouseEventHandler(mousemove);
-                                button.MouseLeave += new EventHandler(mouseleave);
-                                button.Click += new EventHandler(click_de_boton);
-                                pnlRespaldo.Controls.Add(button);
-                                //t += 45;
-                                l += 200;
-                                if (j != 3)
-                                    i += 1;
-                            }
-                        }
-                        catch (Exception) { }
-                    }
-                    l = 0;
-                    t += 45;
-                }
-                l = 0;
-                t += 45;
-                for (int j = 0; j < files.Length; j++)
-                {
-                    for (int k = 0; k < 4; k++)
-                    {
-                        try
-                        {
-                            button2 = new Button();
-                            button2.Width = 200;
-                            button2.Height = 20;
-                            button2.Name = ((FileInfo)files[j]).FullName;
-                            button2.Text = ((FileInfo)files[j]).Name;
-                            button2.Top = t;
-                            button2.Left = l;
-                            button2.BackColor = Color.DarkGray;
-                            button2.FlatStyle = FlatStyle.Popup;
-                            button2.MouseMove += new MouseEventHandler(mousemove);
-                            button2.MouseLeave += new EventHandler(mouseleave);
-                            button2.Click += new EventHandler(click_de_boton2);
-                            pnlRespaldo.Controls.Add(button2);
-                            //t += 45;
-                            l += 200;
-                            if (k != 3)
-                                j += 1;
-                        }
-                        catch (Exception) { }
-                    }
-                    l = 0;
-                    t += 45;
-                }
+                IteracionCarpetas(directories.Length, directories);
+                IterarVideos(files.Length, files);
             }
             catch (Exception) { }
         }       
@@ -695,119 +522,14 @@ namespace See_More
                     {
                         pnlRespaldo.Controls.Clear();
                         oracion = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
-                        String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+                        animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
                         try
                         {
-                            int t = 45, l = 0;
                             DirectoryInfo directory = new DirectoryInfo(@"C:\Users\" + Configuracion.UsuarioActual + @"\Videos");
                             FileInfo[] files = directory.GetFiles("*.mp4");
                             DirectoryInfo[] directories = directory.GetDirectories();
-                            Button button, button2;
-                            for (int i = 0; i < directories.Length; i++)
-                            {
-                                for (int j = 0; j < 4; j++)
-                                {
-                                    try
-                                    {
-                                        if (hayAnimes)
-                                        {
-                                            foreach (String linea in animesVistos)
-                                            {
-                                                if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
-                                                {
-                                                    if (opcion == 3)
-                                                        opcion = 2;
-                                                }
-                                                else
-                                                {
-                                                    if (opcion == 3)
-                                                        opcion = 1;
-                                                    if (opcion == 2)
-                                                        opcion = 1;
-                                                }
-                                            }
-                                            if(opcion == 2)
-                                            {
-                                                button = new Button();
-                                                button.Width = 200;
-                                                button.Height = 20;
-                                                button.Text = ((DirectoryInfo)directories[i]).Name;
-                                                button.Top = t;
-                                                button.Left = l;
-                                                button.BackColor = Color.DarkGray;
-                                                button.FlatStyle = FlatStyle.Popup;
-                                                button.MouseMove += new MouseEventHandler(mousemove);
-                                                button.MouseLeave += new EventHandler(mouseleave);
-                                                button.Click += new EventHandler(click_de_boton);
-                                                pnlRespaldo.Controls.Add(button);
-                                                //t += 45;
-                                                l += 200;
-                                                if (j != 3)
-                                                    i += 1;
-                                            }
-                                            if(opcion == 1)
-                                            {
-                                                j -= 1;
-                                                i += 1;
-                                            }
-                                            opcion = 3;
-                                        }
-                                        else
-                                        {
-                                            button = new Button();
-                                            button.Width = 200;
-                                            button.Height = 20;
-                                            button.Text = ((DirectoryInfo)directories[i]).Name;
-                                            button.Top = t;
-                                            button.Left = l;
-                                            button.BackColor = Color.DarkGray;
-                                            button.FlatStyle = FlatStyle.Popup;
-                                            button.MouseMove += new MouseEventHandler(mousemove);
-                                            button.MouseLeave += new EventHandler(mouseleave);
-                                            button.Click += new EventHandler(click_de_boton);
-                                            pnlRespaldo.Controls.Add(button);
-                                            //t += 45;
-                                            l += 200;
-                                            if (j != 3)
-                                                i += 1;
-                                        }
-                                    }
-                                    catch (Exception) { }
-                                }
-                                l = 0;
-                                t += 45;
-                            }
-                            l = 0;
-                            t += 45;
-                            for (int i = 0; i < files.Length; i++)
-                            {
-                                for (int j = 0; j < 4; j++)
-                                {
-                                    try
-                                    {
-                                        button2 = new Button();
-                                        button2.Width = 200;
-                                        button2.Height = 20;
-                                        button2.Name = ((FileInfo)files[i]).FullName;
-                                        button2.Text = ((FileInfo)files[i]).Name;
-                                        button2.Top = t;
-                                        button2.Left = l;
-                                        button2.BackColor = Color.DarkGray;
-                                        button2.FlatStyle = FlatStyle.Popup;
-                                        button2.MouseMove += new MouseEventHandler(mousemove);
-                                        button2.MouseLeave += new EventHandler(mouseleave);
-                                        button2.Click += new EventHandler(click_de_boton2);
-                                        pnlRespaldo.Controls.Add(button2);
-                                        //t += 45;
-                                        l += 200;
-                                        if (j != 3)
-                                            i += 1;
-                                    }
-                                    catch (Exception) { }
-                                }
-                                l = 0;
-                                t += 45;
-                            }
+                            IteracionCarpetas(directories.Length, directories);
+                            IterarVideos(files.Length, files);
                         }
                         catch (Exception) { }
                     }
@@ -980,119 +702,14 @@ namespace See_More
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             pnlRespaldo.Controls.Clear();
-            String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+            animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
             try
             {
-                int t = 45, l = 0;
                 DirectoryInfo directory = new DirectoryInfo(rutaCamino);
                 FileInfo[] files = directory.GetFiles("*."+cboFiltros.SelectedItem.ToString());
                 DirectoryInfo[] directories = directory.GetDirectories();
-                Button button, button2;
-                for (int i = 0; i < directories.Length; i++)
-                {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        try
-                        {
-                            if (hayAnimes)
-                            {
-                                foreach (String linea in animesVistos)
-                                {
-                                    if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
-                                    {
-                                        if (opcion == 3)
-                                            opcion = 2;
-                                    }
-                                    else
-                                    {
-                                        if (opcion == 3)
-                                            opcion = 1;
-                                        if (opcion == 2)
-                                            opcion = 1;
-                                    }
-                                }
-                                if(opcion == 2)
-                                {
-                                    button = new Button();
-                                    button.Width = 200;
-                                    button.Height = 20;
-                                    button.Text = ((DirectoryInfo)directories[i]).Name;
-                                    button.Top = t;
-                                    button.Left = l;
-                                    button.BackColor = Color.DarkGray;
-                                    button.FlatStyle = FlatStyle.Popup;
-                                    button.MouseMove += new MouseEventHandler(mousemove);
-                                    button.MouseLeave += new EventHandler(mouseleave);
-                                    button.Click += new EventHandler(click_de_boton);
-                                    pnlRespaldo.Controls.Add(button);
-                                    //t += 45;
-                                    l += 200;
-                                    if (j != 3)
-                                        i += 1;
-                                }
-                                if(opcion == 1)
-                                {
-                                    j -= 1;
-                                    i += 1;
-                                }
-                                opcion = 3;
-                            }
-                            else
-                            {
-                                button = new Button();
-                                button.Width = 200;
-                                button.Height = 20;
-                                button.Text = ((DirectoryInfo)directories[i]).Name;
-                                button.Top = t;
-                                button.Left = l;
-                                button.BackColor = Color.DarkGray;
-                                button.FlatStyle = FlatStyle.Popup;
-                                button.MouseMove += new MouseEventHandler(mousemove);
-                                button.MouseLeave += new EventHandler(mouseleave);
-                                button.Click += new EventHandler(click_de_boton);
-                                pnlRespaldo.Controls.Add(button);
-                                //t += 45;
-                                l += 200;
-                                if (j != 3)
-                                    i += 1;
-                            }
-                        }
-                        catch (Exception) { }
-                    }
-                    l = 0;
-                    t += 45;
-                }
-                l = 0;
-                t += 45;
-                for (int i = 0; i < files.Length; i++)
-                {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        try
-                        {
-                            button2 = new Button();
-                            button2.Width = 200;
-                            button2.Height = 20;
-                            button2.Name = ((FileInfo)files[i]).FullName;
-                            button2.Text = ((FileInfo)files[i]).Name;
-                            button2.Top = t;
-                            button2.Left = l;
-                            button2.BackColor = Color.DarkGray;
-                            button2.FlatStyle = FlatStyle.Popup;
-                            button2.MouseMove += new MouseEventHandler(mousemove);
-                            button2.MouseLeave += new EventHandler(mouseleave);
-                            button2.Click += new EventHandler(click_de_boton2);
-                            pnlRespaldo.Controls.Add(button2);
-                            //t += 45;
-                            l += 200;
-                            if (j != 3)
-                                i += 1;
-                        }
-                        catch (Exception) { }
-                    }
-                    l = 0;
-                    t += 45;
-                }
+                IteracionCarpetas(directories.Length, directories);
+                IterarVideos(files.Length, files);
             }
             catch (Exception) { }
         }
