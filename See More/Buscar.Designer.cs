@@ -70,6 +70,7 @@
             this.comoFuncionaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tmrRefresco = new System.Windows.Forms.Timer(this.components);
+            this.regresarALaCarpetaAnteriorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuenta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.pnlContenedor.SuspendLayout();
@@ -412,6 +413,7 @@
             this.apartadosToolStripMenuItem,
             this.reproducirToolStripMenuItem,
             this.regresarARaizToolStripMenuItem,
+            this.regresarALaCarpetaAnteriorToolStripMenuItem,
             this.comoFuncionaToolStripMenuItem});
             this.mspMenu.Location = new System.Drawing.Point(0, 0);
             this.mspMenu.Name = "mspMenu";
@@ -486,6 +488,14 @@
             this.tmrRefresco.Interval = 500;
             this.tmrRefresco.Tick += new System.EventHandler(this.tmrRefresco_Tick);
             // 
+            // regresarALaCarpetaAnteriorToolStripMenuItem
+            // 
+            this.regresarALaCarpetaAnteriorToolStripMenuItem.Name = "regresarALaCarpetaAnteriorToolStripMenuItem";
+            this.regresarALaCarpetaAnteriorToolStripMenuItem.Size = new System.Drawing.Size(171, 20);
+            this.regresarALaCarpetaAnteriorToolStripMenuItem.Text = "Regresar a la carpeta anterior";
+            this.regresarALaCarpetaAnteriorToolStripMenuItem.Visible = false;
+            this.regresarALaCarpetaAnteriorToolStripMenuItem.Click += new System.EventHandler(this.regresarALaCarpetaAnteriorToolStripMenuItem_Click);
+            // 
             // Buscar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -552,5 +562,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem comoFuncionaToolStripMenuItem;
         private System.Windows.Forms.Timer tmrRefresco;
+        private System.Windows.Forms.ToolStripMenuItem regresarALaCarpetaAnteriorToolStripMenuItem;
     }
 }

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.IO;
 using MODELOS_SEEMORE;
 using DATOS_SEEMORE;
+using System.Threading.Tasks;
 
 namespace See_More
 {
@@ -67,10 +68,12 @@ namespace See_More
                 dgvCuenta.DataSource = CuentaSeeMore.BuscarTC();
                 pnlRespaldo.Visible = false;
                 regresarARaizToolStripMenuItem.Visible = false;
+                regresarALaCarpetaAnteriorToolStripMenuItem.Visible = false;
             }
             else {
                 pnlRespaldo.Visible = true;
                 regresarARaizToolStripMenuItem.Visible = true;
+                regresarALaCarpetaAnteriorToolStripMenuItem.Visible = true;
                 lblCreacionApartado.Visible = false;
                 lblApartado.Visible = false;
                 lblApartadoE.Visible = false;
@@ -120,11 +123,77 @@ namespace See_More
                     DirectoryInfo directory = new DirectoryInfo(camino);
                     FileInfo[] files = directory.GetFiles("*.mp4");
                     DirectoryInfo[] directories = directory.GetDirectories();
-                    IteracionCarpetas(directories.Length, directories);
+                    DirectoryInfo[] directorios = RevisarDirectorio(directories);
+                    IteracionCarpetas(directorios.Length, directorios);
                     IterarVideos(files.Length, files);
                 }
                 catch (Exception) { }
             }
+        }
+        public DirectoryInfo[] RevisarDirectorio(DirectoryInfo[] directories)
+        {
+            int indice = 0, suma = 0;
+            DirectoryInfo[] infos;
+            try
+            {
+                for (int i = 0; i < directories.Length; i++)
+                {
+                    if (hayAnimes)
+                    {
+                        foreach (String linea in animesVis)
+                        {
+                            if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
+                            {
+                                if (opcion == 3)
+                                    opcion = 2;
+                            }
+                            else
+                            {
+                                if (opcion == 3)
+                                    opcion = 1;
+                                if (opcion == 2)
+                                    opcion = 1;
+                            }
+                        }
+                        if (opcion == 2)
+                        {
+                            suma += 1;
+                        }
+                        opcion = 3;
+                    }
+                }
+                infos = new DirectoryInfo[suma];
+                for (int i = 0; i < directories.Length; i++)
+                {
+                    if (hayAnimes)
+                    {
+                        foreach (String linea in animesVis)
+                        {
+                            if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
+                            {
+                                if (opcion == 3)
+                                    opcion = 2;
+                            }
+                            else
+                            {
+                                if (opcion == 3)
+                                    opcion = 1;
+                                if (opcion == 2)
+                                    opcion = 1;
+                            }
+                        }
+                        if (opcion == 2)
+                        {
+                            infos[indice] = directories[i];
+                            indice += 1;
+                        }
+                        opcion = 3;
+                    }
+                }
+                return infos;
+            }
+            catch (Exception) { }
+            return null;
         }
         public void IteracionCarpetas(int n, DirectoryInfo[] directorios)
         {
@@ -146,67 +215,22 @@ namespace See_More
             {
                 try
                 {
-                    if (hayAnimes)
-                    {
-                        foreach (String linea in animesVis)
-                        {
-                            if (!((DirectoryInfo)directorios[cuentaCarpetas]).Name.Contains(linea))
-                            {
-                                if (opcion == 3)
-                                    opcion = 2;
-                            }
-                            else
-                            {
-                                if (opcion == 3)
-                                    opcion = 1;
-                                if (opcion == 2)
-                                    opcion = 1;
-                            }
-                        }
-                        if (opcion == 2)
-                        {
-                            carpeta = new Button();
-                            carpeta.Width = 200;
-                            carpeta.Height = 20;
-                            carpeta.Text = ((DirectoryInfo)directorios[cuentaCarpetas]).Name;
-                            carpeta.Top = top;
-                            carpeta.Left = left;
-                            carpeta.FlatStyle = FlatStyle.Popup;
-                            carpeta.BackColor = Color.DarkGray;
-                            carpeta.MouseMove += new MouseEventHandler(mousemove);
-                            carpeta.MouseLeave += new EventHandler(mouseleave);
-                            carpeta.Click += new EventHandler(click_de_boton);
-                            pnlRespaldo.Controls.Add(carpeta);
-                            //t += 45;
-                            left += 200;
-                            if (n != 0)
-                                cuentaCarpetas += 1;
-                        }
-                        if (opcion == 1)
-                        {
-                            n += 1;
-                            cuentaCarpetas += 1;
-                        }
-                        opcion = 3;
-                    }
-                    else
-                    {
-                        carpeta = new Button();
-                        carpeta.Width = 200;
-                        carpeta.Height = 20;
-                        carpeta.Text = ((DirectoryInfo)directorios[cuentaCarpetas]).Name;
-                        carpeta.Top = top;
-                        carpeta.Left = left;
-                        carpeta.FlatStyle = FlatStyle.Popup;
-                        carpeta.BackColor = Color.DarkGray;
-                        carpeta.MouseMove += new MouseEventHandler(mousemove);
-                        carpeta.MouseLeave += new EventHandler(mouseleave);
-                        carpeta.Click += new EventHandler(click_de_boton);
-                        pnlRespaldo.Controls.Add(carpeta);
-                        left += 200;
-                        if (n != 0)
-                            cuentaCarpetas += 1;
-                    }
+                    carpeta = new Button();
+                    carpeta.Width = 200;
+                    carpeta.Height = 20;
+                    carpeta.Text = ((DirectoryInfo)directorios[cuentaCarpetas]).Name;
+                    carpeta.Top = top;
+                    carpeta.Left = left;
+                    carpeta.FlatStyle = FlatStyle.Popup;
+                    carpeta.BackColor = Color.DarkGray;
+                    carpeta.MouseMove += new MouseEventHandler(mousemove);
+                    carpeta.MouseLeave += new EventHandler(mouseleave);
+                    carpeta.Click += new EventHandler(click_de_boton);
+                    pnlRespaldo.Controls.Add(carpeta);
+                    left += 200;
+                    if (n != 0)
+                        cuentaCarpetas += 1;
+                    
                 }
                 catch (Exception) { }
                 MostrarCarpetas(n - 1, directorios);
@@ -283,7 +307,8 @@ namespace See_More
                 DirectoryInfo directory = new DirectoryInfo(rutaCamino);
                 FileInfo[] files = directory.GetFiles("*.mp4");
                 DirectoryInfo[] directories = directory.GetDirectories();
-                IteracionCarpetas(directories.Length, directories);
+                DirectoryInfo[] directorios = RevisarDirectorio(directories);
+                IteracionCarpetas(directorios.Length, directorios);
                 IterarVideos(files.Length, files);
             }
             catch (Exception) { }
@@ -431,6 +456,43 @@ namespace See_More
                 }
             }
         }
+
+        private void regresarALaCarpetaAnteriorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (rutaCamino != @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos")
+            {
+                pnlRespaldo.Controls.Clear();
+                animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+                try
+                {
+
+                    String[] rutaCambio = rutaCamino.Split(new string[] { @"\" }, StringSplitOptions.None);
+                    int vueltas = rutaCambio.Length;
+                    String rutaTemp = "C:";
+                    foreach (String rutas in rutaCambio)
+                    {
+                        if (rutas != "C:")
+                            if (vueltas - 1 != 0)
+                                rutaTemp += @"\" + rutas;
+                        vueltas -= 1;
+                    }
+                    rutaCamino = rutaTemp;
+                    DirectoryInfo directory = new DirectoryInfo(rutaCamino);
+                    FileInfo[] files = directory.GetFiles("*.mp4");
+                    DirectoryInfo[] directories = directory.GetDirectories();
+                    DirectoryInfo[] directorios = RevisarDirectorio(directories);
+                    IteracionCarpetas(directorios.Length, directorios);
+                    IterarVideos(files.Length, files);
+
+                }
+                catch (Exception) { }
+            }
+            else
+            {
+                MessageBox.Show("Ya ha llegado a la carpeta raíz de los videos", "No se puede regresar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         private void regresarARaizToolStripMenuItem_Click(object sender, EventArgs e)
         {
             pnlRespaldo.Controls.Clear();
@@ -438,11 +500,11 @@ namespace See_More
             animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
             try
             {
-                int t = 45, l = 0;
                 DirectoryInfo directory = new DirectoryInfo(@"C:\Users\" + Configuracion.UsuarioActual + @"\Videos");
                 FileInfo[] files = directory.GetFiles("*.mp4");
                 DirectoryInfo[] directories = directory.GetDirectories();
-                IteracionCarpetas(directories.Length, directories);
+                DirectoryInfo[] directorios = RevisarDirectorio(directories);
+                IteracionCarpetas(directorios.Length, directorios);
                 IterarVideos(files.Length, files);
             }
             catch (Exception) { }
@@ -528,7 +590,8 @@ namespace See_More
                             DirectoryInfo directory = new DirectoryInfo(@"C:\Users\" + Configuracion.UsuarioActual + @"\Videos");
                             FileInfo[] files = directory.GetFiles("*.mp4");
                             DirectoryInfo[] directories = directory.GetDirectories();
-                            IteracionCarpetas(directories.Length, directories);
+                            DirectoryInfo[] directorios = RevisarDirectorio(directories);
+                            IteracionCarpetas(directorios.Length, directorios);
                             IterarVideos(files.Length, files);
                         }
                         catch (Exception) { }
@@ -708,7 +771,8 @@ namespace See_More
                 DirectoryInfo directory = new DirectoryInfo(rutaCamino);
                 FileInfo[] files = directory.GetFiles("*."+cboFiltros.SelectedItem.ToString());
                 DirectoryInfo[] directories = directory.GetDirectories();
-                IteracionCarpetas(directories.Length, directories);
+                DirectoryInfo[] directorios = RevisarDirectorio(directories);
+                IteracionCarpetas(directorios.Length, directorios);
                 IterarVideos(files.Length, files);
             }
             catch (Exception) { }
