@@ -1065,6 +1065,8 @@ namespace See_More
                         auxiliarNombre = frm.NombreVideo;
                         usuario = "" + frm.UsuarioRegistrado;
                         extension = frm.RutaVideo;
+                        intercambio = frm.hayIntercambio;
+                        UserTemp = frm.UsuarioTemporal;
                         if (extension.EndsWith("wpl"))
                         {
                             wmpCentral.URL = frm.RutaVideo;
@@ -1122,16 +1124,39 @@ namespace See_More
                             sw2.Close();
                             if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt"))
                             {
-
-                                sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
-                                sw3.WriteLine(frm.NombreVideo + " " + b);
-                                sw3.Close();
+                                if(intercambio == true)
+                                {
+                                    sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
+                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.Close();
+                                    sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + UserTemp + ".txt");
+                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.Close();
+                                }
+                                else
+                                {
+                                    sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
+                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.Close();
+                                }
                             }
                             else
                             {
-                                sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
-                                sw3.WriteLine(frm.NombreVideo + " " + b);
-                                sw3.Close();
+                                if (intercambio == true)
+                                {
+                                    sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
+                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.Close();
+                                    sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + UserTemp + ".txt");
+                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.Close();
+                                }
+                                else
+                                {
+                                    sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
+                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.Close();
+                                }
                             }
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }                      
