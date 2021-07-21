@@ -215,7 +215,7 @@ namespace See_More
                 try
                 {
                     carpeta = new Button();
-                    carpeta.Width = 200;
+                    carpeta.Width = 228;
                     carpeta.Height = 20;
                     carpeta.Text = ((DirectoryInfo)directorios[cuentaCarpetas]).Name;
                     carpeta.Top = top;
@@ -226,7 +226,7 @@ namespace See_More
                     carpeta.MouseLeave += new EventHandler(mouseleave);
                     carpeta.Click += new EventHandler(click_de_boton);
                     pnlRespaldo.Controls.Add(carpeta);
-                    left += 200;
+                    left += 228;
                     if (n != 0)
                         cuentaCarpetas += 1;
                     
@@ -258,7 +258,7 @@ namespace See_More
                 try
                 {
                     archivo = new Button();
-                    archivo.Width = 200;
+                    archivo.Width = 228;
                     archivo.Height = 20;
                     archivo.Name = ((FileInfo)archivos[cuentas]).FullName;
                     archivo.Text = ((FileInfo)archivos[cuentas]).Name;
@@ -271,7 +271,7 @@ namespace See_More
                     archivo.Click += new EventHandler(click_de_boton2);
                     pnlRespaldo.Controls.Add(archivo);
                     //t += 45;
-                    left += 200;
+                    left += 228;
                     if (n != 0)
                         cuentas += 1;
                 }

@@ -1169,11 +1169,11 @@ namespace See_More
         }
         private void actualizarToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            new Actualizar().Show();
+            new Nuevo().Show();
         }
         private void eliminarToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            new Eliminar().Show();
+            new Nuevo().Show();
         }
         private void crearCuentaToolStripMenuItem1_Click(object sender, EventArgs e)
         {

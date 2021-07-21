@@ -76,7 +76,7 @@
             this.guardarHistorialToolStripMenuItem});
             this.mspMenu.Location = new System.Drawing.Point(0, 0);
             this.mspMenu.Name = "mspMenu";
-            this.mspMenu.Size = new System.Drawing.Size(968, 24);
+            this.mspMenu.Size = new System.Drawing.Size(775, 24);
             this.mspMenu.TabIndex = 1;
             this.mspMenu.Text = "menuStrip1";
             // 
@@ -176,7 +176,7 @@
             // lblFondo
             // 
             this.lblFondo.AutoSize = true;
-            this.lblFondo.Location = new System.Drawing.Point(625, 31);
+            this.lblFondo.Location = new System.Drawing.Point(625, 23);
             this.lblFondo.Name = "lblFondo";
             this.lblFondo.Size = new System.Drawing.Size(139, 13);
             this.lblFondo.TabIndex = 10;
@@ -185,11 +185,11 @@
             // lblCasillas
             // 
             this.lblCasillas.AutoSize = true;
-            this.lblCasillas.Location = new System.Drawing.Point(625, 46);
+            this.lblCasillas.Location = new System.Drawing.Point(625, 37);
             this.lblCasillas.Name = "lblCasillas";
-            this.lblCasillas.Size = new System.Drawing.Size(220, 13);
+            this.lblCasillas.Size = new System.Drawing.Size(126, 26);
             this.lblCasillas.TabIndex = 11;
-            this.lblCasillas.Text = "Marca las casillas donde quieres ver tu fondo";
+            this.lblCasillas.Text = "Marca las casillas donde \r\nquieres ver tu fondo";
             // 
             // chkReproductor
             // 
@@ -234,7 +234,7 @@
             // chkCrearCuenta
             // 
             this.chkCrearCuenta.AutoSize = true;
-            this.chkCrearCuenta.Location = new System.Drawing.Point(743, 65);
+            this.chkCrearCuenta.Location = new System.Drawing.Point(628, 160);
             this.chkCrearCuenta.Name = "chkCrearCuenta";
             this.chkCrearCuenta.Size = new System.Drawing.Size(88, 17);
             this.chkCrearCuenta.TabIndex = 16;
@@ -244,7 +244,7 @@
             // chkEliminar
             // 
             this.chkEliminar.AutoSize = true;
-            this.chkEliminar.Location = new System.Drawing.Point(743, 89);
+            this.chkEliminar.Location = new System.Drawing.Point(628, 184);
             this.chkEliminar.Name = "chkEliminar";
             this.chkEliminar.Size = new System.Drawing.Size(62, 17);
             this.chkEliminar.TabIndex = 17;
@@ -254,7 +254,7 @@
             // chkHistorial
             // 
             this.chkHistorial.AutoSize = true;
-            this.chkHistorial.Location = new System.Drawing.Point(742, 114);
+            this.chkHistorial.Location = new System.Drawing.Point(627, 209);
             this.chkHistorial.Name = "chkHistorial";
             this.chkHistorial.Size = new System.Drawing.Size(63, 17);
             this.chkHistorial.TabIndex = 18;
@@ -264,7 +264,7 @@
             // chkNuevo
             // 
             this.chkNuevo.AutoSize = true;
-            this.chkNuevo.Location = new System.Drawing.Point(742, 137);
+            this.chkNuevo.Location = new System.Drawing.Point(627, 232);
             this.chkNuevo.Name = "chkNuevo";
             this.chkNuevo.Size = new System.Drawing.Size(58, 17);
             this.chkNuevo.TabIndex = 19;
@@ -274,12 +274,12 @@
             // lblInfoFondo
             // 
             this.lblInfoFondo.AutoSize = true;
-            this.lblInfoFondo.Location = new System.Drawing.Point(625, 157);
+            this.lblInfoFondo.Location = new System.Drawing.Point(612, 248);
             this.lblInfoFondo.Name = "lblInfoFondo";
-            this.lblInfoFondo.Size = new System.Drawing.Size(302, 26);
+            this.lblInfoFondo.Size = new System.Drawing.Size(164, 39);
             this.lblInfoFondo.TabIndex = 20;
-            this.lblInfoFondo.Text = "Esta ventana no cuenta con esta opción, puesto que sirve de \r\nverificación al usu" +
-    "ario.";
+            this.lblInfoFondo.Text = "Esta ventana no cuenta con \r\nesta opción, puesto que sirve de \r\nverificación al u" +
+    "suario.";
             // 
             // picComprobacion
             // 
@@ -294,7 +294,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(968, 289);
+            this.ClientSize = new System.Drawing.Size(775, 289);
             this.Controls.Add(this.picComprobacion);
             this.Controls.Add(this.lblInfoFondo);
             this.Controls.Add(this.chkNuevo);
