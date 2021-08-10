@@ -635,6 +635,32 @@ namespace See_More
                         catch (Exception) { }
                     }
                 }
+                if (decision == "open")
+                {
+                    OpenFileDialog abrir = new OpenFileDialog();
+                    abrir.ValidateNames = false;
+                    abrir.CheckFileExists = false;
+                    abrir.CheckPathExists = true;
+                    abrir.FileName = "Seleccionar carpeta videos";
+                    DialogResult result = abrir.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        rutaCamino = Path.GetDirectoryName(abrir.FileName);
+                        ultimarutavista = rutaCamino;
+                        pnlRespaldo.Controls.Clear();
+                        animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+                        try
+                        {
+                            DirectoryInfo directory = new DirectoryInfo(rutaCamino);
+                            FileInfo[] files = directory.GetFiles("*.mp4");
+                            DirectoryInfo[] directories = directory.GetDirectories();
+                            DirectoryInfo[] directorios = RevisarDirectorio(directories);
+                            IteracionCarpetas(directorios.Length, directorios);
+                            IterarVideos(files.Length, files);
+                        }
+                        catch (Exception) { }
+                    }
+                }
                 if(decision == "s-n")
                 {
                     if(Configuracion.existeConexion)

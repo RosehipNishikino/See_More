@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AxInterop.WMPLib">
-      <HintPath>..\..\See_more\See_more\bin\Debug\AxInterop.WMPLib.dll</HintPath>
+      <HintPath>..\packages\AxInterop.WMPLib.dll</HintPath>
     </Reference>
     <Reference Include="FontAwesome.Sharp, Version=5.15.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome.Sharp.5.15.3\lib\net472\FontAwesome.Sharp.dll</HintPath>
@@ -84,12 +84,6 @@
     </Compile>
     <Compile Include="Crear Cuenta.designer.cs">
       <DependentUpon>Crear Cuenta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Historial.cs">
       <SubType>Form</SubType>
@@ -143,9 +137,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Crear Cuenta.resx">
       <DependentUpon>Crear Cuenta.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Historial.resx">
       <DependentUpon>Historial.cs</DependentUpon>

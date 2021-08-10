@@ -69,11 +69,11 @@
             this.tmrBateria = new System.Windows.Forms.Timer(this.components);
             this.tmrGuardarAuto = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.axvlcControl = new AxAXVLC.AxVLCPlugin2();
+           // this.axvlcControl = new AxAXVLC.AxVLCPlugin2();
             ((System.ComponentModel.ISupportInitialize)(this.wmpCentral)).BeginInit();
             this.mspMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUsuario)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.axvlcControl)).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)(this.axvlcControl)).BeginInit();
             this.SuspendLayout();
             // 
             // wmpCentral
@@ -383,20 +383,20 @@
             // 
             // axvlcControl
             // 
-            this.axvlcControl.Enabled = true;
+           /* this.axvlcControl.Enabled = true;
             this.axvlcControl.Location = new System.Drawing.Point(330, 76);
             this.axvlcControl.Name = "axvlcControl";
             this.axvlcControl.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axvlcControl.OcxState")));
             this.axvlcControl.Size = new System.Drawing.Size(320, 240);
             this.axvlcControl.TabIndex = 29;
-            this.axvlcControl.Visible = false;
+            this.axvlcControl.Visible = false;*/
             // 
             // Reproductor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1308, 441);
-            this.Controls.Add(this.axvlcControl);
+           // this.Controls.Add(this.axvlcControl);
             this.Controls.Add(this.lblFinal);
             this.Controls.Add(this.lblInicio);
             this.Controls.Add(this.lblAutoRepetir);
@@ -420,7 +420,7 @@
             this.mspMenu.ResumeLayout(false);
             this.mspMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUsuario)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.axvlcControl)).EndInit();
+           // ((System.ComponentModel.ISupportInitialize)(this.axvlcControl)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -467,7 +467,7 @@
         private System.Windows.Forms.ToolStripMenuItem iniciarSesiónToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem cerrarSesiónToolStripMenuItem;
-        private AxAXVLC.AxVLCPlugin2 axvlcControl;
+        //private AxAXVLC.AxVLCPlugin2 axvlcControl;
     }
 }
 

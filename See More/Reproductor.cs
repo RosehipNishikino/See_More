@@ -29,7 +29,7 @@ namespace See_More
         int contador = 1;
         int opcion = 3;
         bool entra = true;
-        bool nombre = true; String ruta;
+        bool nombre = true; String ruta = string.Empty;
         Boolean pantallaCompleta = true;
         Boolean autopausa = false;
         Boolean autorepetir = false;
@@ -429,7 +429,13 @@ namespace See_More
         }
         public void ArchivosExistentes()
         {
-            if(!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt"))
+            if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt"))
+            {
+                File.CreateText(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
+                sw4.Close();
+            }
+            if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
                 sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
@@ -646,7 +652,10 @@ namespace See_More
                     StreamReader rd2 = new StreamReader(Application.StartupPath + @"\See More\Configuraciones SeeMore\reproductor.txt");
                     line = rd.ReadLine();
                     line2 = rd2.ReadLine();
-                    this.Text = "Ultimo video visto: " + line;
+                    if (line == null)
+                        this.Text = "See More";
+                    else
+                        this.Text = "Ultimo video visto: " + line;
                     this.BackgroundImage = Image.FromFile(line2);
                     this.BackgroundImageLayout = ImageLayout.Stretch;
                     rd.Close();
@@ -970,19 +979,19 @@ namespace See_More
                     if (extension.EndsWith("wpl"))
                     {
                         wmpCentral.URL = result;
-                        axvlcControl.BaseURL = result;
+                        //axvlcControl.BaseURL = result;
                         this.Text = "Viendo - " + todo + " Capitulo: " + contador;
                     }
                     else if (extension.EndsWith("avi"))
                     {
                         wmpCentral.URL = result;
-                        axvlcControl.BaseURL = result;
+                        //axvlcControl.BaseURL = result;
                         this.Text = "Viendo - " + todo;
                     }
                     else
                     {
                         wmpCentral.URL = result;
-                        axvlcControl.BaseURL = result;
+                        //axvlcControl.BaseURL = result;
                         this.Text = "Viendo - " + todo;
                     }
                     tmrProgreso.Start();
@@ -993,7 +1002,7 @@ namespace See_More
                         if (vacio[0] == auxiliarNombre)
                         {
                             wmpCentral.Ctlcontrols.currentPosition = double.Parse(vacio[1]);
-                            axvlcControl.input.time = double.Parse(vacio[1]);
+                            //axvlcControl.input.time = double.Parse(vacio[1]);
                         }
                         else
                         {
@@ -1070,13 +1079,13 @@ namespace See_More
                         if (extension.EndsWith("wpl"))
                         {
                             wmpCentral.URL = frm.RutaVideo;
-                            axvlcControl.MRL = frm.RutaVideo;
+                            //axvlcControl.MRL = frm.RutaVideo;
                             this.Text = "Viendo - " + todo + " Capitulo: " + contador;
                         }
                         else
                         {
                             wmpCentral.URL = frm.RutaVideo;
-                            axvlcControl.playlist.add(frm.RutaVideo);
+                            //axvlcControl.playlist.add(frm.RutaVideo);
                             this.Text = "Viendo - " + todo;
                         }
                         tmrProgreso.Start();
@@ -1088,7 +1097,7 @@ namespace See_More
                             if (vacio[0] == auxiliarNombre)
                             {
                                 wmpCentral.Ctlcontrols.currentPosition = double.Parse(vacio[1]);
-                                axvlcControl.input.time = double.Parse(vacio[1]);
+                               // axvlcControl.input.time = double.Parse(vacio[1]);
                             }
                             else
                             {
