@@ -69,11 +69,10 @@
             this.tmrBateria = new System.Windows.Forms.Timer(this.components);
             this.tmrGuardarAuto = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-           // this.axvlcControl = new AxAXVLC.AxVLCPlugin2();
+            this.tmrVerificacion = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.wmpCentral)).BeginInit();
             this.mspMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUsuario)).BeginInit();
-            //((System.ComponentModel.ISupportInitialize)(this.axvlcControl)).BeginInit();
             this.SuspendLayout();
             // 
             // wmpCentral
@@ -227,14 +226,14 @@
             // menuToolStripMenuItem
             // 
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.menuToolStripMenuItem.Text = "Menu";
             this.menuToolStripMenuItem.Click += new System.EventHandler(this.menuToolStripMenuItem_Click);
             // 
             // cerrarLaSesiónToolStripMenuItem
             // 
             this.cerrarLaSesiónToolStripMenuItem.Name = "cerrarLaSesiónToolStripMenuItem";
-            this.cerrarLaSesiónToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.cerrarLaSesiónToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cerrarLaSesiónToolStripMenuItem.Text = "Cerrar la sesión";
             this.cerrarLaSesiónToolStripMenuItem.Click += new System.EventHandler(this.cerrarLaSesiónToolStripMenuItem_Click);
             // 
@@ -381,22 +380,16 @@
             // 
             this.notifyIcon1.Visible = true;
             // 
-            // axvlcControl
+            // tmrVerificacion
             // 
-           /* this.axvlcControl.Enabled = true;
-            this.axvlcControl.Location = new System.Drawing.Point(330, 76);
-            this.axvlcControl.Name = "axvlcControl";
-            this.axvlcControl.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axvlcControl.OcxState")));
-            this.axvlcControl.Size = new System.Drawing.Size(320, 240);
-            this.axvlcControl.TabIndex = 29;
-            this.axvlcControl.Visible = false;*/
+            this.tmrVerificacion.Interval = 500;
+            this.tmrVerificacion.Tick += new System.EventHandler(this.tmrVerificacion_Tick);
             // 
             // Reproductor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1308, 441);
-           // this.Controls.Add(this.axvlcControl);
             this.Controls.Add(this.lblFinal);
             this.Controls.Add(this.lblInicio);
             this.Controls.Add(this.lblAutoRepetir);
@@ -420,7 +413,6 @@
             this.mspMenu.ResumeLayout(false);
             this.mspMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUsuario)).EndInit();
-           // ((System.ComponentModel.ISupportInitialize)(this.axvlcControl)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -467,6 +459,7 @@
         private System.Windows.Forms.ToolStripMenuItem iniciarSesiónToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem cerrarSesiónToolStripMenuItem;
+        private System.Windows.Forms.Timer tmrVerificacion;
         //private AxAXVLC.AxVLCPlugin2 axvlcControl;
     }
 }

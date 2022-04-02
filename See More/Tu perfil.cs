@@ -35,7 +35,7 @@ namespace See_More
             long b = fileInfo.Length;
             if(b >= 10485760)
             {
-                if (MessageBox.Show("Hemos encontrado que el archivo donde creo usuarios ha superado su tamaño, ¿Desea Borrar?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                if (MessageBox.Show("Se ha encontrado que el archivo donde creo usuarios ha superado su tamaño, ¿Desea Borrar?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     StreamWriter creador = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\creaciones.txt");
                     creador.Flush(); creador.Close();
@@ -97,19 +97,19 @@ namespace See_More
                         if (frm.usuarioSeleccionado.genero == "Hombre")
                         {
                             genero = "Hombre";
-                            MessageBox.Show("Bienvenido " + frm.usuarioSeleccionado.usuario);
+                            //MessageBox.Show("Bienvenido " + frm.usuarioSeleccionado.usuario);
                             this.Text = "Bienvenido - " + frm.usuarioSeleccionado.usuario;
                         }
                         if (frm.usuarioSeleccionado.genero == "Mujer")
                         {
                             genero = "Mujer";
-                            MessageBox.Show("Bienvenida " + frm.usuarioSeleccionado.usuario);
+                            //MessageBox.Show("Bienvenida " + frm.usuarioSeleccionado.usuario);
                             this.Text = "Bienvenida - " + frm.usuarioSeleccionado.usuario;
                         }
                         if (frm.usuarioSeleccionado.genero != "Hombre" && frm.usuarioSeleccionado.genero != "Mujer")
                         {
                             genero = frm.usuarioSeleccionado.genero;
-                            MessageBox.Show("Bienvenido/a " + frm.usuarioSeleccionado.genero);
+                            //MessageBox.Show("Bienvenido/a " + frm.usuarioSeleccionado.genero);
                             this.Text = "Bienvenido/a - " + frm.usuarioSeleccionado.usuario;
                         }
                         string res = string.Empty;
@@ -122,7 +122,7 @@ namespace See_More
                         rtxHistorialUsuario.LoadFile(ruta, RichTextBoxStreamType.PlainText);
                         if (rtxHistorialUsuario.Text == "")
                         {
-                            rtxHistorialUsuario.Text = "Vaya, al parecer no has visto un video aún";
+                            rtxHistorialUsuario.Text = "Vaya, al parecer no has visto un video, aún";
                         }
                         guardarToolStripMenuItem.Enabled = true;
                         agregarImagenDeFondoToolStripMenuItem.Enabled = true;
@@ -177,19 +177,19 @@ namespace See_More
                         if (frm.Sexo == "Hombre")
                         {
                             genero = "Hombre";
-                            MessageBox.Show("Bienvenido " + frm.Usuario);
+                            //MessageBox.Show("Bienvenido " + frm.Usuario);
                             this.Text = "Bienvenido - " + frm.Usuario;
                         }
                         if (frm.Sexo == "Mujer")
                         {
                             genero = "Mujer";
-                            MessageBox.Show("Bienvenida " + frm.Usuario);
+                            //MessageBox.Show("Bienvenida " + frm.Usuario);
                             this.Text = "Bienvenida - " + frm.Usuario;
                         }
                         if(frm.Sexo != "Hombre" && frm.Sexo != "Mujer")
                         {
                             genero = frm.Sexo;
-                            MessageBox.Show("Bienvenido/a " + frm.Sexo);
+                            //MessageBox.Show("Bienvenido/a " + frm.Sexo);
                             this.Text = "Bienvenido/a - " + frm.Usuario;
                         }
                         string res = string.Empty;
@@ -202,7 +202,7 @@ namespace See_More
                         rtxHistorialUsuario.LoadFile(ruta, RichTextBoxStreamType.PlainText);
                         if (rtxHistorialUsuario.Text == "")
                         {
-                            rtxHistorialUsuario.Text = "Vaya, al parecer no has visto un video aún";
+                            rtxHistorialUsuario.Text = "Vaya, al parecer no has visto un video, aún";
                         }
                         guardarToolStripMenuItem.Enabled = true;
                         agregarImagenDeFondoToolStripMenuItem.Enabled = true;

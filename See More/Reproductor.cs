@@ -303,40 +303,43 @@ namespace See_More
         }
         private void Form1_Resize(object sender, EventArgs e)
         {
-            if (this.Width <= 900)
+            if (this.WindowState == FormWindowState.Normal)
             {
-                toolStripMenuItem1.Visible = false;
-                toolStripMenuItem3.Visible = true;
+                if (this.Width <= 900)
+                {
+                    toolStripMenuItem1.Visible = false;
+                    toolStripMenuItem3.Visible = true;
+                }
+                if (this.Width > 900)
+                {
+                    toolStripMenuItem1.Visible = true;
+                    toolStripMenuItem3.Visible = false;
+                }
+                if (this.Width <= 800)
+                {
+                    cerrarToolStripMenuItem.Visible = false;
+                    personalizaciónToolStripMenuItem.Visible = true;
+                }
+                if (this.Width > 800)
+                {
+                    cerrarToolStripMenuItem.Visible = true;
+                    personalizaciónToolStripMenuItem.Visible = false;
+                }
+                if (this.Width <= 700)
+                {
+                    iniciarSesiónToolStripMenuItem.Visible = false;
+                    iniciarSesiónToolStripMenuItem1.Visible = true;
+                }
+                if (this.Width > 700)
+                {
+                    iniciarSesiónToolStripMenuItem.Visible = true;
+                    iniciarSesiónToolStripMenuItem1.Visible = false;
+                }
+                if (this.Width <= 650)
+                    this.Width = 650;
+                if (this.Height <= 380)
+                    this.Height = 380;
             }
-            if (this.Width > 900)
-            {
-                toolStripMenuItem1.Visible = true;
-                toolStripMenuItem3.Visible = false;
-            }
-            if (this.Width <= 800)
-            {
-                cerrarToolStripMenuItem.Visible = false;
-                personalizaciónToolStripMenuItem.Visible = true;
-            }
-            if (this.Width > 800)
-            {
-                cerrarToolStripMenuItem.Visible = true;
-                personalizaciónToolStripMenuItem.Visible = false;
-            }
-            if (this.Width <= 700)
-            {
-                iniciarSesiónToolStripMenuItem.Visible = false;
-                iniciarSesiónToolStripMenuItem1.Visible = true;
-            }
-            if (this.Width > 700)
-            {
-                iniciarSesiónToolStripMenuItem.Visible = true;
-                iniciarSesiónToolStripMenuItem1.Visible = false;
-            }
-            if (this.Width <= 650)
-                this.Width = 650;
-            if (this.Height <= 380)
-                this.Height = 380;
             if (!autopausa)
             {
                 if (this.WindowState == FormWindowState.Minimized)
@@ -602,11 +605,13 @@ namespace See_More
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            wmpCentral.CreateControl();
             if (Instacia())
             {
                 DirectoriosExistentes();
                 ArchivosExistentes();
                 tmrEstadoActual.Start();
+                tmrVerificacion.Start();
                 string result = string.Empty;
                 string resultado = string.Empty;
                 String linea;
@@ -1422,6 +1427,12 @@ namespace See_More
         {
             CerrarSesion();
         }
+
+        private void tmrVerificacion_Tick(object sender, EventArgs e)
+        {
+            Evento();
+        }
+
         private void tmrGuardarAuto_Tick(object sender, EventArgs e)
         {
             if (wmpCentral.playState == WMPLib.WMPPlayState.wmppsPlaying)

@@ -314,15 +314,16 @@
             this.txtContraseña.Size = new System.Drawing.Size(205, 20);
             this.txtContraseña.TabIndex = 38;
             this.txtContraseña.Visible = false;
+            this.txtContraseña.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContraseña_KeyPress);
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Enabled = false;
             this.txtUsuario.Location = new System.Drawing.Point(619, 38);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(147, 20);
             this.txtUsuario.TabIndex = 37;
             this.txtUsuario.Visible = false;
+            this.txtUsuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtUsuario_KeyPress);
             // 
             // lblDatoInfo
             // 

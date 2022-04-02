@@ -20,6 +20,10 @@ namespace See_More
         public String UsuarioImagen { get; set; }
         public Boolean hayIntercambio { get; set; }
         public String UsuarioTemporal { get; set; }
+        public String Usuario { get; set; }
+        public String Imagen { get; set; }
+        public String Sexo { get; set; }
+        public String Contraseña { get; set; }
         Boolean esUnico = true;
         StreamWriter sw1, sw2;
         Boolean esApartado = false;
@@ -29,7 +33,7 @@ namespace See_More
         String rutaCamino = string.Empty;
         String[] animesVis;
         int tamaño, opcion = 3, left = 0, top = 45, cuentaCarpetas = 0, cuentas = 0;
-        Boolean buscar = false, buscarListas = false, buscarApartado = false, hayAnimes = false;
+        Boolean buscar = false, buscarListas = false, buscarApartado = false, hayAnimes = false, seleccion = false;
         string decision = "";
         Button carpeta, archivo;
         public Buscar()
@@ -52,6 +56,15 @@ namespace See_More
                     rdUsuario.Close();
                 }
                 catch (Exception) { }
+            }
+            else
+            {
+                lblUsuario.Visible = true;
+                lblContraseña.Visible = true;
+                txtUsuario.Visible = true;
+                txtContraseña.Visible = true;
+                regresarALaCarpetaAnteriorToolStripMenuItem.Enabled = false;
+                regresarARaizToolStripMenuItem.Enabled = false;
             }
             try
             {
@@ -314,6 +327,7 @@ namespace See_More
         }
         private void click_de_boton2(object boton, EventArgs args)
         {
+            //Aqui va la verificacion de seleccion de videos
             Boolean sinCoencidencia = false;
             for (int j = 0; j < tamaño; j++)
             {
@@ -455,6 +469,137 @@ namespace See_More
                 }
             }
         }
+        public void CargarDatos()
+        {
+            lblUsuario.Visible = false;
+            lblContraseña.Visible = false;
+            txtUsuario.Visible = false;
+            txtContraseña.Visible = false;
+            regresarALaCarpetaAnteriorToolStripMenuItem.Enabled = true;
+            regresarARaizToolStripMenuItem.Enabled = true;
+            StreamWriter sw5 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
+            sw5.Flush(); sw5.Close();
+            StreamWriter sw6 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
+            sw6.Flush(); sw6.Close();
+            sw1 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
+            string result = string.Empty;
+            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(Usuario);
+            result = Convert.ToBase64String(encryted);
+            sw1.WriteLine(result);
+            sw1.Close();
+            sw2 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
+            string resultado = string.Empty;
+            byte[] encriptar = System.Text.Encoding.Unicode.GetBytes(Contraseña);
+            resultado = Convert.ToBase64String(encriptar);
+            sw2.WriteLine(resultado);
+            sw2.Close();
+            try
+            {
+                String camino = string.Empty;
+                String[] ruta = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Ruta.txt");
+                //Posible eliminacion
+                String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+                animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+                String[] caminos = new string[1]; String[] separar;
+                try
+                {
+                    if (animesVistos[0] != null && animesVis[0] != null) { hayAnimes = true; }
+                }
+                catch (Exception) { hayAnimes = false; }
+                foreach (String linea in ruta)
+                {
+                    separar = linea.Split(';');
+                    caminos[0] = separar[0];
+                }
+                if (caminos[0] == null)
+                {
+                    camino = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
+                    rutaCamino = camino;
+                }
+                else
+                {
+                    camino = caminos[0];
+                    rutaCamino = camino;
+                }
+                ultimarutavista = camino;
+                DirectoryInfo directory = new DirectoryInfo(camino);
+                FileInfo[] files = directory.GetFiles("*.mp4");
+                DirectoryInfo[] directories = directory.GetDirectories();
+                DirectoryInfo[] directorios = RevisarDirectorio(directories);
+                IteracionCarpetas(directorios.Length, directorios);
+                IterarVideos(files.Length, files);
+            }
+            catch (Exception) { }
+        }
+        private void txtUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (txtUsuario.Text != "" && txtContraseña.Text != "")
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    Boolean sinCoencidencia = false;
+                    for (int j = 0; j < tamaño; j++)
+                    {
+                        string res = string.Empty;
+                        byte[] decryted = Convert.FromBase64String(Configuracion.UsuariosContra[j]);
+                        res = System.Text.Encoding.Unicode.GetString(decryted);
+                        if (Configuracion.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
+                        {
+                            sinCoencidencia = true;
+                            Usuario = Configuracion.UsuariosNombre[j];
+                            Contraseña = res;
+                            Imagen = Configuracion.UsuariosImagen[j];
+                            Sexo = Configuracion.UsuariosSexo[j];
+                            Configuracion.nombre = txtUsuario.Text;
+                            Configuracion.usuario = txtUsuario.Text;
+                            Configuracion.contraseña = txtContraseña.Text;
+                            Configuracion.loCerroelUsuario = false;
+                            CargarDatos();
+                            break;
+                        }
+                    }
+                    if (sinCoencidencia == false)
+                    {
+                        MessageBox.Show("El Usuario y/o Contraseña estan mal, intente de nuevo");
+                    }
+                }
+            }
+        }
+
+        private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (txtUsuario.Text != "" && txtContraseña.Text != "")
+            {
+                if (e.KeyChar == (char)Keys.Enter)
+                {
+                    Boolean sinCoencidencia = false;
+                    for (int j = 0; j < tamaño; j++)
+                    {
+                        string res = string.Empty;
+                        byte[] decryted = Convert.FromBase64String(Configuracion.UsuariosContra[j]);
+                        res = System.Text.Encoding.Unicode.GetString(decryted);
+                        if (Configuracion.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
+                        {
+                            sinCoencidencia = true;
+                            Usuario = Configuracion.UsuariosNombre[j];
+                            Contraseña = res;
+                            Imagen = Configuracion.UsuariosImagen[j];
+                            Sexo = Configuracion.UsuariosSexo[j];
+                            Configuracion.nombre = txtUsuario.Text;
+                            Configuracion.usuario = txtUsuario.Text;
+                            Configuracion.contraseña = txtContraseña.Text;
+                            Configuracion.loCerroelUsuario = false;
+                            CargarDatos();
+                            break;
+                        }
+                    }
+                    if (sinCoencidencia == false)
+                    {
+                        MessageBox.Show("El Usuario y/o Contraseña estan mal, intente de nuevo");
+                    }
+                }
+            }
+        }
 
         private void regresarALaCarpetaAnteriorToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -583,6 +728,9 @@ namespace See_More
                 "6.- Busca todas las listas escribiendo {all-l}\n" +
                 "7.- Busca el nombre de la lista escribiendo {l-n} y luego escribiendo la lista a buscar\n" +
                 "8.- Busca la última lista escribiendo {u-l}\n" +
+                "-----------------------------------------------\n" +
+                "9.- Para seleccionar varios videos oprima {t}\n" +
+                "10.- Para deseleccionar los videos oprima {n}\n" + 
                 "Para salir de los comandos presione {ESC}\n" +
                 "                                                                                    See More.", "Ayuda de See More al usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -769,6 +917,14 @@ namespace See_More
                     {
                         MessageBox.Show("SeeMore no puede mostrarte la información del comando Buscar Última Lista", "SeeMore", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                }
+                if(decision == "t")
+                {
+                    seleccion = true;
+                }
+                if(decision == "n")
+                {
+                    seleccion = false;
                 }
                 txtNombreSerie.Clear();
             }
