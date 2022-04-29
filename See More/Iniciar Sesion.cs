@@ -85,6 +85,10 @@ namespace See_More
                         Configuracion.nombre = txtUsuario.Text;
                         Configuracion.usuario = txtUsuario.Text;
                         Configuracion.contraseña = txtContraseña.Text;
+                        string resulta = string.Empty;
+                        byte[] desin = Convert.FromBase64String(Imagen);
+                        resulta = System.Text.Encoding.Unicode.GetString(desin);
+                        Configuracion.imagen = resulta;
                         Configuracion.loCerroelUsuario = false;
                         this.Close();
                         break;

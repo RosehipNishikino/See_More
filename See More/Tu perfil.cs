@@ -15,7 +15,7 @@ namespace See_More
         public String Sexo1 { get; set; }
         public String Contraseña1 { get; set; }
         Boolean entraSINO = false;
-        StreamWriter sw1 = null, sw2 = null;
+        StreamWriter sw1 = null, sw2 = null, sw3 = null;
         String genero = "";
         String usuarioAct;
         String imagenConConexion;
@@ -82,6 +82,8 @@ namespace See_More
                         sw5.Flush(); sw5.Close();
                         StreamWriter sw6 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
                         sw6.Flush(); sw6.Close();
+                        StreamWriter sw7 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
+                        sw7.Flush(); sw7.Close();
                         sw1 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
                         string result = string.Empty;
                         byte[] encryted = System.Text.Encoding.Unicode.GetBytes(frm.usuarioSeleccionado.usuario);
@@ -162,6 +164,8 @@ namespace See_More
                         sw5.Flush(); sw5.Close();
                         StreamWriter sw6 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
                         sw6.Flush(); sw6.Close();
+                        StreamWriter sw7 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
+                        sw7.Flush(); sw7.Close();
                         sw1 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
                         string result = string.Empty;
                         byte[] encryted = System.Text.Encoding.Unicode.GetBytes(frm.Usuario);
@@ -174,6 +178,9 @@ namespace See_More
                         resultado = Convert.ToBase64String(encriptar);
                         sw2.WriteLine(resultado);
                         sw2.Close();
+                        sw3 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
+                        sw3.WriteLine(frm.Imagen);
+                        sw3.Close();
                         if (frm.Sexo == "Hombre")
                         {
                             genero = "Hombre";
@@ -401,9 +408,9 @@ namespace See_More
                     String ruta = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + ".txt";
                     String ruta2 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Imagen.txt";
                     String ruta3 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Busqueda.txt";
-                    String ruta4 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Animes";
-                    String ruta5 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Inte";
-                    String ruta6 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Ruta";
+                    String ruta4 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Animes.txt";
+                    String ruta5 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Inte.txt";
+                    String ruta6 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Ruta.txt";
                     if (File.Exists(ruta) && File.Exists(ruta2) && File.Exists(ruta3) && File.Exists(ruta4) && File.Exists(ruta5) && File.Exists(ruta6))
                     {
                         if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + ".txt") &&
@@ -487,9 +494,9 @@ namespace See_More
                         String ruta = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + ".txt";
                         String ruta2 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Imagen.txt";
                         String ruta3 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Busqueda.txt";
-                        String ruta4 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Animes";
-                        String ruta5 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Inte";
-                        String ruta6 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Ruta";
+                        String ruta4 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Animes.txt";
+                        String ruta5 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Inte.txt";
+                        String ruta6 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Ruta.txt";
                         if (File.Exists(ruta) && File.Exists(ruta2) && File.Exists(ruta3) && File.Exists(ruta4) && File.Exists(ruta5) && File.Exists(ruta6))
                         {
                             if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + ".txt") &&
@@ -633,6 +640,8 @@ namespace See_More
             sw.Flush(); sw.Close();
             StreamWriter sw2 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
             sw2.Flush(); sw2.Close();
+            StreamWriter sw3 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
+            sw3.Flush(); sw3.Close();
         }
     }
 }

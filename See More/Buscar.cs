@@ -25,7 +25,7 @@ namespace See_More
         public String Sexo { get; set; }
         public String Contraseña { get; set; }
         Boolean esUnico = true;
-        StreamWriter sw1, sw2;
+        StreamWriter sw1, sw2, sw3;
         Boolean esApartado = false;
         String oracion = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
         String texto;
@@ -344,10 +344,16 @@ namespace See_More
                     Configuracion.nombre = txtUsuario.Text;
                     Configuracion.usuario = txtUsuario.Text;
                     Configuracion.contraseña = txtContraseña.Text;
+                    string resulta = string.Empty;
+                    byte[] desin = Convert.FromBase64String(Configuracion.UsuariosImagen[j]);
+                    resulta = System.Text.Encoding.Unicode.GetString(desin);
+                    Configuracion.imagen = resulta;
                     StreamWriter sw5 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
                     sw5.Flush(); sw5.Close();
                     StreamWriter sw6 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
                     sw6.Flush(); sw6.Close();
+                    StreamWriter sw7 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
+                    sw7.Flush(); sw7.Close();
                     sw1 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
                     string result = string.Empty;
                     byte[] encryted = System.Text.Encoding.Unicode.GetBytes(txtUsuario.Text);
@@ -360,6 +366,9 @@ namespace See_More
                     resultado = Convert.ToBase64String(encriptar);
                     sw2.WriteLine(resultado);
                     sw2.Close();
+                    sw3 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
+                    sw3.WriteLine(Configuracion.UsuariosImagen[j]);
+                    sw3.Close();
                     StreamWriter ultimaruta = new StreamWriter(Application.StartupPath + @"\See More\Usuarios SeeMore\"+Configuracion.usuario+"Ruta.txt");
                     ultimaruta.Flush(); ultimaruta.Close();
                     StreamWriter ultimaruta2 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\"+Configuracion.usuario+"Ruta.txt");
@@ -481,6 +490,8 @@ namespace See_More
             sw5.Flush(); sw5.Close();
             StreamWriter sw6 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
             sw6.Flush(); sw6.Close();
+            StreamWriter sw7 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
+            sw7.Flush(); sw7.Close();
             sw1 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
             string result = string.Empty;
             byte[] encryted = System.Text.Encoding.Unicode.GetBytes(Usuario);
@@ -493,6 +504,9 @@ namespace See_More
             resultado = Convert.ToBase64String(encriptar);
             sw2.WriteLine(resultado);
             sw2.Close();
+            sw3 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
+            sw3.WriteLine(Imagen);
+            sw3.Close();
             try
             {
                 String camino = string.Empty;
@@ -553,6 +567,10 @@ namespace See_More
                             Configuracion.nombre = txtUsuario.Text;
                             Configuracion.usuario = txtUsuario.Text;
                             Configuracion.contraseña = txtContraseña.Text;
+                            string resulta = string.Empty;
+                            byte[] desin = Convert.FromBase64String(Imagen);
+                            resulta = System.Text.Encoding.Unicode.GetString(desin);
+                            Configuracion.imagen = resulta;
                             Configuracion.loCerroelUsuario = false;
                             CargarDatos();
                             break;
@@ -588,6 +606,10 @@ namespace See_More
                             Configuracion.nombre = txtUsuario.Text;
                             Configuracion.usuario = txtUsuario.Text;
                             Configuracion.contraseña = txtContraseña.Text;
+                            string resulta = string.Empty;
+                            byte[] desin = Convert.FromBase64String(Imagen);
+                            resulta = System.Text.Encoding.Unicode.GetString(desin);
+                            Configuracion.imagen = resulta;
                             Configuracion.loCerroelUsuario = false;
                             CargarDatos();
                             break;

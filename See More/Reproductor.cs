@@ -447,115 +447,121 @@ namespace See_More
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\buscar.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\buscar.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\buscar.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\busqueda.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\busqueda.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\busqueda.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\crearcuenta.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\crearcuenta.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\crearcuenta.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\eliminar.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\eliminar.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\eliminar.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\history.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\history.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\history.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\nuevo.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\nuevo.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\nuevo.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\reproductor.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\reproductor.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\reproductor.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\respaldo.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\respaldo.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\respaldo.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
                 sw4.Close();
             }
             if(!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
+                sw4.Close();
+            }
+            if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt"))
+            {
+                File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\actuaTemp.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\actuaTemp.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\actuaTemp.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\creaTemp.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\creaTemp.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\creaTemp.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\temp.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\temp.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\temp.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\creaciones.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\creaciones.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\creaciones.txt");
                 sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\actualizaciones.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\actualizaciones.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
+                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\actualizaciones.txt");
                 sw4.Close();
             }
         }
@@ -614,20 +620,27 @@ namespace See_More
                 tmrVerificacion.Start();
                 string result = string.Empty;
                 string resultado = string.Empty;
+                string resul = string.Empty;
                 String linea;
                 String linea2;
+                String linea3;
                 try
                 {
                     StreamReader rd = new StreamReader(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
                     StreamReader rd2 = new StreamReader(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
+                    StreamReader rd3 = new StreamReader(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
                     linea = rd.ReadLine();
                     linea2 = rd2.ReadLine();
+                    linea3 = rd3.ReadLine();
                     byte[] decryted = Convert.FromBase64String(linea);
                     result = System.Text.Encoding.Unicode.GetString(decryted);
                     Configuracion.usuario = result;
                     byte[] decryted2 = Convert.FromBase64String(linea2);
                     resultado = System.Text.Encoding.Unicode.GetString(decryted2);
                     Configuracion.contraseña = resultado;
+                    byte[] decryted3 = Convert.FromBase64String(linea3);
+                    resul = System.Text.Encoding.Unicode.GetString(decryted3);
+                    Configuracion.imagen = resul;
                 }
                 catch (Exception) { }
                 wmpCentral.settings.volume = 50;
@@ -641,6 +654,8 @@ namespace See_More
                     menuToolStripMenuItem.Text = "Ir a perfil de " + Configuracion.usuario;
                     iniciarSesiónToolStripMenuItem1.Text = Configuracion.usuario;
                     menuToolStripMenuItem1.Text = "Ir a perfil de " + Configuracion.usuario;
+                    picUsuario.Image = Image.FromFile(Configuracion.imagen);
+                    picUsuario.BackgroundImageLayout = ImageLayout.Stretch;
                 }
                 else
                 {
@@ -648,6 +663,11 @@ namespace See_More
                     menuToolStripMenuItem.Text = "Iniciar Sesión";
                     iniciarSesiónToolStripMenuItem1.Text = "Iniciar Sesión";
                     menuToolStripMenuItem1.Text = "Iniciar Sesión";
+                    if (picUsuario.Image != null)
+                    {
+                        picUsuario.Image.Dispose();
+                        picUsuario.Image = null;
+                    }
                 }
                 this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
                 String line; String line2;
@@ -1236,8 +1256,11 @@ namespace See_More
                 sw.Flush(); sw.Close();
                 StreamWriter sw2 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
                 sw2.Flush(); sw2.Close();
+                StreamWriter sw3 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
+                sw3.Flush(); sw3.Close();
                 Configuracion.usuario = "";
                 Configuracion.contraseña = "";
+                Configuracion.imagen = "";
                 iniciarSesiónToolStripMenuItem.Text = "Iniciar Sesión";
                 menuToolStripMenuItem.Text = "Iniciar Sesión";
                 iniciarSesiónToolStripMenuItem1.Text = "Iniciar Sesión";
@@ -1254,6 +1277,8 @@ namespace See_More
                 menuToolStripMenuItem.Text = "Ir a perfil de " + Configuracion.usuario;
                 iniciarSesiónToolStripMenuItem1.Text = Configuracion.usuario;
                 menuToolStripMenuItem1.Text = "Ir a perfil de " + Configuracion.usuario;
+                picUsuario.Image = Image.FromFile(Configuracion.imagen);
+                picUsuario.BackgroundImageLayout = ImageLayout.Stretch;
             }
             else
             {
@@ -1261,6 +1286,11 @@ namespace See_More
                 menuToolStripMenuItem.Text = "Iniciar Sesión";
                 iniciarSesiónToolStripMenuItem1.Text = "Iniciar Sesión";
                 menuToolStripMenuItem1.Text = "Iniciar Sesión";
+                if (picUsuario.Image != null)
+                {
+                    picUsuario.Image.Dispose();
+                    picUsuario.Image = null;
+                }
             }
         }
         public void PerfilDe()
