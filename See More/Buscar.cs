@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.IO;
 using MODELOS_SEEMORE;
 using DATOS_SEEMORE;
+using WMPLib;
 using System.Threading.Tasks;
 
 namespace See_More
@@ -24,6 +25,8 @@ namespace See_More
         public String Imagen { get; set; }
         public String Sexo { get; set; }
         public String Contraseña { get; set; }
+        public IWMPPlaylist datos { get; set; }
+        public Boolean IsOnly { get; set; }
         Boolean esUnico = true;
         StreamWriter sw1, sw2, sw3;
         Boolean esApartado = false;
@@ -33,9 +36,12 @@ namespace See_More
         String rutaCamino = string.Empty;
         String[] animesVis;
         int tamaño, opcion = 3, left = 0, top = 45, cuentaCarpetas = 0, cuentas = 0;
-        Boolean buscar = false, buscarListas = false, buscarApartado = false, hayAnimes = false, seleccion = false;
+        Boolean buscar = false, buscarListas = false, buscarApartado = false, hayAnimes = false, seleccion = false, aceptar = false;
         string decision = "";
         Button carpeta, archivo;
+        AxWMPLib.AxWindowsMediaPlayer player = new AxWMPLib.AxWindowsMediaPlayer();
+        WMPLib.IWMPPlaylist playlist;
+        WMPLib.IWMPMedia media;
         public Buscar()
         {
             InitializeComponent();
@@ -44,7 +50,9 @@ namespace See_More
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             this.StartPosition = FormStartPosition.CenterScreen;
             String line, leni;
-            if(Configuracion.usuario != "" && Configuracion.contraseña != "")
+            player.CreateControl();
+            playlist = player.playlistCollection.newPlaylist("List");
+            if (Configuracion.usuario != "" && Configuracion.contraseña != "")
             {
                 txtUsuario.Text = Configuracion.usuario;
                 txtContraseña.Text = Configuracion.contraseña;
@@ -274,7 +282,7 @@ namespace See_More
                     archivo.Width = 228;
                     archivo.Height = 20;
                     archivo.Name = ((FileInfo)archivos[cuentas]).FullName;
-                    archivo.Text = ((FileInfo)archivos[cuentas]).Name;
+                    archivo.Text = ((FileInfo)archivos[cuentas]).Name.Substring(0, ((FileInfo)archivos[cuentas]).Name.Length - 4);
                     archivo.Top = top;
                     archivo.Left = left;
                     archivo.FlatStyle = FlatStyle.Popup;
@@ -327,64 +335,135 @@ namespace See_More
         }
         private void click_de_boton2(object boton, EventArgs args)
         {
-            //Aqui va la verificacion de seleccion de videos
-            Boolean sinCoencidencia = false;
-            for (int j = 0; j < tamaño; j++)
+            if (seleccion)
             {
-                string res = string.Empty;
-                byte[] decryted = Convert.FromBase64String(Configuracion.UsuariosContra[j]);
-                res = System.Text.Encoding.Unicode.GetString(decryted);
-                if (Configuracion.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
+                //Aqui va la verificacion de seleccion de videos
+                media = player.newMedia(((Button)boton).Name);
+                playlist.appendItem(media);
+                if (aceptar)
                 {
-                    sinCoencidencia = true;
-                    UsuarioRegistrado = Configuracion.UsuariosNombre[j];
-                    UsuarioImagen = Configuracion.UsuariosImagen[j];
-                    NombreVideo = ((Button)boton).Text;
-                    RutaVideo = ((Button)boton).Name;
-                    Configuracion.nombre = txtUsuario.Text;
-                    Configuracion.usuario = txtUsuario.Text;
-                    Configuracion.contraseña = txtContraseña.Text;
-                    string resulta = string.Empty;
-                    byte[] desin = Convert.FromBase64String(Configuracion.UsuariosImagen[j]);
-                    resulta = System.Text.Encoding.Unicode.GetString(desin);
-                    Configuracion.imagen = resulta;
-                    StreamWriter sw5 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
-                    sw5.Flush(); sw5.Close();
-                    StreamWriter sw6 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
-                    sw6.Flush(); sw6.Close();
-                    StreamWriter sw7 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
-                    sw7.Flush(); sw7.Close();
-                    sw1 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
-                    string result = string.Empty;
-                    byte[] encryted = System.Text.Encoding.Unicode.GetBytes(txtUsuario.Text);
-                    result = Convert.ToBase64String(encryted);
-                    sw1.WriteLine(result);
-                    sw1.Close();
-                    sw2 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
-                    string resultado = string.Empty;
-                    byte[] encriptar = System.Text.Encoding.Unicode.GetBytes(txtContraseña.Text);
-                    resultado = Convert.ToBase64String(encriptar);
-                    sw2.WriteLine(resultado);
-                    sw2.Close();
-                    sw3 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
-                    sw3.WriteLine(Configuracion.UsuariosImagen[j]);
-                    sw3.Close();
-                    StreamWriter ultimaruta = new StreamWriter(Application.StartupPath + @"\See More\Usuarios SeeMore\"+Configuracion.usuario+"Ruta.txt");
-                    ultimaruta.Flush(); ultimaruta.Close();
-                    StreamWriter ultimaruta2 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\"+Configuracion.usuario+"Ruta.txt");
-                    ultimaruta2.WriteLine(ultimarutavista+";"); ultimaruta2.Close();
-                    this.Close();
-                    break;
+                    Boolean sinCoencidencia = false;
+                    for (int j = 0; j < tamaño; j++)
+                    {
+                        string res = string.Empty;
+                        byte[] decryted = Convert.FromBase64String(Configuracion.UsuariosContra[j]);
+                        res = System.Text.Encoding.Unicode.GetString(decryted);
+                        if (Configuracion.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
+                        {
+                            sinCoencidencia = true;
+                            UsuarioRegistrado = Configuracion.UsuariosNombre[j];
+                            UsuarioImagen = Configuracion.UsuariosImagen[j];
+                            datos = playlist;
+                            IsOnly = false;
+                            Configuracion.nombre = txtUsuario.Text;
+                            Configuracion.usuario = txtUsuario.Text;
+                            Configuracion.contraseña = txtContraseña.Text;
+                            string resulta = string.Empty;
+                            byte[] desin = Convert.FromBase64String(Configuracion.UsuariosImagen[j]);
+                            resulta = System.Text.Encoding.Unicode.GetString(desin);
+                            Configuracion.imagen = resulta;
+                            StreamWriter sw5 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
+                            sw5.Flush(); sw5.Close();
+                            StreamWriter sw6 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
+                            sw6.Flush(); sw6.Close();
+                            StreamWriter sw7 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
+                            sw7.Flush(); sw7.Close();
+                            sw1 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
+                            string result = string.Empty;
+                            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(txtUsuario.Text);
+                            result = Convert.ToBase64String(encryted);
+                            sw1.WriteLine(result);
+                            sw1.Close();
+                            sw2 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
+                            string resultado = string.Empty;
+                            byte[] encriptar = System.Text.Encoding.Unicode.GetBytes(txtContraseña.Text);
+                            resultado = Convert.ToBase64String(encriptar);
+                            sw2.WriteLine(resultado);
+                            sw2.Close();
+                            sw3 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
+                            sw3.WriteLine(Configuracion.UsuariosImagen[j]);
+                            sw3.Close();
+                            StreamWriter ultimaruta = new StreamWriter(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Ruta.txt");
+                            ultimaruta.Flush(); ultimaruta.Close();
+                            StreamWriter ultimaruta2 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Ruta.txt");
+                            ultimaruta2.WriteLine(ultimarutavista + ";"); ultimaruta2.Close();
+                            this.Close();
+                            break;
+                        }
+                    }
+                    if (sinCoencidencia == false)
+                    {
+                        MessageBox.Show("El Usuario y/o Contraseña estan mal, intente de nuevo");
+                        lblIniciarSesion.Visible = true;
+                        lblUsuario.Visible = true;
+                        lblContraseña.Visible = true;
+                        txtUsuario.Visible = true;
+                        txtContraseña.Visible = true;
+                    }
                 }
             }
-            if (sinCoencidencia == false)
+            else
             {
-                MessageBox.Show("El Usuario y/o Contraseña estan mal, intente de nuevo");
-                lblIniciarSesion.Visible = true;
-                lblUsuario.Visible = true;
-                lblContraseña.Visible = true;
-                txtUsuario.Visible = true;
-                txtContraseña.Visible = true;
+                Boolean sinCoencidencia = false;
+
+                for (int j = 0; j < tamaño; j++)
+                {
+                    string res = string.Empty;
+                    byte[] decryted = Convert.FromBase64String(Configuracion.UsuariosContra[j]);
+                    res = System.Text.Encoding.Unicode.GetString(decryted);
+                    if (Configuracion.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
+                    {
+                        sinCoencidencia = true;
+                        UsuarioRegistrado = Configuracion.UsuariosNombre[j];
+                        UsuarioImagen = Configuracion.UsuariosImagen[j];
+                        NombreVideo = ((Button)boton).Text;
+                        RutaVideo = ((Button)boton).Name;
+                        IsOnly = true;
+                        Configuracion.nombre = txtUsuario.Text;
+                        Configuracion.usuario = txtUsuario.Text;
+                        Configuracion.contraseña = txtContraseña.Text;
+                        string resulta = string.Empty;
+                        byte[] desin = Convert.FromBase64String(Configuracion.UsuariosImagen[j]);
+                        resulta = System.Text.Encoding.Unicode.GetString(desin);
+                        Configuracion.imagen = resulta;
+                        StreamWriter sw5 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
+                        sw5.Flush(); sw5.Close();
+                        StreamWriter sw6 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
+                        sw6.Flush(); sw6.Close();
+                        StreamWriter sw7 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
+                        sw7.Flush(); sw7.Close();
+                        sw1 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
+                        string result = string.Empty;
+                        byte[] encryted = System.Text.Encoding.Unicode.GetBytes(txtUsuario.Text);
+                        result = Convert.ToBase64String(encryted);
+                        sw1.WriteLine(result);
+                        sw1.Close();
+                        sw2 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
+                        string resultado = string.Empty;
+                        byte[] encriptar = System.Text.Encoding.Unicode.GetBytes(txtContraseña.Text);
+                        resultado = Convert.ToBase64String(encriptar);
+                        sw2.WriteLine(resultado);
+                        sw2.Close();
+                        sw3 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
+                        sw3.WriteLine(Configuracion.UsuariosImagen[j]);
+                        sw3.Close();
+                        StreamWriter ultimaruta = new StreamWriter(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Ruta.txt");
+                        ultimaruta.Flush(); ultimaruta.Close();
+                        StreamWriter ultimaruta2 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Ruta.txt");
+                        ultimaruta2.WriteLine(ultimarutavista + ";"); ultimaruta2.Close();
+                        this.Close();
+                        break;
+                    }
+                }
+                if (sinCoencidencia == false)
+                {
+                    MessageBox.Show("El Usuario y/o Contraseña estan mal, intente de nuevo");
+                    lblIniciarSesion.Visible = true;
+                    lblUsuario.Visible = true;
+                    lblContraseña.Visible = true;
+                    txtUsuario.Visible = true;
+                    txtContraseña.Visible = true;
+                }
             }
         }
         private void Buscar_Load(object sender, EventArgs e)
@@ -751,7 +830,7 @@ namespace See_More
                 "7.- Busca el nombre de la lista escribiendo {l-n} y luego escribiendo la lista a buscar\n" +
                 "8.- Busca la última lista escribiendo {u-l}\n" +
                 "-----------------------------------------------\n" +
-                "9.- Para seleccionar varios videos oprima {t}\n" +
+                "9.- Para seleccionar varios videos oprima {t} luego oprima {r} para aceptar la lista\n" +
                 "10.- Para deseleccionar los videos oprima {n}\n" + 
                 "Para salir de los comandos presione {ESC}\n" +
                 "                                                                                    See More.", "Ayuda de See More al usuario", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -947,6 +1026,10 @@ namespace See_More
                 if(decision == "n")
                 {
                     seleccion = false;
+                }
+                if(decision == "r")
+                {
+                    aceptar = true;
                 }
                 txtNombreSerie.Clear();
             }

@@ -70,6 +70,7 @@
             this.tmrGuardarAuto = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.tmrVerificacion = new System.Windows.Forms.Timer(this.components);
+            this.tmrLista = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.wmpCentral)).BeginInit();
             this.mspMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUsuario)).BeginInit();
@@ -226,14 +227,14 @@
             // menuToolStripMenuItem
             // 
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.menuToolStripMenuItem.Text = "Menu";
             this.menuToolStripMenuItem.Click += new System.EventHandler(this.menuToolStripMenuItem_Click);
             // 
             // cerrarLaSesiónToolStripMenuItem
             // 
             this.cerrarLaSesiónToolStripMenuItem.Name = "cerrarLaSesiónToolStripMenuItem";
-            this.cerrarLaSesiónToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cerrarLaSesiónToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.cerrarLaSesiónToolStripMenuItem.Text = "Cerrar la sesión";
             this.cerrarLaSesiónToolStripMenuItem.Click += new System.EventHandler(this.cerrarLaSesiónToolStripMenuItem_Click);
             // 
@@ -385,6 +386,11 @@
             this.tmrVerificacion.Interval = 500;
             this.tmrVerificacion.Tick += new System.EventHandler(this.tmrVerificacion_Tick);
             // 
+            // tmrLista
+            // 
+            this.tmrLista.Interval = 1000;
+            this.tmrLista.Tick += new System.EventHandler(this.tmrLista_Tick);
+            // 
             // Reproductor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -460,6 +466,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem cerrarSesiónToolStripMenuItem;
         private System.Windows.Forms.Timer tmrVerificacion;
+        private System.Windows.Forms.Timer tmrLista;
         //private AxAXVLC.AxVLCPlugin2 axvlcControl;
     }
 }
