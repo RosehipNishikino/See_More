@@ -11,22 +11,7 @@ namespace See_More
 {
     public partial class Buscar : Form
     {
-        public Seemore AnimeSeleccionado { get; set; }
-        public Cuenta cuentaSeleccionado { get; set; }
-        public String respaldo { get; set; }
-        public String respa { get; set; }
-        public String NombreVideo { get; set; }
-        public String RutaVideo { get; set; }
-        public String UsuarioRegistrado { get; set; }
-        public String UsuarioImagen { get; set; }
-        public Boolean hayIntercambio { get; set; }
-        public String UsuarioTemporal { get; set; }
-        public String Usuario { get; set; }
-        public String Imagen { get; set; }
-        public String Sexo { get; set; }
-        public String Contraseña { get; set; }
         public IWMPPlaylist datos { get; set; }
-        public Boolean IsOnly { get; set; }
         Boolean esUnico = true;
         StreamWriter sw1, sw2, sw3;
         Boolean esApartado = false;
@@ -51,6 +36,7 @@ namespace See_More
             this.StartPosition = FormStartPosition.CenterScreen;
             String line, leni;
             player.CreateControl();
+            player.settings.setMode("loop", false);
             playlist = player.playlistCollection.newPlaylist("List");
             if (Configuracion.usuario != "" && Configuracion.contraseña != "")
             {
@@ -150,160 +136,7 @@ namespace See_More
                 catch (Exception) { }
             }
         }
-        public DirectoryInfo[] RevisarDirectorio(DirectoryInfo[] directories)
-        {
-            int indice = 0, suma = 0;
-            DirectoryInfo[] infos;
-            try
-            {
-                for (int i = 0; i < directories.Length; i++)
-                {
-                    if (hayAnimes)
-                    {
-                        foreach (String linea in animesVis)
-                        {
-                            if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
-                            {
-                                if (opcion == 3)
-                                    opcion = 2;
-                            }
-                            else
-                            {
-                                if (opcion == 3)
-                                    opcion = 1;
-                                if (opcion == 2)
-                                    opcion = 1;
-                            }
-                        }
-                        if (opcion == 2)
-                        {
-                            suma += 1;
-                        }
-                        opcion = 3;
-                    }
-                }
-                infos = new DirectoryInfo[suma];
-                for (int i = 0; i < directories.Length; i++)
-                {
-                    if (hayAnimes)
-                    {
-                        foreach (String linea in animesVis)
-                        {
-                            if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
-                            {
-                                if (opcion == 3)
-                                    opcion = 2;
-                            }
-                            else
-                            {
-                                if (opcion == 3)
-                                    opcion = 1;
-                                if (opcion == 2)
-                                    opcion = 1;
-                            }
-                        }
-                        if (opcion == 2)
-                        {
-                            infos[indice] = directories[i];
-                            indice += 1;
-                        }
-                        opcion = 3;
-                    }
-                }
-                return infos;
-            }
-            catch (Exception) { }
-            return null;
-        }
-        public void IteracionCarpetas(int n, DirectoryInfo[] directorios)
-        {
-            if(n != 0)
-            {
-                MostrarCarpetas(4, directorios);
-                left = 0; top += 45;
-                IteracionCarpetas(directorios.Length - cuentaCarpetas, directorios);
-            }
-            else
-            {
-                left = 0; top += 45; cuentaCarpetas = 0;
-                return;
-            }
-        }
-        public void MostrarCarpetas(int n, DirectoryInfo[] directorios)
-        {
-            if (n != 0)
-            {
-                try
-                {
-                    carpeta = new Button();
-                    carpeta.Width = 228;
-                    carpeta.Height = 20;
-                    carpeta.Text = ((DirectoryInfo)directorios[cuentaCarpetas]).Name;
-                    carpeta.Top = top;
-                    carpeta.Left = left;
-                    carpeta.FlatStyle = FlatStyle.Popup;
-                    carpeta.BackColor = Color.DarkGray;
-                    carpeta.MouseMove += new MouseEventHandler(mousemove);
-                    carpeta.MouseLeave += new EventHandler(mouseleave);
-                    carpeta.Click += new EventHandler(click_de_boton);
-                    pnlRespaldo.Controls.Add(carpeta);
-                    left += 228;
-                    if (n != 0)
-                        cuentaCarpetas += 1;
-                    
-                }
-                catch (Exception) { }
-                MostrarCarpetas(n - 1, directorios);
-            }
-            else
-                return;
-        }
-        public void IterarVideos(int n, FileInfo[] archivos)
-        {
-            if(n != 0)
-            {
-                MostrarVideos(4, archivos);
-                top += 45; left = 0;
-                IterarVideos(archivos.Length - cuentas, archivos);
-            }
-            else
-            {
-                top = 45; left = 0; cuentas = 0;
-                return;
-            }
-        }
-        public void MostrarVideos(int n, FileInfo[] archivos)
-        {
-            if(n != 0)
-            {
-                try
-                {
-                    archivo = new Button();
-                    archivo.Width = 228;
-                    archivo.Height = 20;
-                    archivo.Name = ((FileInfo)archivos[cuentas]).FullName;
-                    archivo.Text = ((FileInfo)archivos[cuentas]).Name.Substring(0, ((FileInfo)archivos[cuentas]).Name.Length - 4);
-                    archivo.Top = top;
-                    archivo.Left = left;
-                    archivo.FlatStyle = FlatStyle.Popup;
-                    archivo.BackColor = Color.DarkGray;
-                    archivo.MouseMove += new MouseEventHandler(mousemove);
-                    archivo.MouseLeave += new EventHandler(mouseleave);
-                    archivo.Click += new EventHandler(click_de_boton2);
-                    pnlRespaldo.Controls.Add(archivo);
-                    //t += 45;
-                    left += 228;
-                    if (n != 0)
-                        cuentas += 1;
-                }
-                catch (Exception) { }
-                MostrarVideos(n - 1, archivos);
-            }
-            else
-            {
-                return;
-            }
-        }
+        
         private void mousemove(object mouse, MouseEventArgs args)
         {
             ((Button)mouse).BackColor = Color.Silver;
@@ -351,10 +184,10 @@ namespace See_More
                         if (Configuracion.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
                         {
                             sinCoencidencia = true;
-                            UsuarioRegistrado = Configuracion.UsuariosNombre[j];
-                            UsuarioImagen = Configuracion.UsuariosImagen[j];
+                            Configuracion.BuscarAddon.UsuarioRegistrado = Configuracion.UsuariosNombre[j];
+                            Configuracion.BuscarAddon.UsuarioImagen = Configuracion.UsuariosImagen[j];
                             datos = playlist;
-                            IsOnly = false;
+                            Configuracion.BuscarAddon.IsOnly = false;
                             Configuracion.nombre = txtUsuario.Text;
                             Configuracion.usuario = txtUsuario.Text;
                             Configuracion.contraseña = txtContraseña.Text;
@@ -414,11 +247,11 @@ namespace See_More
                     if (Configuracion.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
                     {
                         sinCoencidencia = true;
-                        UsuarioRegistrado = Configuracion.UsuariosNombre[j];
-                        UsuarioImagen = Configuracion.UsuariosImagen[j];
-                        NombreVideo = ((Button)boton).Text;
-                        RutaVideo = ((Button)boton).Name;
-                        IsOnly = true;
+                        Configuracion.BuscarAddon.UsuarioRegistrado = Configuracion.UsuariosNombre[j];
+                        Configuracion.BuscarAddon.UsuarioImagen = Configuracion.UsuariosImagen[j];
+                        Configuracion.BuscarAddon.NombreVideo = ((Button)boton).Text;
+                        Configuracion.BuscarAddon.RutaVideo = ((Button)boton).Name;
+                        Configuracion.BuscarAddon.IsOnly = true;
                         Configuracion.nombre = txtUsuario.Text;
                         Configuracion.usuario = txtUsuario.Text;
                         Configuracion.contraseña = txtContraseña.Text;
@@ -471,8 +304,8 @@ namespace See_More
             String[] users = File.ReadAllLines(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
             tamaño = (users.Length * 4) / 4;
             int contador = 0;
-            hayIntercambio = false;
-            UsuarioTemporal = "";
+            Configuracion.BuscarAddon.hayIntercambio = false;
+            Configuracion.BuscarAddon.UsuarioTemporal = "";
             Configuracion.UsuariosNombre = new string[tamaño];
             Configuracion.UsuariosContra = new string[tamaño];
             Configuracion.UsuariosImagen = new string[tamaño];
@@ -573,18 +406,18 @@ namespace See_More
             sw7.Flush(); sw7.Close();
             sw1 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
             string result = string.Empty;
-            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(Usuario);
+            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(Configuracion.BuscarAddon.Usuario);
             result = Convert.ToBase64String(encryted);
             sw1.WriteLine(result);
             sw1.Close();
             sw2 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
             string resultado = string.Empty;
-            byte[] encriptar = System.Text.Encoding.Unicode.GetBytes(Contraseña);
+            byte[] encriptar = System.Text.Encoding.Unicode.GetBytes(Configuracion.BuscarAddon.Contraseña);
             resultado = Convert.ToBase64String(encriptar);
             sw2.WriteLine(resultado);
             sw2.Close();
             sw3 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
-            sw3.WriteLine(Imagen);
+            sw3.WriteLine(Configuracion.BuscarAddon.Imagen);
             sw3.Close();
             try
             {
@@ -639,15 +472,15 @@ namespace See_More
                         if (Configuracion.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
                         {
                             sinCoencidencia = true;
-                            Usuario = Configuracion.UsuariosNombre[j];
-                            Contraseña = res;
-                            Imagen = Configuracion.UsuariosImagen[j];
-                            Sexo = Configuracion.UsuariosSexo[j];
+                            Configuracion.BuscarAddon.Usuario = Configuracion.UsuariosNombre[j];
+                            Configuracion.BuscarAddon.Contraseña = res;
+                            Configuracion.BuscarAddon.Imagen = Configuracion.UsuariosImagen[j];
+                            Configuracion.BuscarAddon.Sexo = Configuracion.UsuariosSexo[j];
                             Configuracion.nombre = txtUsuario.Text;
                             Configuracion.usuario = txtUsuario.Text;
                             Configuracion.contraseña = txtContraseña.Text;
                             string resulta = string.Empty;
-                            byte[] desin = Convert.FromBase64String(Imagen);
+                            byte[] desin = Convert.FromBase64String(Configuracion.BuscarAddon.Imagen);
                             resulta = System.Text.Encoding.Unicode.GetString(desin);
                             Configuracion.imagen = resulta;
                             Configuracion.loCerroelUsuario = false;
@@ -678,15 +511,15 @@ namespace See_More
                         if (Configuracion.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
                         {
                             sinCoencidencia = true;
-                            Usuario = Configuracion.UsuariosNombre[j];
-                            Contraseña = res;
-                            Imagen = Configuracion.UsuariosImagen[j];
-                            Sexo = Configuracion.UsuariosSexo[j];
+                            Configuracion.BuscarAddon.Usuario = Configuracion.UsuariosNombre[j];
+                            Configuracion.BuscarAddon.Contraseña = res;
+                            Configuracion.BuscarAddon.Imagen = Configuracion.UsuariosImagen[j];
+                            Configuracion.BuscarAddon.Sexo = Configuracion.UsuariosSexo[j];
                             Configuracion.nombre = txtUsuario.Text;
                             Configuracion.usuario = txtUsuario.Text;
                             Configuracion.contraseña = txtContraseña.Text;
                             string resulta = string.Empty;
-                            byte[] desin = Convert.FromBase64String(Imagen);
+                            byte[] desin = Convert.FromBase64String(Configuracion.BuscarAddon.Imagen);
                             resulta = System.Text.Encoding.Unicode.GetString(desin);
                             Configuracion.imagen = resulta;
                             Configuracion.loCerroelUsuario = false;
@@ -756,7 +589,7 @@ namespace See_More
         }       
         private void button1_Click(object sender, EventArgs e)
         {
-            hayIntercambio = false;
+            Configuracion.BuscarAddon.hayIntercambio = false;
             if(Configuracion.existeConexion)
             {
                 if (CuentaSeeMore.CompartirInformacion(textBox2.Text,textBox1.Text))
@@ -766,15 +599,15 @@ namespace See_More
                     dgvCuenta.CurrentCell = dgvCuenta.Rows[0].Cells[0];
                     if (dgvCuenta.SelectedRows.Count == 1)
                     {
-                        UsuarioTemporal = textBox2.Text;
+                        Configuracion.BuscarAddon.UsuarioTemporal = textBox2.Text;
                         MessageBox.Show("Procediendo a intercambio de información, puede continuar viendo videos");
-                        hayIntercambio = true;
+                        Configuracion.BuscarAddon.hayIntercambio = true;
                     }
                 }
                 else
                 {
                     MessageBox.Show("El usuario y/o contraseña estan mal, intente de nuevo");
-                    hayIntercambio = false;
+                    Configuracion.BuscarAddon.hayIntercambio = false;
                 }
             }
             else
@@ -806,8 +639,8 @@ namespace See_More
                     {
                         sinCoencidencia = true;
                         MessageBox.Show("Procediendo a intercambio de información, puede continuar viendo videos");
-                        UsuarioTemporal = textBox2.Text;
-                        hayIntercambio = true;
+                        Configuracion.BuscarAddon.UsuarioTemporal = textBox2.Text;
+                        Configuracion.BuscarAddon.hayIntercambio = true;
                         break;
                     }
                 }
@@ -1104,10 +937,10 @@ namespace See_More
         }
         private void reproducirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (hayIntercambio == true)
-                hayIntercambio = true;
+            if (Configuracion.BuscarAddon.hayIntercambio == true)
+                Configuracion.BuscarAddon.hayIntercambio = true;
             else
-                hayIntercambio = false;
+                Configuracion.BuscarAddon.hayIntercambio = false;
             if(Configuracion.existeConexion) { 
                 if (Configuracion.existeConexion)
                 {
@@ -1126,8 +959,8 @@ namespace See_More
                                     {
                                         int id = Convert.ToInt32(dgvDatos.CurrentRow.Cells[0].Value);
                                         int id2 = Convert.ToInt32(dgvCuenta.CurrentRow.Cells[0].Value);
-                                        AnimeSeleccionado = ApartadosSeeMore.ObtenerApartado(txtBuscarApartado.Text, id);
-                                        cuentaSeleccionado = CuentaSeeMore.ObtenerC(id2);
+                                        Configuracion.BuscarAddon.AnimeSeleccionado = ApartadosSeeMore.ObtenerApartado(txtBuscarApartado.Text, id);
+                                        Configuracion.BuscarAddon.cuentaSeleccionado = CuentaSeeMore.ObtenerC(id2);
                                         Configuracion.usuario = txtUsuario.Text;
                                         Configuracion.contraseña = txtContraseña.Text;
                                         StreamWriter sw5 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
@@ -1166,8 +999,8 @@ namespace See_More
                                     {
                                         int id = Convert.ToInt32(dgvDatos.CurrentRow.Cells[0].Value);
                                         int id2 = Convert.ToInt32(dgvCuenta.CurrentRow.Cells[0].Value);
-                                        AnimeSeleccionado = DatosSeeMore.Obtener(id);
-                                        cuentaSeleccionado = CuentaSeeMore.ObtenerC(id2);
+                                        Configuracion.BuscarAddon.AnimeSeleccionado = DatosSeeMore.Obtener(id);
+                                        Configuracion.BuscarAddon.cuentaSeleccionado = CuentaSeeMore.ObtenerC(id2);
                                         Configuracion.usuario = txtUsuario.Text;
                                         Configuracion.contraseña = txtContraseña.Text;
                                         StreamWriter sw5 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
@@ -1207,8 +1040,8 @@ namespace See_More
                                 {
                                     int id = Convert.ToInt32(dgvDatos.CurrentRow.Cells[0].Value);
                                     int id2 = Convert.ToInt32(dgvCuenta.CurrentRow.Cells[0].Value);
-                                    AnimeSeleccionado = ListasSeeMore.ObtenerLista(id);
-                                    cuentaSeleccionado = CuentaSeeMore.ObtenerC(id2);
+                                    Configuracion.BuscarAddon.AnimeSeleccionado = ListasSeeMore.ObtenerLista(id);
+                                    Configuracion.BuscarAddon.cuentaSeleccionado = CuentaSeeMore.ObtenerC(id2);
                                     Configuracion.usuario = txtUsuario.Text;
                                     Configuracion.contraseña = txtContraseña.Text;
                                     StreamWriter sw5 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
@@ -1238,6 +1071,161 @@ namespace See_More
                         }
                     }
                 }
+            }
+        }
+        //METODOS NUEVOS
+        public DirectoryInfo[] RevisarDirectorio(DirectoryInfo[] directories)
+        {
+            int indice = 0, suma = 0;
+            DirectoryInfo[] infos;
+            try
+            {
+                for (int i = 0; i < directories.Length; i++)
+                {
+                    if (hayAnimes)
+                    {
+                        foreach (String linea in animesVis)
+                        {
+                            if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
+                            {
+                                if (opcion == 3)
+                                    opcion = 2;
+                            }
+                            else
+                            {
+                                if (opcion == 3)
+                                    opcion = 1;
+                                if (opcion == 2)
+                                    opcion = 1;
+                            }
+                        }
+                        if (opcion == 2)
+                        {
+                            suma += 1;
+                        }
+                        opcion = 3;
+                    }
+                }
+                infos = new DirectoryInfo[suma];
+                for (int i = 0; i < directories.Length; i++)
+                {
+                    if (hayAnimes)
+                    {
+                        foreach (String linea in animesVis)
+                        {
+                            if (!((DirectoryInfo)directories[i]).Name.Contains(linea))
+                            {
+                                if (opcion == 3)
+                                    opcion = 2;
+                            }
+                            else
+                            {
+                                if (opcion == 3)
+                                    opcion = 1;
+                                if (opcion == 2)
+                                    opcion = 1;
+                            }
+                        }
+                        if (opcion == 2)
+                        {
+                            infos[indice] = directories[i];
+                            indice += 1;
+                        }
+                        opcion = 3;
+                    }
+                }
+                return infos;
+            }
+            catch (Exception) { }
+            return null;
+        }
+        public void IteracionCarpetas(int n, DirectoryInfo[] directorios)
+        {
+            if (n != 0)
+            {
+                MostrarCarpetas(4, directorios);
+                left = 0; top += 45;
+                IteracionCarpetas(directorios.Length - cuentaCarpetas, directorios);
+            }
+            else
+            {
+                left = 0; top += 45; cuentaCarpetas = 0;
+                return;
+            }
+        }
+        public void MostrarCarpetas(int n, DirectoryInfo[] directorios)
+        {
+            if (n != 0)
+            {
+                try
+                {
+                    carpeta = new Button();
+                    carpeta.Width = 228;
+                    carpeta.Height = 20;
+                    carpeta.Text = ((DirectoryInfo)directorios[cuentaCarpetas]).Name;
+                    carpeta.Top = top;
+                    carpeta.Left = left;
+                    carpeta.FlatStyle = FlatStyle.Popup;
+                    carpeta.BackColor = Color.DarkGray;
+                    carpeta.MouseMove += new MouseEventHandler(mousemove);
+                    carpeta.MouseLeave += new EventHandler(mouseleave);
+                    carpeta.Click += new EventHandler(click_de_boton);
+                    pnlRespaldo.Controls.Add(carpeta);
+                    left += 228;
+                    if (n != 0)
+                        cuentaCarpetas += 1;
+
+                }
+                catch (Exception) { }
+                MostrarCarpetas(n - 1, directorios);
+            }
+            else
+                return;
+        }
+        public void IterarVideos(int n, FileInfo[] archivos)
+        {
+            if (n != 0)
+            {
+                MostrarVideos(4, archivos);
+                top += 45; left = 0;
+                IterarVideos(archivos.Length - cuentas, archivos);
+            }
+            else
+            {
+                top = 45; left = 0; cuentas = 0;
+                return;
+            }
+        }
+        public void MostrarVideos(int n, FileInfo[] archivos)
+        {
+            if (n != 0)
+            {
+                try
+                {
+                    archivo = new Button();
+                    archivo.Width = 228;
+                    archivo.Height = 20;
+                    archivo.Name = ((FileInfo)archivos[cuentas]).FullName;
+                    archivo.Text = ((FileInfo)archivos[cuentas]).Name.Substring(0, ((FileInfo)archivos[cuentas]).Name.Length - 4);
+                    archivo.Top = top;
+                    archivo.Left = left;
+                    archivo.FlatStyle = FlatStyle.Popup;
+                    archivo.BackColor = Color.DarkGray;
+                    archivo.MouseMove += new MouseEventHandler(mousemove);
+                    archivo.MouseLeave += new EventHandler(mouseleave);
+                    archivo.Click += new EventHandler(click_de_boton2);
+                    pnlRespaldo.Controls.Add(archivo);
+                    //t += 45;
+                    left += 228;
+                    if (n != 0)
+                        cuentas += 1;
+                }
+                catch (Exception) { }
+                MostrarVideos(n - 1, archivos);
+            }
+            else
+            {
+                return;
             }
         }
     }
