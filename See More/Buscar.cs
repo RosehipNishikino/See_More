@@ -2,10 +2,8 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
-using MODELOS_SEEMORE;
 using DATOS_SEEMORE;
 using WMPLib;
-using System.Threading.Tasks;
 
 namespace See_More
 {
@@ -69,14 +67,6 @@ namespace See_More
                 rd.Close();
             }
             catch (Exception) { }
-            if(Configuracion.existeConexion)
-            {
-                dgvCuenta.DataSource = CuentaSeeMore.BuscarTC();
-                pnlRespaldo.Visible = false;
-                regresarARaizToolStripMenuItem.Visible = false;
-                regresarALaCarpetaAnteriorToolStripMenuItem.Visible = false;
-            }
-            else {
                 pnlRespaldo.Visible = true;
                 regresarARaizToolStripMenuItem.Visible = true;
                 regresarALaCarpetaAnteriorToolStripMenuItem.Visible = true;
@@ -89,8 +79,6 @@ namespace See_More
                 txtCrearApartado.Visible = false;
                 txtBuscarApartado.Visible = false;
                 txtNombreApartado.Visible = false;
-                apartadosToolStripMenuItem.Visible = false;
-                reproducirToolStripMenuItem.Visible = false;
                 txtSerie.Visible = false;
                 lblFiltros.Visible = true;
                 cboFiltros.Visible = true;
@@ -134,7 +122,6 @@ namespace See_More
                     IterarVideos(files.Length, files);
                 }
                 catch (Exception) { }
-            }
         }
         
         private void mousemove(object mouse, MouseEventArgs args)
@@ -170,7 +157,6 @@ namespace See_More
         {
             if (seleccion)
             {
-                //Aqui va la verificacion de seleccion de videos
                 media = player.newMedia(((Button)boton).Name);
                 playlist.appendItem(media);
                 if (aceptar)
@@ -312,7 +298,6 @@ namespace See_More
             Configuracion.UsuariosSexo = new string[tamaño];
             foreach (String linea in users)
             {
-                //Aqui hay un error, tratar de no reescribir sobre el arreglo
                 Configuracion.Usuarios = linea.Split(';');
                 Configuracion.UsuariosNombre[contador] = Configuracion.Usuarios[0];
                 Configuracion.UsuariosContra[contador] = Configuracion.Usuarios[1];
@@ -321,75 +306,6 @@ namespace See_More
                 contador += 1;
             }
         } 
-        private void buscarEnElApartadoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Configuracion.existeConexion)
-            {
-                if (txtBuscarApartado.Text != "")
-                {
-                    esUnico = true;
-                    esApartado = true;
-                    buscar = false;
-                    buscarListas = false;
-                    buscarApartado = true;
-                    Configuracion.nombreApartado = txtBuscarApartado.Text;
-                    dgvDatos.DataSource = ApartadosSeeMore.BuscarEnElApartado(txtBuscarApartado.Text);
-                }
-                else
-                {
-                    MessageBox.Show("No se puede buscar el nombre sin datos");
-                }
-            }
-        }
-        private void crearApartadoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Configuracion.existeConexion)
-            {
-                if (txtCrearApartado.Text != "")
-                {
-                    String nombre;
-                    nombre = txtCrearApartado.Text.Trim();
-                    int resultado = ApartadosSeeMore.CrearApartado(nombre);
-                    if (resultado == 0)
-                    {
-                        MessageBox.Show("Exito al crear el apartado");
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se creo el apartado");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Esta vacio, no se puede crear un apartado");
-                }
-            }
-        }
-        private void moverAlApartadoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Configuracion.existeConexion)
-            {
-                if (txtNombreApartado.Text != "" && txtSerie.Text != "")
-                {
-                    String nombre, nameSerie;
-                    nombre = txtNombreApartado.Text.Trim();
-                    nameSerie = txtSerie.Text.Trim();
-                    int resultado = ApartadosSeeMore.MoverAlApartado(nombre, nameSerie);
-                    if (resultado > 0)
-                    {
-                        MessageBox.Show("Se movieron exitosamente los archivos al apartado");
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se movieron los archivos al apartado");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("No se puede mover sin los datos");
-                }
-            }
-        }
         public void CargarDatos()
         {
             lblUsuario.Visible = false;
@@ -423,7 +339,6 @@ namespace See_More
             {
                 String camino = string.Empty;
                 String[] ruta = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Ruta.txt");
-                //Posible eliminacion
                 String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
                 animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
                 String[] caminos = new string[1]; String[] separar;
@@ -543,7 +458,6 @@ namespace See_More
                 animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
                 try
                 {
-
                     String[] rutaCambio = rutaCamino.Split(new string[] { @"\" }, StringSplitOptions.None);
                     int vueltas = rutaCambio.Length;
                     String rutaTemp = "C:";
@@ -590,28 +504,6 @@ namespace See_More
         private void button1_Click(object sender, EventArgs e)
         {
             Configuracion.BuscarAddon.hayIntercambio = false;
-            if(Configuracion.existeConexion)
-            {
-                if (CuentaSeeMore.CompartirInformacion(textBox2.Text,textBox1.Text))
-                {
-                    dgvCuenta.DataSource = CuentaSeeMore.BuscarImagen(textBox2.Text);
-                    dgvCuenta.Rows[0].Selected = true;
-                    dgvCuenta.CurrentCell = dgvCuenta.Rows[0].Cells[0];
-                    if (dgvCuenta.SelectedRows.Count == 1)
-                    {
-                        Configuracion.BuscarAddon.UsuarioTemporal = textBox2.Text;
-                        MessageBox.Show("Procediendo a intercambio de información, puede continuar viendo videos");
-                        Configuracion.BuscarAddon.hayIntercambio = true;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("El usuario y/o contraseña estan mal, intente de nuevo");
-                    Configuracion.BuscarAddon.hayIntercambio = false;
-                }
-            }
-            else
-            {
                 String[] users = File.ReadAllLines(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
                 tamaño = (users.Length * 4) / 4;
                 int contador = 0;
@@ -648,7 +540,6 @@ namespace See_More
                 {
                     MessageBox.Show("El Usuario y/o Contraseña estan mal, intente de nuevo");
                 }
-            }
         }
         private void comoFuncionaToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -691,17 +582,6 @@ namespace See_More
                 decision = txtNombreSerie.Text;
                 if(decision == "all")
                 {
-                    if (Configuracion.existeConexion)
-                    {
-                        dgvDatos.DataSource = DatosSeeMore.BuscarT();
-                        esUnico = true;
-                        esApartado = false;
-                        buscar = true;
-                        buscarListas = false;
-                        buscarApartado = false;
-                    }
-                    else
-                    {
                         pnlRespaldo.Controls.Clear();
                         oracion = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
                         animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
@@ -715,7 +595,6 @@ namespace See_More
                             IterarVideos(files.Length, files);
                         }
                         catch (Exception) { }
-                    }
                 }
                 if (decision == "open")
                 {
@@ -743,114 +622,25 @@ namespace See_More
                         catch (Exception) { }
                     }
                 }
-                if(decision == "s-n")
+                if (decision == "s-n")
                 {
-                    if(Configuracion.existeConexion)
-                    {
-                        Configuracion.totales = 0;
-                        String linea;
-                        try
-                        {
-                            StreamReader sr = new StreamReader(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
-                            linea = sr.ReadLine();
-                            while (linea != null)
-                            {
-                                linea = sr.ReadLine();
-                                Configuracion.totales += 1;
-                            }
-                            sr.Close();
-                        }
-                        catch (Exception)
-                        {
-                        }
-                        Configuracion.Animes = new string[Configuracion.totales]; int k = 0;
-                        String linea2;
-                        try
-                        {
-                            StreamReader sr = new StreamReader(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
-                            linea2 = sr.ReadLine();
-                            while (linea2 != null)
-                            {
-                                Configuracion.Animes[k] = linea2;
-                                linea2 = sr.ReadLine();
-                                k += 1;
-                            }
-                            sr.Close();
-                        }
-                        catch (Exception)
-                        {
-                        }
-                            dgvDatos.DataSource = DatosSeeMore.BusquedaContraria();
-                            if (dgvDatos.DataSource == null)
-                            {
-                                dgvDatos.DataSource = DatosSeeMore.BuscarT();
-                            }
-                        
-                        buscar = true;
-                        buscarListas = false;
-                        buscarApartado = false;
-                    }
-                    else
-                    {
-                        MessageBox.Show("No es necesario efectuar este comando pues See More lo hace de forma automatica", "SeeMore", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    MessageBox.Show("No es necesario efectuar este comando pues See More lo hace de forma automatica", "SeeMore", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 if(decision == "b-u")
                 {
-                    if (Configuracion.existeConexion)
-                    {
-                        dgvDatos.DataSource = DatosSeeMore.BuscarUltimo();
-                        esUnico = true;
-                        esApartado = false;
-                        buscar = true;
-                        buscarListas = false;
-                        buscarApartado = false;
-                    }
-                    else
-                    {
                         MessageBox.Show("No podemos mostrarte la información del comando Buscar Último", "SeeMore", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
                 }
                 if(decision == "o")
                 {
-                    if (Configuracion.existeConexion)
-                    {
-                        dgvDatos.DataSource = DatosSeeMore.BuscarPorOrden();
-                    }
-                    else
-                    {
                         MessageBox.Show("No puede mostrarte la información del comando Buscar por Orden", "SeeMore", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
                 }
                 if(decision == "all-l")
                 {
-                    if (Configuracion.existeConexion)
-                    {
-                        dgvDatos.DataSource = ListasSeeMore.BuscarTL();
-                        esUnico = false;
-                        buscar = false;
-                        buscarListas = true;
-                        buscarApartado = false;
-                    }
-                    else
-                    {
                         MessageBox.Show("SeeMore no puede mostrarte la información del comando Buscar Todas las Listas", "SeeMore", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
                 }
                 if(decision == "u-l")
                 {
-                    if (Configuracion.existeConexion)
-                    {
-                        dgvDatos.DataSource = ListasSeeMore.BuscarUltimaLista();
-                        esUnico = false;
-                        buscar = false;
-                        buscarListas = true;
-                        buscarApartado = false;
-                    }
-                    else
-                    {
                         MessageBox.Show("SeeMore no puede mostrarte la información del comando Buscar Última Lista", "SeeMore", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
                 }
                 if(decision == "t")
                 {
@@ -873,51 +663,14 @@ namespace See_More
             } 
             else if(decision == "s")
             {
-                if (Configuracion.existeConexion)
-                {
-                    if (txtNombreSerie.Text != "")
-                    {                    
-                            dgvDatos.DataSource = DatosSeeMore.BuscarNombre(txtNombreSerie.Text);
-                            esUnico = true;
-                            esApartado = false;
-                            if (File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Busqueda.txt"))
-                            {
-                                StreamWriter swParaUsuario = new StreamWriter(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Busqueda.txt");
-                                swParaUsuario.Flush(); swParaUsuario.Close();
-                                StreamWriter swEscribir = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + "Busqueda.txt");
-                                swEscribir.WriteLine(txtNombreSerie.Text); swEscribir.Close();
-                            }
-                            else
-                            {
-                                MessageBox.Show("No hemos encontrado a un usuario con el nombre " + txtUsuario.Text + ", ingrese con uno existente");
-                            }                      
-                    }
-                }
-                else
-                {
                     MessageBox.Show("No podemos mostrar información del comando Buscar Series", "SeeMore", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
                 buscar = true;
                 buscarListas = false;
                 buscarApartado = false;
             } 
             if(decision == "l-n")
             {
-                if (Configuracion.existeConexion)
-                {
-                    if (txtNombreSerie.Text != "")
-                    {
-                        dgvDatos.DataSource = ListasSeeMore.BuscarNombreLista(txtNombreSerie.Text);
-                        esUnico = false;
-                        buscar = false;
-                        buscarListas = true;
-                        buscarApartado = false;
-                    }
-                }
-                else
-                {
                     MessageBox.Show("SeeMore no puede mostrar información del comando Buscar Nombre Lista", "SeeMore", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
             }
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -934,144 +687,6 @@ namespace See_More
                 IterarVideos(files.Length, files);
             }
             catch (Exception) { }
-        }
-        private void reproducirToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Configuracion.BuscarAddon.hayIntercambio == true)
-                Configuracion.BuscarAddon.hayIntercambio = true;
-            else
-                Configuracion.BuscarAddon.hayIntercambio = false;
-            if(Configuracion.existeConexion) { 
-                if (Configuracion.existeConexion)
-                {
-                    if (CuentaSeeMore.InicioSesion(txtUsuario.Text,txtContraseña.Text))
-                    {
-                        if (esUnico == true)
-                        {
-                            if (esApartado == true)
-                            {
-                                if(buscarApartado == true)
-                                {
-                                    dgvCuenta.DataSource = CuentaSeeMore.BuscarImagen(txtUsuario.Text);
-                                    dgvCuenta.Rows[0].Selected = true;
-                                    dgvCuenta.CurrentCell = dgvDatos.Rows[0].Cells[0];
-                                    if (dgvDatos.SelectedRows.Count == 1 && dgvCuenta.SelectedRows.Count == 1)
-                                    {
-                                        int id = Convert.ToInt32(dgvDatos.CurrentRow.Cells[0].Value);
-                                        int id2 = Convert.ToInt32(dgvCuenta.CurrentRow.Cells[0].Value);
-                                        Configuracion.BuscarAddon.AnimeSeleccionado = ApartadosSeeMore.ObtenerApartado(txtBuscarApartado.Text, id);
-                                        Configuracion.BuscarAddon.cuentaSeleccionado = CuentaSeeMore.ObtenerC(id2);
-                                        Configuracion.usuario = txtUsuario.Text;
-                                        Configuracion.contraseña = txtContraseña.Text;
-                                        StreamWriter sw5 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
-                                        sw5.Flush(); sw5.Close();
-                                        StreamWriter sw6 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
-                                        sw6.Flush(); sw6.Close();
-                                        sw1 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
-                                        string result = string.Empty;
-                                        byte[] encryted = System.Text.Encoding.Unicode.GetBytes(txtUsuario.Text);
-                                        result = Convert.ToBase64String(encryted);
-                                        sw1.WriteLine(result);
-                                        sw1.Close();
-                                        sw2 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
-                                        string resultado = string.Empty;
-                                        byte[] encriptar = System.Text.Encoding.Unicode.GetBytes(txtContraseña.Text);
-                                        resultado = Convert.ToBase64String(encriptar);
-                                        sw2.WriteLine(resultado);
-                                        sw2.Close();
-                                        this.Close();
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Seleccione un video del apartado y inicie sesión con un usuario");
-                                    }
-                                }
-                                else { MessageBox.Show("No se ha buscado nada para la reproduccion"); }
-                            }
-                            else
-                            {
-                                if(buscar == true)
-                                {
-                                    dgvCuenta.DataSource = CuentaSeeMore.BuscarImagen(txtUsuario.Text);
-                                    dgvCuenta.Rows[0].Selected = true;
-                                    dgvCuenta.CurrentCell = dgvDatos.Rows[0].Cells[0];
-                                    if (dgvDatos.SelectedRows.Count == 1 && dgvCuenta.SelectedRows.Count == 1)
-                                    {
-                                        int id = Convert.ToInt32(dgvDatos.CurrentRow.Cells[0].Value);
-                                        int id2 = Convert.ToInt32(dgvCuenta.CurrentRow.Cells[0].Value);
-                                        Configuracion.BuscarAddon.AnimeSeleccionado = DatosSeeMore.Obtener(id);
-                                        Configuracion.BuscarAddon.cuentaSeleccionado = CuentaSeeMore.ObtenerC(id2);
-                                        Configuracion.usuario = txtUsuario.Text;
-                                        Configuracion.contraseña = txtContraseña.Text;
-                                        StreamWriter sw5 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
-                                        sw5.Flush(); sw5.Close();
-                                        StreamWriter sw6 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
-                                        sw6.Flush(); sw6.Close();
-                                        sw1 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
-                                        string result = string.Empty;
-                                        byte[] encryted = System.Text.Encoding.Unicode.GetBytes(txtUsuario.Text);
-                                        result = Convert.ToBase64String(encryted);
-                                        sw1.WriteLine(result);
-                                        sw1.Close();
-                                        sw2 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
-                                        string resultado = string.Empty;
-                                        byte[] encriptar = System.Text.Encoding.Unicode.GetBytes(txtContraseña.Text);
-                                        resultado = Convert.ToBase64String(encriptar);
-                                        sw2.WriteLine(resultado);
-                                        sw2.Close();
-                                        this.Close();
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Seleccione un video o el video buscado exacto con un usuario");
-                                    }
-                                }
-                                else { MessageBox.Show("No se ha buscado nada para la reproduccion"); }
-                            }
-                        }
-                        else
-                        {
-                            if(buscarListas == true)
-                            {
-                                dgvCuenta.DataSource = CuentaSeeMore.BuscarImagen(txtUsuario.Text);
-                                dgvCuenta.Rows[0].Selected = true;
-                                dgvCuenta.CurrentCell = dgvDatos.Rows[0].Cells[0];
-                                if (dgvDatos.SelectedRows.Count == 1 && dgvCuenta.SelectedRows.Count == 1)
-                                {
-                                    int id = Convert.ToInt32(dgvDatos.CurrentRow.Cells[0].Value);
-                                    int id2 = Convert.ToInt32(dgvCuenta.CurrentRow.Cells[0].Value);
-                                    Configuracion.BuscarAddon.AnimeSeleccionado = ListasSeeMore.ObtenerLista(id);
-                                    Configuracion.BuscarAddon.cuentaSeleccionado = CuentaSeeMore.ObtenerC(id2);
-                                    Configuracion.usuario = txtUsuario.Text;
-                                    Configuracion.contraseña = txtContraseña.Text;
-                                    StreamWriter sw5 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
-                                    sw5.Flush(); sw5.Close();
-                                    StreamWriter sw6 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
-                                    sw6.Flush(); sw6.Close();
-                                    sw1 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
-                                    string result = string.Empty;
-                                    byte[] encryted = System.Text.Encoding.Unicode.GetBytes(txtUsuario.Text);
-                                    result = Convert.ToBase64String(encryted);
-                                    sw1.WriteLine(result);
-                                    sw1.Close();
-                                    sw2 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
-                                    string resultado = string.Empty;
-                                    byte[] encriptar = System.Text.Encoding.Unicode.GetBytes(txtContraseña.Text);
-                                    resultado = Convert.ToBase64String(encriptar);
-                                    sw2.WriteLine(resultado);
-                                    sw2.Close();
-                                    this.Close();
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Seleccione una lista o la lista buscada exacta con un usuario");
-                                }
-                            }
-                            else { MessageBox.Show("No se ha buscado nada para la reproduccion"); }
-                        }
-                    }
-                }
-            }
         }
         //METODOS NUEVOS
         public DirectoryInfo[] RevisarDirectorio(DirectoryInfo[] directories)

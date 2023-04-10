@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "See More", "See More\See Mo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DATOS_SEEMORE", "DATOS_SEEMORE\DATOS_SEEMORE.csproj", "{6EF097D5-CBAA-4991-9988-ECC5BAE9A0C6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MODELOS_SEEMORE", "MODELOS_SEEMORE\MODELOS_SEEMORE.csproj", "{9C7AF5C7-EE6E-4ED8-A055-34646C3DFD02}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{6EF097D5-CBAA-4991-9988-ECC5BAE9A0C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EF097D5-CBAA-4991-9988-ECC5BAE9A0C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EF097D5-CBAA-4991-9988-ECC5BAE9A0C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9C7AF5C7-EE6E-4ED8-A055-34646C3DFD02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C7AF5C7-EE6E-4ED8-A055-34646C3DFD02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C7AF5C7-EE6E-4ED8-A055-34646C3DFD02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C7AF5C7-EE6E-4ED8-A055-34646C3DFD02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

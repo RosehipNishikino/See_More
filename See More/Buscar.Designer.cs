@@ -36,11 +36,6 @@
             this.dgvDatos = new System.Windows.Forms.DataGridView();
             this.pnlContenedor = new System.Windows.Forms.Panel();
             this.mspMenu = new System.Windows.Forms.MenuStrip();
-            this.apartadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buscarEnElApartadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.crearApartadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.moverAlApartadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reproducirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regresarARaizToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regresarALaCarpetaAnteriorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comoFuncionaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -137,8 +132,6 @@
             // mspMenu
             // 
             this.mspMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.apartadosToolStripMenuItem,
-            this.reproducirToolStripMenuItem,
             this.regresarARaizToolStripMenuItem,
             this.regresarALaCarpetaAnteriorToolStripMenuItem,
             this.comoFuncionaToolStripMenuItem});
@@ -149,50 +142,11 @@
             this.mspMenu.TabIndex = 39;
             this.mspMenu.Text = "menuStrip1";
             // 
-            // apartadosToolStripMenuItem
-            // 
-            this.apartadosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.buscarEnElApartadoToolStripMenuItem,
-            this.crearApartadoToolStripMenuItem,
-            this.moverAlApartadoToolStripMenuItem});
-            this.apartadosToolStripMenuItem.Name = "apartadosToolStripMenuItem";
-            this.apartadosToolStripMenuItem.Size = new System.Drawing.Size(185, 19);
-            this.apartadosToolStripMenuItem.Text = "Apartados";
-            // 
-            // buscarEnElApartadoToolStripMenuItem
-            // 
-            this.buscarEnElApartadoToolStripMenuItem.Name = "buscarEnElApartadoToolStripMenuItem";
-            this.buscarEnElApartadoToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.buscarEnElApartadoToolStripMenuItem.Text = "Buscar en el Apartado";
-            this.buscarEnElApartadoToolStripMenuItem.Click += new System.EventHandler(this.buscarEnElApartadoToolStripMenuItem_Click);
-            // 
-            // crearApartadoToolStripMenuItem
-            // 
-            this.crearApartadoToolStripMenuItem.Name = "crearApartadoToolStripMenuItem";
-            this.crearApartadoToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.crearApartadoToolStripMenuItem.Text = "Crear Apartado";
-            this.crearApartadoToolStripMenuItem.Click += new System.EventHandler(this.crearApartadoToolStripMenuItem_Click);
-            // 
-            // moverAlApartadoToolStripMenuItem
-            // 
-            this.moverAlApartadoToolStripMenuItem.Name = "moverAlApartadoToolStripMenuItem";
-            this.moverAlApartadoToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.moverAlApartadoToolStripMenuItem.Text = "Mover al Apartado";
-            this.moverAlApartadoToolStripMenuItem.Click += new System.EventHandler(this.moverAlApartadoToolStripMenuItem_Click);
-            // 
-            // reproducirToolStripMenuItem
-            // 
-            this.reproducirToolStripMenuItem.Name = "reproducirToolStripMenuItem";
-            this.reproducirToolStripMenuItem.Size = new System.Drawing.Size(185, 19);
-            this.reproducirToolStripMenuItem.Text = "Reproducir";
-            this.reproducirToolStripMenuItem.Click += new System.EventHandler(this.reproducirToolStripMenuItem_Click);
-            // 
             // regresarARaizToolStripMenuItem
             // 
             this.regresarARaizToolStripMenuItem.Name = "regresarARaizToolStripMenuItem";
             this.regresarARaizToolStripMenuItem.Size = new System.Drawing.Size(185, 19);
             this.regresarARaizToolStripMenuItem.Text = "Regresar a raiz";
-            this.regresarARaizToolStripMenuItem.Visible = false;
             this.regresarARaizToolStripMenuItem.Click += new System.EventHandler(this.regresarARaizToolStripMenuItem_Click);
             // 
             // regresarALaCarpetaAnteriorToolStripMenuItem
@@ -200,7 +154,6 @@
             this.regresarALaCarpetaAnteriorToolStripMenuItem.Name = "regresarALaCarpetaAnteriorToolStripMenuItem";
             this.regresarALaCarpetaAnteriorToolStripMenuItem.Size = new System.Drawing.Size(185, 19);
             this.regresarALaCarpetaAnteriorToolStripMenuItem.Text = "Regresar a la carpeta anterior";
-            this.regresarALaCarpetaAnteriorToolStripMenuItem.Visible = false;
             this.regresarALaCarpetaAnteriorToolStripMenuItem.Click += new System.EventHandler(this.regresarALaCarpetaAnteriorToolStripMenuItem_Click);
             // 
             // comoFuncionaToolStripMenuItem
@@ -523,11 +476,6 @@
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Label lblIniciarSesion;
         private System.Windows.Forms.MenuStrip mspMenu;
-        private System.Windows.Forms.ToolStripMenuItem apartadosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem buscarEnElApartadoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem crearApartadoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem moverAlApartadoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem reproducirToolStripMenuItem;
         private System.Windows.Forms.Panel pnlRespaldo;
         private System.Windows.Forms.ToolStripMenuItem regresarARaizToolStripMenuItem;
         private System.Windows.Forms.ComboBox cboFiltros;

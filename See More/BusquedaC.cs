@@ -1,14 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using MODELOS_SEEMORE;
 using DATOS_SEEMORE;
 
 namespace See_More
 {
     public partial class BusquedaC : Form
     {
-        public Cuenta cuentaseleccionada { get; set; }
         public String NombreUsuario { get; set; }
         int tamaño;
         public BusquedaC()
@@ -18,11 +16,6 @@ namespace See_More
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             this.StartPosition = FormStartPosition.CenterScreen;
-            if (Configuracion.existeConexion)
-            {
-                dgvDatos.DataSource = CuentaSeeMore.BuscarTC();
-            }
-            else {
                 dgvDatos.Visible = false;
                 lblNombre.Visible = true;
                 lblDatos.Visible = true;
@@ -44,25 +37,10 @@ namespace See_More
                     Configuracion.UsuariosSexo[contador] = Configuracion.Usuarios[3];
                     contador += 1;
                 }
-            }
+            
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if(Configuracion.existeConexion)
-            {
-                if (dgvDatos.SelectedRows.Count == 1)
-                {
-                    int id = Convert.ToInt32(dgvDatos.CurrentRow.Cells[0].Value);
-                    cuentaseleccionada = CuentaSeeMore.ObtenerC(id);
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Se debe seleccionar un usuario creado para su eliminación");
-                }
-            }
-            else
-            {
                 Boolean sinCoencidencia = false;
                 for (int j = 0; j < tamaño; j++)
                 {
@@ -78,7 +56,6 @@ namespace See_More
                 {
                     MessageBox.Show("El Usuario y/o Contraseña estan mal, intente de nuevo");
                 }
-            }
         }
     }
 }

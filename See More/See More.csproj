@@ -61,12 +61,6 @@
     <Compile Include="Buscar.designer.cs">
       <DependentUpon>Buscar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Busqueda.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Busqueda.designer.cs">
-      <DependentUpon>Busqueda.cs</DependentUpon>
-    </Compile>
     <Compile Include="BusquedaC.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,12 +97,6 @@
     <Compile Include="Iniciar Sesion.designer.cs">
       <DependentUpon>Iniciar Sesion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Nuevo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Nuevo.designer.cs">
-      <DependentUpon>Nuevo.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reproductor.cs">
@@ -125,9 +113,6 @@
     </Compile>
     <EmbeddedResource Include="Buscar.resx">
       <DependentUpon>Buscar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Busqueda.resx">
-      <DependentUpon>Busqueda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BusquedaC.resx">
       <DependentUpon>BusquedaC.cs</DependentUpon>
@@ -146,9 +131,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Iniciar Sesion.resx">
       <DependentUpon>Iniciar Sesion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Nuevo.resx">
-      <DependentUpon>Nuevo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -184,29 +166,8 @@
       <Project>{6ef097d5-cbaa-4991-9988-ecc5bae9a0c6}</Project>
       <Name>DATOS_SEEMORE</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MODELOS_SEEMORE\MODELOS_SEEMORE.csproj">
-      <Project>{9c7af5c7-ee6e-4ed8-a055-34646c3dfd02}</Project>
-      <Name>MODELOS_SEEMORE</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AxAXVLC">
-      <Guid>{DF2BBE39-40A8-433B-A279-073F48DA94B6}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
-    <COMReference Include="AXVLC">
-      <Guid>{DF2BBE39-40A8-433B-A279-073F48DA94B6}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="AxWMPLib">
       <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
       <VersionMajor>1</VersionMajor>

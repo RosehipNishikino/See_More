@@ -33,10 +33,7 @@
             this.wmpCentral = new AxWMPLib.AxWindowsMediaPlayer();
             this.mspMenu = new System.Windows.Forms.MenuStrip();
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nuevoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.buscarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.actualizarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.personalizaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iniciarSesiónToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,10 +109,7 @@
             // nuevoToolStripMenuItem
             // 
             this.nuevoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nuevoToolStripMenuItem1,
             this.buscarToolStripMenuItem1,
-            this.actualizarToolStripMenuItem1,
-            this.eliminarToolStripMenuItem1,
             this.toolStripMenuItem3,
             this.personalizaciónToolStripMenuItem,
             this.iniciarSesiónToolStripMenuItem1});
@@ -124,38 +118,17 @@
             this.nuevoToolStripMenuItem.Text = "See More";
             this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.nuevoToolStripMenuItem_Click);
             // 
-            // nuevoToolStripMenuItem1
-            // 
-            this.nuevoToolStripMenuItem1.Name = "nuevoToolStripMenuItem1";
-            this.nuevoToolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
-            this.nuevoToolStripMenuItem1.Text = "Nuevo";
-            this.nuevoToolStripMenuItem1.Click += new System.EventHandler(this.nuevoToolStripMenuItem1_Click);
-            // 
             // buscarToolStripMenuItem1
             // 
             this.buscarToolStripMenuItem1.Name = "buscarToolStripMenuItem1";
-            this.buscarToolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
+            this.buscarToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.buscarToolStripMenuItem1.Text = "Buscar";
             this.buscarToolStripMenuItem1.Click += new System.EventHandler(this.buscarToolStripMenuItem1_Click);
-            // 
-            // actualizarToolStripMenuItem1
-            // 
-            this.actualizarToolStripMenuItem1.Name = "actualizarToolStripMenuItem1";
-            this.actualizarToolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
-            this.actualizarToolStripMenuItem1.Text = "Actualizar";
-            this.actualizarToolStripMenuItem1.Click += new System.EventHandler(this.actualizarToolStripMenuItem1_Click);
-            // 
-            // eliminarToolStripMenuItem1
-            // 
-            this.eliminarToolStripMenuItem1.Name = "eliminarToolStripMenuItem1";
-            this.eliminarToolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
-            this.eliminarToolStripMenuItem1.Text = "Eliminar";
-            this.eliminarToolStripMenuItem1.Click += new System.EventHandler(this.eliminarToolStripMenuItem1_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(156, 22);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem3.Text = "|||||||||";
             this.toolStripMenuItem3.Visible = false;
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
@@ -163,7 +136,7 @@
             // personalizaciónToolStripMenuItem
             // 
             this.personalizaciónToolStripMenuItem.Name = "personalizaciónToolStripMenuItem";
-            this.personalizaciónToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.personalizaciónToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.personalizaciónToolStripMenuItem.Text = "Personalización";
             this.personalizaciónToolStripMenuItem.Visible = false;
             this.personalizaciónToolStripMenuItem.Click += new System.EventHandler(this.personalizaciónToolStripMenuItem_Click);
@@ -174,7 +147,7 @@
             this.menuToolStripMenuItem1,
             this.cerrarSesiónToolStripMenuItem});
             this.iniciarSesiónToolStripMenuItem1.Name = "iniciarSesiónToolStripMenuItem1";
-            this.iniciarSesiónToolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
+            this.iniciarSesiónToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.iniciarSesiónToolStripMenuItem1.Text = "Iniciar Sesión";
             this.iniciarSesiónToolStripMenuItem1.Visible = false;
             // 
@@ -441,10 +414,7 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label lblDuracionInicial;
         private System.Windows.Forms.Label lblDuracionFinal;
-        private System.Windows.Forms.ToolStripMenuItem nuevoToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem buscarToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem actualizarToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem crearCuentaToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem comoFuncionaToolStripMenuItem;
         private System.Windows.Forms.Label lblAutoPausa;

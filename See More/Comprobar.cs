@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.IO;
-using MODELOS_SEEMORE;
 using DATOS_SEEMORE;
 
 namespace See_More
 {
     public partial class Comprobar : Form
     {
-        public Cuenta usuarioSeleccionado { get; set; }
         public String Usuario { get; set; }
         public String Imagen { get; set; }
         public String Sexo { get; set; }
@@ -40,28 +38,6 @@ namespace See_More
         {
             if (txtUsuario.Text == Configuracion.usuario && txtContraseña.Text == Configuracion.contraseña)
             {
-                try
-                {
-                    if (CuentaSeeMore.InicioSesion(txtUsuario.Text,txtContraseña.Text))
-                    {
-                        dgvDatos.DataSource = CuentaSeeMore.BuscarImagen(txtUsuario.Text);
-                        dgvDatos.Rows[0].Selected = true;
-                        dgvDatos.CurrentCell = dgvDatos.Rows[0].Cells[0];
-                        if (dgvDatos.SelectedRows.Count == 1)
-                        {
-                            int Nombre = Convert.ToInt32(dgvDatos.CurrentRow.Cells[0].Value);
-                            usuarioSeleccionado = CuentaSeeMore.ObtenerC(Nombre);
-                            MessageBox.Show("Usuario " + txtUsuario.Text + " Comprobado");
-                            this.Close();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("El usuario y/o contraseña estan mal, intente de nuevo");
-                    }
-                }
-                catch (Exception)
-                {
                     Boolean sinCoencidencia = false;
                     for (int j = 0; j < tamaño; j++)
                     {
@@ -85,12 +61,6 @@ namespace See_More
                     {
                         MessageBox.Show("El Usuario y/o Contraseña estan mal, intente de nuevo");
                     }
-                    
-                }
-                finally
-                {
-
-                }
             }
             else
             {

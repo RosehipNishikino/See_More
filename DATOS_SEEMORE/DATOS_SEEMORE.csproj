@@ -4,14 +4,4 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MODELOS_SEEMORE\MODELOS_SEEMORE.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="MySql.Data">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 8.0.29\Assemblies\v4.5.2\MySql.Data.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
-using MODELOS_SEEMORE;
 using DATOS_SEEMORE;
 
 namespace See_More
@@ -10,7 +9,6 @@ namespace See_More
     public partial class Crear_Cuenta : Form
     {
         public Boolean cerrar { get; set; }
-        public Cuenta cuentaActual { get; set; }
         public String nombreUsuario { get; set; }
         String imagenPerfil = string.Empty;
         public Crear_Cuenta()
@@ -34,82 +32,10 @@ namespace See_More
         }        
         private void crearUsuarioNuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            String nombre = "";
             if (txtUsuario.Text != "" && txtContraseña.Text != "" && txtRepetirContraseña.Text != "" && picImagen.Image != null && (rdoHombre.Checked || rdoMujer.Checked || (rdoOtro.Checked && txtOtro.Text != "")))
             {
                 if (txtContraseña.Text == txtRepetirContraseña.Text)
                 {
-                    if(Configuracion.existeConexion)
-                    {
-                        if (!ExisteUsuario(txtUsuario.Text))
-                        {
-                            Cuenta cuenta = new Cuenta();
-                            cuenta.usuario = txtUsuario.Text.Trim();
-                            cuenta.contraseña = txtContraseña.Text.Trim();
-                            string result = string.Empty;
-                            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(imagenPerfil);
-                            result = Convert.ToBase64String(encryted);
-                            cuenta.imagen = result.Trim();
-                            if (rdoHombre.Checked)
-                            {
-                                cuenta.genero = rdoHombre.Text.Trim();
-                            }
-                            if (rdoMujer.Checked)
-                            {
-                                cuenta.genero = rdoMujer.Text.Trim();
-                            }
-                            if (rdoOtro.Checked)
-                            {
-                                cuenta.genero = txtOtro.Text.Trim();
-                            }
-                            nombre = cuenta.usuario;
-                            string resultado1 = string.Empty;
-                            byte[] encrytedo1 = System.Text.Encoding.Unicode.GetBytes(txtContraseña.Text);
-                            resultado1 = Convert.ToBase64String(encrytedo1);
-                            string result1 = string.Empty;
-                            byte[] encryted1 = System.Text.Encoding.Unicode.GetBytes(imagenPerfil);
-                            result1 = Convert.ToBase64String(encryted1);
-                            StreamWriter sw = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
-                            if (rdoHombre.Checked)
-                                sw.WriteLine(txtUsuario.Text.Trim() + ";" + resultado1.Trim() + ";" + result1.Trim() + ";" + rdoHombre.Text.Trim());
-                            if (rdoMujer.Checked)
-                                sw.WriteLine(txtUsuario.Text.Trim() + ";" + resultado1.Trim() + ";" + result1.Trim() + ";" + rdoMujer.Text.Trim());
-                            if (rdoOtro.Checked)
-                                sw.WriteLine(txtUsuario.Text.Trim() + ";" + resultado1.Trim() + ";" + result1.Trim() + ";" + txtOtro.Text.Trim());
-                            sw.Close();
-                            int resultado = CuentaSeeMore.AgregarC(cuenta);
-                            if (resultado > 0)
-                            {
-                                //No sirve pero deberia   richTextBox1.SaveFile("C:\\" + cuenta.usuario + ".txt", RichTextBoxStreamType.PlainText);
-                                //No sirve pero deberia   File.CreateText("C:\\" + cuenta.usuario + ".txt");
-                                //No sirve pero deberia   File.AppendText("C:\\" + cuenta.usuario + ".txt");
-                                //No sirve pero deberia   File.WriteAllText(@"C:\" + cuenta.usuario + ".txt","Bienvenido, puedes borrar esta linea y guardar");
-                                File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + ".txt");
-                                if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Imagen.txt") &&
-                                    !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Busqueda.txt") &&
-                                    !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Animes.txt") &&
-                                    !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Inte.txt") &&
-                                    !File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Ruta.txt"))
-                                {
-                                    File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Imagen.txt");
-                                    File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Busqueda.txt");
-                                    File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Animes.txt");
-                                    File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Inte.txt");
-                                    File.Create(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuenta.usuario + "Ruta.txt");
-                                }
-                                MessageBox.Show("Se ha creado su cuenta, proceda a loguearse en la parte Iniciar Sesión");
-                                Limpiar();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Ha ocurrido un error");
-                            }
-                        }
-                        else
-                            MessageBox.Show("El usuario ya ha sido creado", "Error al crear nuevo usuario");
-                    }
-                    else
-                    {
                         if (!ExisteUsuario(txtUsuario.Text))
                         {
                             string resultado = string.Empty;
@@ -151,7 +77,6 @@ namespace See_More
                             Limpiar();
                         }else
                             MessageBox.Show("El usuario ya ha sido creado", "Error al crear nuevo usuario");
-                    }
                 }
             }
             else
@@ -163,66 +88,14 @@ namespace See_More
         {
             BusquedaC frm = new BusquedaC();
             frm.ShowDialog();
-            if(Configuracion.existeConexion)
-            {
-                if (frm.cuentaseleccionada != null)
-                {
-                    cuentaActual = frm.cuentaseleccionada;
-                    txtEliminarUser.Text = frm.cuentaseleccionada.usuario;
-                }
-            }
-            else
-            {
                 if(frm.NombreUsuario != null)
                 {
                     nombreUsuario = frm.NombreUsuario;
                     txtEliminarUser.Text = frm.NombreUsuario;
                 }
-            }
         }
         private void eliminarElUsuarioCreadoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(Configuracion.existeConexion)
-            {
-                if (txtEliminarUser.Text == "")
-                {
-                    MessageBox.Show("No se ha buscado ningún usuario creado para eliminar", "Falló al eliminar", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    if (MessageBox.Show("¿Desea eliminar la siguiente Cuenta?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                    {
-                        if (CuentaSeeMore.EliminarC(cuentaActual.ID) > 0)
-                        {
-                            if (File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + ".txt") &&
-                                File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Imagen.txt") &&
-                                File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Busqueda.txt") &&
-                                File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Animes.txt") &&
-                                File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Inte.txt") &&
-                                File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Ruta.txt"))
-                            {
-                                File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + ".txt");
-                                File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Imagen.txt");
-                                File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Busqueda.txt");
-                                File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Animes.txt");
-                                File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Inte.txt");
-                                File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + cuentaActual.usuario + "Ruta.txt");
-                            }
-                            MessageBox.Show("Se ha eliminado la Cuenta exitosamente", "Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Ha ocurrido un error al eliminar la Cuenta", "Eliminacion fallida", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Se cancelo la eliminacion de la Cuenta", "Cancelado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-            }
-            else
-            {
                 if (txtEliminarUser.Text == "")
                 {
                     MessageBox.Show("No se ha buscado ningún usuario creado para eliminar", "Falló al eliminar", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -273,7 +146,6 @@ namespace See_More
                     }
                     MessageBox.Show("Se ha eliminado la Cuenta exitosamente", "Eliminacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-            }
         }
         private void textBox3_KeyUp(object sender, KeyEventArgs e)
         {

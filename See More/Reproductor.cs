@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using AxWMPLib;
 using System.IO;
-using MODELOS_SEEMORE;
 using DATOS_SEEMORE;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
@@ -14,7 +13,6 @@ namespace See_More
     public partial class Reproductor : Form
     {
         int volumen = 50;
-        public Seemore AnimeActual { get; set; }
         public Boolean respuesta { get; set; }
         public String NombreVideo1 { get; set; }
         public String RutaVideo1 { get; set; }
@@ -50,95 +48,7 @@ namespace See_More
         public Reproductor()
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
-            Boolean acabo = false, actua = false;
-            if(Configuracion.existeConexion)
-            {
-                String[] users = File.ReadAllLines(Application.StartupPath + @"\See More\Inicios SeeMore\creaciones.txt");
-                int tamaño = (users.Length * 4) / 4;
-                String[] nombre = new string[tamaño];
-                String[] contraseña = new string[tamaño];
-                String[] Imagen = new string[tamaño];
-                String[] Sexo = new string[tamaño];
-                int contador = 0;
-                String[] users1 = File.ReadAllLines(Application.StartupPath + @"\See More\Inicios SeeMore\actualizaciones.txt");
-                int tamaño1 = (users1.Length * 4) / 4;
-                String[] nombre1 = new string[tamaño1];
-                String[] contraseña1 = new string[tamaño1];
-                String[] Imagen1 = new string[tamaño1];
-                String[] Sexo1 = new string[tamaño1];
-                int contador1 = 0;
-                foreach (String linea in users)
-                {
-                    Configuracion.Usuarios = linea.Split(';');
-                    nombre[contador] = Configuracion.Usuarios[0];
-                    contraseña[contador] = Configuracion.Usuarios[1];
-                    Imagen[contador] = Configuracion.Usuarios[2];
-                    Sexo[contador] = Configuracion.Usuarios[3];
-                    Cuenta cuenta = new Cuenta();
-                    cuenta.usuario = nombre[contador];
-                    cuenta.contraseña = contraseña[contador];
-                    cuenta.imagen = Imagen[contador];
-                    cuenta.genero = Sexo[contador];
-                    int resultado = CuentaSeeMore.AgregarC(cuenta);
-                    if (resultado > 0)
-                    {
-                        acabo = true;
-                    }
-                    else
-                    {
-                        acabo = false;
-                    }
-                    contador += 1;
-                }
-                foreach (String linea in users1)
-                {
-                    Configuracion.Usuarios2 = linea.Split(';');
-                    nombre1[contador1] = Configuracion.Usuarios2[0];
-                    contraseña1[contador1] = Configuracion.Usuarios2[1];
-                    Imagen1[contador1] = Configuracion.Usuarios2[2];
-                    Sexo1[contador1] = Configuracion.Usuarios2[3];
-                    Cuenta cuenta = new Cuenta();
-                    cuenta.usuario = nombre1[contador1];
-                    cuenta.contraseña = contraseña1[contador1];
-                    cuenta.imagen = Imagen1[contador1];
-                    cuenta.genero = Sexo1[contador1];
-                    int resultado = CuentaSeeMore.actualizarC2(cuenta);
-                    if (resultado > 0)
-                    {
-                        actua = true;
-                    }
-                    else
-                    {
-                        actua = false;
-                    }
-                    contador1 += 1;
-                }
-                if (acabo == true || actua == true)
-                {
-                    notifyIcon1.Icon = new Icon(Path.GetFullPath(@"seemore.ico"));
-                    notifyIcon1.Text = "Los nuevos usuarios se crearon o actualizaron";
-                    notifyIcon1.Visible = true;
-                    notifyIcon1.BalloonTipTitle = "Sin problemas detectados";
-                    notifyIcon1.BalloonTipText = "Se han creado/actualizado diferentes usuarios cuando no habia conexión";
-                    notifyIcon1.ShowBalloonTip(100);
-                    StreamWriter sw = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\creaciones.txt");
-                    sw.Flush(); sw.Close();
-                    StreamWriter sw1 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\actualizaciones.txt");
-                    sw1.Flush(); sw1.Close();
-                    var a = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\actualizaciones.txt");
-                    a.AutoFlush = true; a.Close();
-                }
-                else
-                {
-                    notifyIcon1.Icon = new Icon(Path.GetFullPath(@"seemore.ico"));
-                    notifyIcon1.Text = "Los usuarios no se crearon o no hay usuarios";
-                    notifyIcon1.Visible = true;
-                    notifyIcon1.BalloonTipTitle = "Con problemas, tal vez";
-                    notifyIcon1.BalloonTipText = "La creacion de diferentes usuarios no fue correcta o no hay nada que crear";
-                    notifyIcon1.ShowBalloonTip(100);
-                }
-            }    
+            this.StartPosition = FormStartPosition.CenterScreen;    
         }
         private void Form1_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -282,8 +192,6 @@ namespace See_More
                 if (abrir.ShowDialog() == DialogResult.OK)
                 {
                     wmpCentral.URL = abrir.FileName;
-                    //axvlcControl.playlist.add("file:///"+abrir.FileName, abrir.SafeFileName,null);
-                    //axvlcControl.playlist.play();
                     ruta = abrir.FileName;
                     tmrProgreso.Start();
                     StreamWriter escribir = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
@@ -291,15 +199,12 @@ namespace See_More
                     sw = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
                     sw2 = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt");
                     sw.WriteLine(wmpCentral.currentMedia.name + " Video no guardado");
-                    //sw.WriteLine(axvlcControl.mediaDescription.title + " Video no guardado");
                     sw2.WriteLine(wmpCentral.currentMedia.name + " " + c + " Video no guardado");
-                    //sw2.WriteLine(axvlcControl.mediaDescription.title + " " + c + " Video no guardado");
                     sw.Close();
                     sw2.Close();
                     entra = false;
                     nombre = false;
                     todo = wmpCentral.currentMedia.name;
-                    //todo = axvlcControl.mediaDescription.title;
                     this.Text = "Viendo - " + todo;
                 }
         }
@@ -566,12 +471,6 @@ namespace See_More
                 sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\actualizaciones.txt");
                 sw4.Close();
             }
-        }
-        public void Subtitles()
-        {
-            String algo = wmpCentral.closedCaption.SAMILang;
-            
-            MessageBox.Show(algo);
         }
         public void Verificar()
         {
@@ -974,11 +873,6 @@ namespace See_More
             }
             Application.Exit();
         }
-        private void nuevoToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Nuevo frm = new Nuevo();
-            frm.ShowDialog();
-        }
        /* public void HabilitarUsoCompleto()
         {
             wmpCentral.Size = new Size(wmpCentral.Width, wmpCentral.Height);
@@ -989,105 +883,19 @@ namespace See_More
             frm.ShowDialog();
             try
             {
-                if (frm.AnimeSeleccionado != null)
-                {
-                    AnimeActual = frm.AnimeSeleccionado;
-                    todo = "" + frm.AnimeSeleccionado.Nombre + " - " + frm.cuentaSeleccionado.usuario;
-                    auxiliarNombre = frm.AnimeSeleccionado.Nombre;
-                    usuario = "" + frm.cuentaSeleccionado.usuario;
-                    intercambio = frm.hayIntercambio;
-                    UserTemp = frm.UsuarioTemporal;
-                    string result = string.Empty;
-                    byte[] decryted = Convert.FromBase64String(frm.AnimeSeleccionado.URL);
-                    result = System.Text.Encoding.Unicode.GetString(decryted);
-                    String[] porVer = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
-                    String[] vacio;
-                        wmpCentral.URL = result;
-                        //axvlcControl.BaseURL = result;
-                        this.Text = "Viendo - " + todo;                    
-                    tmrProgreso.Start();
-                    tmrGuardarAuto.Start();
-                    foreach (String linea in porVer)
-                    {
-                        vacio = linea.Split('{');
-                        if (vacio[0] == auxiliarNombre)
-                        {
-                            wmpCentral.Ctlcontrols.currentPosition = double.Parse(vacio[1]);
-                            //axvlcControl.input.time = double.Parse(vacio[1]);
-                        }
-                        else
-                        {
-                            StreamWriter escribir = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
-                            escribir.WriteLine(vacio[0] + "{" + vacio[1]);
-                            escribir.Close();
-                        }
-                    }
-                    File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
-                    File.Move(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt", Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
-                    if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt"))
-                    {
-                        File.CreateText(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
-                    }
-                    string resulta = string.Empty;
-                    byte[] decrytede = Convert.FromBase64String(frm.cuentaSeleccionado.imagen);
-                    resulta = System.Text.Encoding.Unicode.GetString(decrytede);
-                    picUsuario.Image = Image.FromFile(resulta);
-                    entra = true;
-                    nombre = true;
-                    ruta = string.Empty;
-                    try
-                    {
-                        StreamWriter escribir = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
-                        escribir.Flush(); escribir.Close();
-                        sw = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
-                        sw2 = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt");
-                        sw.WriteLine(frm.AnimeSeleccionado.Nombre + "");
-                        String b = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
-                        sw2.WriteLine(frm.AnimeSeleccionado.Nombre + " " + b);
-                        sw.Close();
-                        sw2.Close();
-                        if (intercambio == true)
-                        {
-                            if (File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt"))
-                            {
-                                sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
-                                sw3.WriteLine(frm.AnimeSeleccionado.Nombre + " " + b);
-                                sw3.Close();
-                            }
-                            if (File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + UserTemp + ".txt"))
-                            {
-                                sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + UserTemp + ".txt");
-                                sw3.WriteLine(frm.AnimeSeleccionado.Nombre + " " + b);
-                                sw3.Close();
-                            }
-                        }
-                        else
-                        {
-                            if (File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt"))
-                            {
-                                sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
-                                sw3.WriteLine(frm.AnimeSeleccionado.Nombre + " " + b);
-                                sw3.Close();
-                            }
-                        }
-                    }                   
-                    catch (Exception ex) { MessageBox.Show(ex.Message); }
-                }
-                else
-                {
                     if(frm.datos != null)
                     {
-                        UsuarioRegistrado1 = frm.UsuarioRegistrado;
-                        UsuarioImagen1 = frm.UsuarioImagen;
-                        usuario = "" + frm.UsuarioRegistrado;
-                        intercambio = frm.hayIntercambio;
-                        UserTemp = frm.UsuarioTemporal;
-                        esUnico = frm.IsOnly;
+                        UsuarioRegistrado1 = Configuracion.BuscarAddon.UsuarioRegistrado;
+                        UsuarioImagen1 = Configuracion.BuscarAddon.Imagen;
+                        usuario = "" + Configuracion.BuscarAddon.UsuarioRegistrado;
+                        intercambio = Configuracion.BuscarAddon.hayIntercambio;
+                        UserTemp = Configuracion.BuscarAddon.UsuarioTemporal;
+                        esUnico = Configuracion.BuscarAddon.IsOnly;
                         wmpCentral.currentPlaylist = frm.datos;
                         wmpCentral.Ctlcontrols.play();
                         this.Text = "Viendo - " + wmpCentral.currentMedia.name + " - " + UsuarioRegistrado1;
-                        frm.NombreVideo = wmpCentral.currentMedia.name;
-                        auxiliarNombre = frm.NombreVideo;
+                        Configuracion.BuscarAddon.NombreVideo = wmpCentral.currentMedia.name;
+                        auxiliarNombre = Configuracion.BuscarAddon.NombreVideo;
                         VideoNombreActual = wmpCentral.currentMedia.name;
                         tmrProgreso.Start();
                         tmrLista.Start();
@@ -1115,7 +923,7 @@ namespace See_More
                             File.CreateText(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
                         }
                         string resulta = string.Empty;
-                        byte[] decrytede = Convert.FromBase64String(frm.UsuarioImagen);
+                        byte[] decrytede = Convert.FromBase64String(Configuracion.BuscarAddon.UsuarioImagen);
                         resulta = System.Text.Encoding.Unicode.GetString(decrytede);
                         picUsuario.Image = Image.FromFile(resulta);
                         entra = true;
@@ -1127,9 +935,9 @@ namespace See_More
                             escribir.Flush(); escribir.Close();
                             sw = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
                             sw2 = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt");
-                            sw.WriteLine(frm.NombreVideo + "");
+                            sw.WriteLine(Configuracion.BuscarAddon.NombreVideo + "");
                             String b = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
-                            sw2.WriteLine(frm.NombreVideo + " " + b);
+                            sw2.WriteLine(Configuracion.BuscarAddon.NombreVideo + " " + b);
                             sw.Close();
                             sw2.Close();
                             if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt"))
@@ -1137,16 +945,16 @@ namespace See_More
                                 if (intercambio == true)
                                 {
                                     sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
-                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.WriteLine(Configuracion.BuscarAddon.NombreVideo + " " + b);
                                     sw3.Close();
                                     sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + UserTemp + ".txt");
-                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.WriteLine(Configuracion.BuscarAddon.NombreVideo + " " + b);
                                     sw3.Close();
                                 }
                                 else
                                 {
                                     sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
-                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.WriteLine(Configuracion.BuscarAddon.NombreVideo + " " + b);
                                     sw3.Close();
                                 }
                             }
@@ -1155,35 +963,35 @@ namespace See_More
                                 if (intercambio == true)
                                 {
                                     sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
-                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.WriteLine(Configuracion.BuscarAddon.NombreVideo + " " + b);
                                     sw3.Close();
                                     sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + UserTemp + ".txt");
-                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.WriteLine(Configuracion.BuscarAddon.NombreVideo + " " + b);
                                     sw3.Close();
                                 }
                                 else
                                 {
                                     sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
-                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.WriteLine(Configuracion.BuscarAddon.NombreVideo + " " + b);
                                     sw3.Close();
                                 }
                             }
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }
                     }
-                    if (frm.NombreVideo != null && frm.RutaVideo != null)
+                    if (Configuracion.BuscarAddon.NombreVideo != null && Configuracion.BuscarAddon.RutaVideo != null)
                     {
-                        NombreVideo1 = frm.NombreVideo;
-                        RutaVideo1 = frm.RutaVideo;
-                        UsuarioRegistrado1 = frm.UsuarioRegistrado;
-                        UsuarioImagen1 = frm.UsuarioImagen;
-                        todo = "" + frm.NombreVideo + " - " + frm.UsuarioRegistrado;
-                        auxiliarNombre = frm.NombreVideo;
-                        usuario = "" + frm.UsuarioRegistrado;
-                        intercambio = frm.hayIntercambio;
-                        UserTemp = frm.UsuarioTemporal;
-                        esUnico = frm.IsOnly;
-                            wmpCentral.URL = frm.RutaVideo;
+                        NombreVideo1 = Configuracion.BuscarAddon.NombreVideo;
+                        RutaVideo1 = Configuracion.BuscarAddon.RutaVideo;
+                        UsuarioRegistrado1 = Configuracion.BuscarAddon.UsuarioRegistrado;
+                        UsuarioImagen1 = Configuracion.BuscarAddon.UsuarioImagen;
+                        todo = "" + Configuracion.BuscarAddon.NombreVideo + " - " + Configuracion.BuscarAddon.UsuarioRegistrado;
+                        auxiliarNombre = Configuracion.BuscarAddon.NombreVideo;
+                        usuario = "" + Configuracion.BuscarAddon.UsuarioRegistrado;
+                        intercambio = Configuracion.BuscarAddon.hayIntercambio;
+                        UserTemp = Configuracion.BuscarAddon.UsuarioTemporal;
+                        esUnico = Configuracion.BuscarAddon.IsOnly;
+                            wmpCentral.URL = Configuracion.BuscarAddon.RutaVideo;
                             //axvlcControl.playlist.add(frm.RutaVideo);
                             this.Text = "Viendo - " + todo;
                         tmrProgreso.Start();
@@ -1212,7 +1020,7 @@ namespace See_More
                             File.CreateText(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
                         }
                         string resulta = string.Empty;
-                        byte[] decrytede = Convert.FromBase64String(frm.UsuarioImagen);
+                        byte[] decrytede = Convert.FromBase64String(Configuracion.BuscarAddon.UsuarioImagen);
                         resulta = System.Text.Encoding.Unicode.GetString(decrytede);
                         picUsuario.Image = Image.FromFile(resulta);
                         entra = true;
@@ -1224,9 +1032,9 @@ namespace See_More
                             escribir.Flush(); escribir.Close();
                             sw = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
                             sw2 = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt");
-                            sw.WriteLine(frm.NombreVideo + "");
+                            sw.WriteLine(Configuracion.BuscarAddon.NombreVideo + "");
                             String b = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
-                            sw2.WriteLine(frm.NombreVideo + " " + b);
+                            sw2.WriteLine(Configuracion.BuscarAddon.NombreVideo + " " + b);
                             sw.Close();
                             sw2.Close();
                             if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt"))
@@ -1234,16 +1042,16 @@ namespace See_More
                                 if(intercambio == true)
                                 {
                                     sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
-                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.WriteLine(Configuracion.BuscarAddon.NombreVideo + " " + b);
                                     sw3.Close();
                                     sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + UserTemp + ".txt");
-                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.WriteLine(Configuracion.BuscarAddon.NombreVideo + " " + b);
                                     sw3.Close();
                                 }
                                 else
                                 {
                                     sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
-                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.WriteLine(Configuracion.BuscarAddon.NombreVideo + " " + b);
                                     sw3.Close();
                                 }
                             }
@@ -1252,35 +1060,26 @@ namespace See_More
                                 if (intercambio == true)
                                 {
                                     sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
-                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.WriteLine(Configuracion.BuscarAddon.NombreVideo + " " + b);
                                     sw3.Close();
                                     sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + UserTemp + ".txt");
-                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.WriteLine(Configuracion.BuscarAddon.NombreVideo + " " + b);
                                     sw3.Close();
                                 }
                                 else
                                 {
                                     sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
-                                    sw3.WriteLine(frm.NombreVideo + " " + b);
+                                    sw3.WriteLine(Configuracion.BuscarAddon.NombreVideo + " " + b);
                                     sw3.Close();
                                 }
                             }
                         }
                         catch (Exception ex) { MessageBox.Show(ex.Message); }                      
                     }
-                }
             }
             catch (Exception)
             {
             }
-        }
-        private void actualizarToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            new Nuevo().Show();
-        }
-        private void eliminarToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            new Nuevo().Show();
         }
         private void crearCuentaToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -1434,12 +1233,10 @@ namespace See_More
             if (wmpCentral.playState == WMPLib.WMPPlayState.wmppsPlaying)
             {
                 lblInicio.Text = wmpCentral.Ctlcontrols.currentPositionString;
-                //lblInicio.Text = "" + wmpCentral.Ctlcontrols.currentPosition;
             }
             if(wmpCentral.playState == WMPLib.WMPPlayState.wmppsPaused)
             {
                 lblInicio.Text = wmpCentral.Ctlcontrols.currentPositionString;
-                //lblInicio.Text = "" + wmpCentral.Ctlcontrols.currentPosition;
             }
             if(wmpCentral.playState == WMPLib.WMPPlayState.wmppsStopped)
             {
@@ -1543,6 +1340,7 @@ namespace See_More
                 if(VideoNombreActual != wmpCentral.currentMedia.name)
                 {
                     VideoNombreActual = wmpCentral.currentMedia.name;
+                    auxiliarNombre = VideoNombreActual;
                     String[] porVer = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
                     String[] vacio;
                     foreach (String linea in porVer)

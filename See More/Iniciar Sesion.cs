@@ -2,13 +2,11 @@
 using System.Windows.Forms;
 using System.IO;
 using DATOS_SEEMORE;
-using MODELOS_SEEMORE;
 
 namespace See_More
 {
     public partial class Iniciar_Sesion : Form
     {
-        public Cuenta usuarioSeleccionado { get; set; }
         public String Usuario { get; set; }
         public String Imagen { get; set; }
         public String Sexo { get; set; }
@@ -45,30 +43,6 @@ namespace See_More
         }
         private void iniciarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (CuentaSeeMore.InicioSesion(txtUsuario.Text,txtContraseña.Text))
-                {
-                    dgvDatos.DataSource = CuentaSeeMore.BuscarImagen(txtUsuario.Text);
-                    dgvDatos.Rows[0].Selected = true;
-                    dgvDatos.CurrentCell = dgvDatos.Rows[0].Cells[0];
-                    if (dgvDatos.SelectedRows.Count == 1)
-                    {
-                        int Nombre = Convert.ToInt32(dgvDatos.CurrentRow.Cells[0].Value);
-                        usuarioSeleccionado = CuentaSeeMore.ObtenerC(Nombre);
-                        Configuracion.nombre = txtUsuario.Text;
-                        Configuracion.usuario = txtUsuario.Text;
-                        Configuracion.contraseña = txtContraseña.Text;
-                        this.Close();
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("El usuario y/o contraseña estan mal, intente de nuevo");
-                }
-            }
-            catch (Exception)
-            {
                 Boolean sinCoencidencia = false;
                 for (int j = 0; j < tamaño; j++)
                 {
@@ -98,11 +72,6 @@ namespace See_More
                 {
                     MessageBox.Show("El Usuario y/o Contraseña estan mal, intente de nuevo");
                 }
-            }
-            finally
-            {
-
-            }
         }
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
         {
