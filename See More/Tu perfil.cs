@@ -8,15 +8,10 @@ namespace See_More
 {
     public partial class Tu_perfil : Form
     {
-        public String Usuario1 { get; set; }
-        public String Imagen1 { get; set; }
-        public String Sexo1 { get; set; }
-        public String Contraseña1 { get; set; }
         Boolean entraSINO = false;
         StreamWriter sw1 = null, sw2 = null, sw3 = null;
         String genero = "";
         String usuarioAct;
-        String imagenConConexion;
         String imagenSinConexion;
         String rutadeImagen;
         Boolean regresarHistorial = true;
@@ -46,7 +41,7 @@ namespace See_More
         }
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-                String ruta = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + ".txt";
+                String ruta = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + ".txt";
                 rtxHistorialUsuario.SaveFile(ruta, RichTextBoxStreamType.PlainText);
                 rtxHistorialUsuario.LoadFile(ruta, RichTextBoxStreamType.PlainText);          
         }
@@ -66,13 +61,8 @@ namespace See_More
             frm.ShowDialog(); 
                 try
                 {
-                    if (frm.Usuario != null)
+                    if (Configuracion.DatosUsuario.Usuario != null)
                     {
-                        Usuario1 = frm.Usuario;
-                        usuarioAct = frm.Usuario;
-                        Imagen1 = frm.Imagen;
-                        Sexo1 = frm.Sexo;
-                        Contraseña1 = frm.Contraseña;
                         lblSeries.Visible = true;
                         txtSeries.Visible = true;
                         actualizarPerfilToolStripMenuItem.Enabled = false;
@@ -86,41 +76,41 @@ namespace See_More
                         sw7.Flush(); sw7.Close();
                         sw1 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
                         string result = string.Empty;
-                        byte[] encryted = System.Text.Encoding.Unicode.GetBytes(frm.Usuario);
+                        byte[] encryted = System.Text.Encoding.Unicode.GetBytes(Configuracion.DatosUsuario.Usuario);
                         result = Convert.ToBase64String(encryted);
                         sw1.WriteLine(result);
                         sw1.Close();
                         sw2 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
                         string resultado = string.Empty;
-                        byte[] encriptar = System.Text.Encoding.Unicode.GetBytes(frm.Contraseña);
+                        byte[] encriptar = System.Text.Encoding.Unicode.GetBytes(Configuracion.DatosUsuario.Contraseña);
                         resultado = Convert.ToBase64String(encriptar);
                         sw2.WriteLine(resultado);
                         sw2.Close();
                         sw3 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
-                        sw3.WriteLine(frm.Imagen);
+                        sw3.WriteLine(Configuracion.DatosUsuario.Imagen);
                         sw3.Close();
-                        if (frm.Sexo == "Hombre")
+                        if (Configuracion.DatosUsuario.Sexo == "Hombre")
                         {
                             genero = "Hombre";
-                            this.Text = "Bienvenido - " + frm.Usuario;
+                            this.Text = "Bienvenido - " + Configuracion.DatosUsuario.Usuario;
                         }
-                        if (frm.Sexo == "Mujer")
+                        if (Configuracion.DatosUsuario.Sexo == "Mujer")
                         {
                             genero = "Mujer";
-                            this.Text = "Bienvenida - " + frm.Usuario;
+                            this.Text = "Bienvenida - " + Configuracion.DatosUsuario.Usuario;
                         }
-                        if(frm.Sexo != "Hombre" && frm.Sexo != "Mujer")
+                        if(Configuracion.DatosUsuario.Sexo != "Hombre" && Configuracion.DatosUsuario.Sexo != "Mujer")
                         {
-                            genero = frm.Sexo;
-                            this.Text = "Bienvenido/a - " + frm.Usuario;
+                            genero = Configuracion.DatosUsuario.Sexo;
+                            this.Text = "Bienvenido/a - " + Configuracion.DatosUsuario.Usuario;
                         }
                         string res = string.Empty;
-                        byte[] decryted = Convert.FromBase64String(frm.Imagen);
+                        byte[] decryted = Convert.FromBase64String(Configuracion.DatosUsuario.Imagen);
                         res = System.Text.Encoding.Unicode.GetString(decryted);
                         picUsuario.Image = Image.FromFile(res);
                         picUsuario.BackgroundImageLayout = ImageLayout.Stretch;
-                        lblUsuario.Text = "Este es tu historial de videos - " + frm.Usuario;
-                        String ruta = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + ".txt";
+                        lblUsuario.Text = "Este es tu historial de videos - " + Configuracion.DatosUsuario.Usuario;
+                        String ruta = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + ".txt";
                         rtxHistorialUsuario.LoadFile(ruta, RichTextBoxStreamType.PlainText);
                         if (rtxHistorialUsuario.Text == "")
                         {
@@ -134,7 +124,7 @@ namespace See_More
                         StreamReader rd = null;
                         try
                         {
-                            rd = new StreamReader(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Imagen.txt");
+                            rd = new StreamReader(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Imagen.txt");
                             line = rd.ReadLine();
                             this.BackgroundImage = Image.FromFile(line);
                             this.BackgroundImageLayout = ImageLayout.Stretch;
@@ -161,9 +151,9 @@ namespace See_More
                 string direccion = abrir.FileName;
                 this.BackgroundImage = Image.FromFile(abrir.FileName);
                 this.BackgroundImageLayout = ImageLayout.Stretch;
-                StreamWriter escribir = new StreamWriter(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Imagen.txt");
+                StreamWriter escribir = new StreamWriter(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Imagen.txt");
                 escribir.Flush(); escribir.Close();
-                StreamWriter sw = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Imagen.txt");
+                StreamWriter sw = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Imagen.txt");
                 sw.WriteLine(direccion);
                 sw.Close();
             }
@@ -174,7 +164,7 @@ namespace See_More
             frm.ShowDialog();
                 try
                 {
-                    if (frm.Usuario != null)
+                    if (Configuracion.DatosUsuario.Usuario != null)
                     {
                         entraSINO = true;
                         lblContraseña.Visible = true;
@@ -185,30 +175,25 @@ namespace See_More
                         txtUsuario.Visible = true;
                         txtContraseña.Visible = true;
                         txtConfirmarContraseña.Visible = true;
-                        Usuario1 = frm.Usuario;
-                        Imagen1 = frm.Imagen;
-                        imagenSinConexion = frm.Imagen;
-                        Sexo1 = frm.Sexo;
-                        Contraseña1 = frm.Contraseña;
                         string imagen = string.Empty;
-                        byte[] decryte = Convert.FromBase64String(frm.Imagen);
+                        byte[] decryte = Convert.FromBase64String(Configuracion.DatosUsuario.Imagen);
                         imagen = System.Text.Encoding.Unicode.GetString(decryte);
                         picUsuario.Image = Image.FromFile(imagen);
                         picUsuario.BackgroundImageLayout = ImageLayout.Stretch;
-                        txtUsuario.Text = frm.Usuario;
-                        txtContraseña.Text = frm.Contraseña;
-                        txtConfirmarContraseña.Text = frm.Contraseña;
-                        if (frm.Sexo == "Hombre")
+                        txtUsuario.Text = Configuracion.DatosUsuario.Usuario;
+                        txtContraseña.Text = Configuracion.DatosUsuario.Contraseña;
+                        txtConfirmarContraseña.Text = Configuracion.DatosUsuario.Contraseña;
+                        if (Configuracion.DatosUsuario.Sexo == "Hombre")
                         {
-                            this.Text = "Bienvenido - " + frm.Usuario; lblUsuario.Text = "";
+                            this.Text = "Bienvenido - " + Configuracion.DatosUsuario.Usuario; lblUsuario.Text = "";
                         }
-                        if (frm.Sexo == "Mujer")
+                        if (Configuracion.DatosUsuario.Sexo == "Mujer")
                         {
-                            this.Text = "Bienvenida - " + frm.Usuario; lblUsuario.Text = "";
+                            this.Text = "Bienvenida - " + Configuracion.DatosUsuario.Usuario; lblUsuario.Text = "";
                         }
-                        if (frm.Sexo != "Hombre" && frm.Sexo != "Mujer")
+                        if (Configuracion.DatosUsuario.Sexo != "Hombre" && Configuracion.DatosUsuario.Sexo != "Mujer")
                         {
-                            this.Text = "Bienvenido/a - " + frm.Usuario; lblUsuario.Text = "";
+                            this.Text = "Bienvenido/a - " + Configuracion.DatosUsuario.Usuario; lblUsuario.Text = "";
                         }
                         rtxHistorialUsuario.Text = "";
                         actualizarPerfilToolStripMenuItem.Enabled = true;
@@ -225,55 +210,55 @@ namespace See_More
         {
             if (txtContraseña.Text == txtConfirmarContraseña.Text)
             {
-                    try
+                try
+                {
+                    String[] users = File.ReadAllLines(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
+                    int tamaño = (users.Length * 4) / 4;
+                    Configuracion.DatosInicioSesionTemp.TempNombre = new string[tamaño];
+                    Configuracion.DatosInicioSesionTemp.TempContra = new string[tamaño];
+                    Configuracion.DatosInicioSesionTemp.TempImagen = new string[tamaño];
+                    Configuracion.DatosInicioSesionTemp.TempSexo = new string[tamaño];
+                    int contador = 0;
+                    foreach (String linea in users)
                     {
-                        String[] users = File.ReadAllLines(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
-                        int tamaño = (users.Length * 4) / 4;
-                        Configuracion.TempNombre = new string[tamaño];
-                        Configuracion.TempContra = new string[tamaño];
-                        Configuracion.TempImagen = new string[tamaño];
-                        Configuracion.TempSexo = new string[tamaño];
-                        int contador = 0;
-                        foreach (String linea in users)
+                        Configuracion.DatosInicioSesionAuto.Usuarios = linea.Split(';');
+                        Configuracion.DatosInicioSesionTemp.TempNombre[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[0];
+                        Configuracion.DatosInicioSesionTemp.TempContra[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[1];
+                        Configuracion.DatosInicioSesionTemp.TempImagen[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[2];
+                        Configuracion.DatosInicioSesionTemp.TempSexo[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[3];
+                        if (usuarioAct != Configuracion.DatosInicioSesionTemp.TempNombre[contador])
                         {
-                            Configuracion.Usuarios = linea.Split(';');
-                            Configuracion.TempNombre[contador] = Configuracion.Usuarios[0];
-                            Configuracion.TempContra[contador] = Configuracion.Usuarios[1];
-                            Configuracion.TempImagen[contador] = Configuracion.Usuarios[2];
-                            Configuracion.TempSexo[contador] = Configuracion.Usuarios[3];
-                            if(usuarioAct != Configuracion.TempNombre[contador])
-                            {
-                                StreamWriter sw = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\temp.txt");
-                                sw.WriteLine(Configuracion.TempNombre[contador] + ";" + Configuracion.TempContra[contador] + ";" + Configuracion.TempImagen[contador] + ";" + Configuracion.TempSexo[contador]);
-                                sw.Close();
-                            }
-                            contador += 1;
+                            StreamWriter sw = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\temp.txt");
+                            sw.WriteLine(Configuracion.DatosInicioSesionTemp.TempNombre[contador] + ";" + Configuracion.DatosInicioSesionTemp.TempContra[contador] + ";" + Configuracion.DatosInicioSesionTemp.TempImagen[contador] + ";" + Configuracion.DatosInicioSesionTemp.TempSexo[contador]);
+                            sw.Close();
                         }
-                        string result = string.Empty;
-                        if (imagenPerfil != "")
-                        {                            
-                            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(imagenPerfil);
-                            result = Convert.ToBase64String(encryted);
-                        }
-                        else
-                        {
-                            result = imagenSinConexion.Trim();
-                        }
-                        string resul = string.Empty;
-                        byte[] encryte = System.Text.Encoding.Unicode.GetBytes(txtContraseña.Text);
-                        resul = Convert.ToBase64String(encryte);
-                        StreamWriter sw2 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\temp.txt");
-                        sw2.WriteLine(txtUsuario.Text.Trim() + ";" + resul.Trim() + ";" + result.Trim() + ";" + genero.Trim());
-                        sw2.Close();
-                        StreamWriter sw3 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\actualizaciones.txt");
-                        sw3.WriteLine(txtUsuario.Text.Trim() + ";" + txtContraseña.Text.Trim() + ";" + result.Trim() + ";" + genero.Trim());
-                        sw3.Close();
-                        String ruta = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + ".txt";
-                        String ruta2 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Imagen.txt";
-                        String ruta3 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Busqueda.txt";
-                        String ruta4 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Animes.txt";
-                        String ruta5 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Inte.txt";
-                        String ruta6 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Ruta.txt";
+                        contador += 1;
+                    }
+                    string result = string.Empty;
+                    if (imagenPerfil != "")
+                    {
+                        byte[] encryted = System.Text.Encoding.Unicode.GetBytes(imagenPerfil);
+                        result = Convert.ToBase64String(encryted);
+                    }
+                    else
+                    {
+                        result = imagenSinConexion.Trim();
+                    }
+                    string resul = string.Empty;
+                    byte[] encryte = System.Text.Encoding.Unicode.GetBytes(txtContraseña.Text);
+                    resul = Convert.ToBase64String(encryte);
+                    StreamWriter sw2 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\temp.txt");
+                    sw2.WriteLine(txtUsuario.Text.Trim() + ";" + resul.Trim() + ";" + result.Trim() + ";" + genero.Trim());
+                    sw2.Close();
+                    StreamWriter sw3 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\actualizaciones.txt");
+                    sw3.WriteLine(txtUsuario.Text.Trim() + ";" + txtContraseña.Text.Trim() + ";" + result.Trim() + ";" + genero.Trim());
+                    sw3.Close();
+                    String ruta = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + ".txt";
+                        String ruta2 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Imagen.txt";
+                        String ruta3 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Busqueda.txt";
+                        String ruta4 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt";
+                        String ruta5 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Inte.txt";
+                        String ruta6 = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Ruta.txt";
                         if (File.Exists(ruta) && File.Exists(ruta2) && File.Exists(ruta3) && File.Exists(ruta4) && File.Exists(ruta5) && File.Exists(ruta6))
                         {
                             if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + txtUsuario.Text + ".txt") &&
@@ -319,7 +304,7 @@ namespace See_More
                 if (txtSeries.Text != "")
                 {
                     Program.Displaynotify(txtSeries.Text);
-                    escritor = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.nombre + "Animes.txt");
+                    escritor = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt");
                     escritor.WriteLine(txtSeries.Text);
                     escritor.Close();
                     txtSeries.Clear();
@@ -330,8 +315,8 @@ namespace See_More
         {
             if (regresarHistorial == true)
             {
-                lblUsuario.Text = "Estos son las series vistas - " + Configuracion.usuario;
-                String ruta = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt";
+                lblUsuario.Text = "Estos son las series vistas - " + Configuracion.DatosUsuario.Usuario;
+                String ruta = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt";
                 rtxHistorialUsuario.LoadFile(ruta, RichTextBoxStreamType.PlainText);
                 guardarToolStripMenuItem.Enabled = false;
                 mostrarAnimesVistosToolStripMenuItem.Text = "Regresar al historial";
@@ -339,8 +324,8 @@ namespace See_More
             }
             else
             {
-                lblUsuario.Text = "Este es tu historial de videos - " + Configuracion.usuario;
-                String ruta = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + ".txt";
+                lblUsuario.Text = "Este es tu historial de videos - " + Configuracion.DatosUsuario.Usuario;
+                String ruta = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + ".txt";
                 rtxHistorialUsuario.LoadFile(ruta, RichTextBoxStreamType.PlainText);
                 guardarToolStripMenuItem.Enabled = true;
                 mostrarAnimesVistosToolStripMenuItem.Text = "Mostrar Animes vistos";
@@ -410,8 +395,10 @@ namespace See_More
             txtContraseña.Text = "";
             txtConfirmarContraseña.Text = "";
             this.BackgroundImage = null;
-            Configuracion.usuario = "";
-            Configuracion.contraseña = "";
+            Configuracion.DatosUsuario.Usuario = "";
+            Configuracion.DatosUsuario.Contraseña = "";
+            Configuracion.DatosUsuario.Sexo = "";
+            Configuracion.DatosUsuario.Imagen = "";
             StreamWriter sw = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
             sw.Flush(); sw.Close();
             StreamWriter sw2 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");

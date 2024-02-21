@@ -36,13 +36,13 @@ namespace See_More
             player.CreateControl();
             player.settings.setMode("loop", false);
             playlist = player.playlistCollection.newPlaylist("List");
-            if (Configuracion.usuario != "" && Configuracion.contraseña != "")
+            if (Configuracion.DatosUsuario.Usuario != "" && Configuracion.DatosUsuario.Contraseña != "")
             {
-                txtUsuario.Text = Configuracion.usuario;
-                txtContraseña.Text = Configuracion.contraseña;
+                txtUsuario.Text = Configuracion.DatosUsuario.Usuario;
+                txtContraseña.Text = Configuracion.DatosUsuario.Contraseña;
                 try
                 {
-                    StreamReader rdUsuario = new StreamReader(Application.StartupPath+@"\See More\Usuarios SeeMore\" + Configuracion.usuario+"Busqueda.txt");
+                    StreamReader rdUsuario = new StreamReader(Application.StartupPath+@"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario +"Busqueda.txt");
                     leni = rdUsuario.ReadLine();
                     txtNombreSerie.Text = leni;
                     rdUsuario.Close();
@@ -88,10 +88,10 @@ namespace See_More
                 try
                 {
                     String camino = string.Empty;
-                    String[] ruta = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\"+Configuracion.usuario+"Ruta.txt");
+                    String[] ruta = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\"+Configuracion.DatosUsuario.Usuario +"Ruta.txt");
                     //Posible eliminacion
-                    String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
-                    animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+                    String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt");
+                    animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt");
                     String[] caminos = new string[1]; String[] separar;
                     try
                     {
@@ -135,7 +135,7 @@ namespace See_More
         private void click_de_boton(object boton, EventArgs args)
         {
             pnlRespaldo.Controls.Clear();
-            animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+            animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt");
             try
             {
                 texto = ((Button)boton).Text;
@@ -165,22 +165,20 @@ namespace See_More
                     for (int j = 0; j < tamaño; j++)
                     {
                         string res = string.Empty;
-                        byte[] decryted = Convert.FromBase64String(Configuracion.UsuariosContra[j]);
+                        byte[] decryted = Convert.FromBase64String(Configuracion.DatosInicioSesionAuto.UsuariosContra[j]);
                         res = System.Text.Encoding.Unicode.GetString(decryted);
-                        if (Configuracion.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
+                        if (Configuracion.DatosInicioSesionAuto.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
                         {
                             sinCoencidencia = true;
-                            Configuracion.BuscarAddon.UsuarioRegistrado = Configuracion.UsuariosNombre[j];
-                            Configuracion.BuscarAddon.UsuarioImagen = Configuracion.UsuariosImagen[j];
+                            Configuracion.DatosUsuario.Usuario = Configuracion.DatosInicioSesionAuto.UsuariosNombre[j];
+                            Configuracion.DatosUsuario.Imagen = Configuracion.DatosInicioSesionAuto.UsuariosImagen[j];
                             datos = playlist;
-                            Configuracion.BuscarAddon.IsOnly = false;
-                            Configuracion.nombre = txtUsuario.Text;
-                            Configuracion.usuario = txtUsuario.Text;
-                            Configuracion.contraseña = txtContraseña.Text;
+                            Configuracion.DatosReproductor.IsOnly = false;
+                            Configuracion.DatosUsuario.Contraseña = txtContraseña.Text;
                             string resulta = string.Empty;
-                            byte[] desin = Convert.FromBase64String(Configuracion.UsuariosImagen[j]);
+                            byte[] desin = Convert.FromBase64String(Configuracion.DatosInicioSesionAuto.UsuariosImagen[j]);
                             resulta = System.Text.Encoding.Unicode.GetString(desin);
-                            Configuracion.imagen = resulta;
+                            Configuracion.DatosUsuario.Imagen = resulta;
                             StreamWriter sw5 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
                             sw5.Flush(); sw5.Close();
                             StreamWriter sw6 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
@@ -200,11 +198,11 @@ namespace See_More
                             sw2.WriteLine(resultado);
                             sw2.Close();
                             sw3 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
-                            sw3.WriteLine(Configuracion.UsuariosImagen[j]);
+                            sw3.WriteLine(Configuracion.DatosInicioSesionAuto.UsuariosImagen[j]);
                             sw3.Close();
-                            StreamWriter ultimaruta = new StreamWriter(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Ruta.txt");
+                            StreamWriter ultimaruta = new StreamWriter(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Ruta.txt");
                             ultimaruta.Flush(); ultimaruta.Close();
-                            StreamWriter ultimaruta2 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Ruta.txt");
+                            StreamWriter ultimaruta2 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Ruta.txt");
                             ultimaruta2.WriteLine(ultimarutavista + ";"); ultimaruta2.Close();
                             this.Close();
                             break;
@@ -228,23 +226,21 @@ namespace See_More
                 for (int j = 0; j < tamaño; j++)
                 {
                     string res = string.Empty;
-                    byte[] decryted = Convert.FromBase64String(Configuracion.UsuariosContra[j]);
+                    byte[] decryted = Convert.FromBase64String(Configuracion.DatosInicioSesionAuto.UsuariosContra[j]);
                     res = System.Text.Encoding.Unicode.GetString(decryted);
-                    if (Configuracion.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
+                    if (Configuracion.DatosInicioSesionAuto.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
                     {
                         sinCoencidencia = true;
-                        Configuracion.BuscarAddon.UsuarioRegistrado = Configuracion.UsuariosNombre[j];
-                        Configuracion.BuscarAddon.UsuarioImagen = Configuracion.UsuariosImagen[j];
-                        Configuracion.BuscarAddon.NombreVideo = ((Button)boton).Text;
-                        Configuracion.BuscarAddon.RutaVideo = ((Button)boton).Name;
-                        Configuracion.BuscarAddon.IsOnly = true;
-                        Configuracion.nombre = txtUsuario.Text;
-                        Configuracion.usuario = txtUsuario.Text;
-                        Configuracion.contraseña = txtContraseña.Text;
+                        Configuracion.DatosUsuario.Usuario = Configuracion.DatosInicioSesionAuto.UsuariosNombre[j];
+                        Configuracion.DatosUsuario.Imagen = Configuracion.DatosInicioSesionAuto.UsuariosImagen[j];
+                        Configuracion.DatosReproductor.NombreVideo = ((Button)boton).Text;
+                        Configuracion.DatosReproductor.RutaVideo = ((Button)boton).Name;
+                        Configuracion.DatosReproductor.IsOnly = true;
+                        Configuracion.DatosUsuario.Contraseña = txtContraseña.Text;
                         string resulta = string.Empty;
-                        byte[] desin = Convert.FromBase64String(Configuracion.UsuariosImagen[j]);
+                        byte[] desin = Convert.FromBase64String(Configuracion.DatosInicioSesionAuto.UsuariosImagen[j]);
                         resulta = System.Text.Encoding.Unicode.GetString(desin);
-                        Configuracion.imagen = resulta;
+                        Configuracion.DatosUsuario.Imagen = resulta;
                         StreamWriter sw5 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
                         sw5.Flush(); sw5.Close();
                         StreamWriter sw6 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
@@ -264,11 +260,11 @@ namespace See_More
                         sw2.WriteLine(resultado);
                         sw2.Close();
                         sw3 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
-                        sw3.WriteLine(Configuracion.UsuariosImagen[j]);
+                        sw3.WriteLine(Configuracion.DatosInicioSesionAuto.UsuariosImagen[j]);
                         sw3.Close();
-                        StreamWriter ultimaruta = new StreamWriter(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Ruta.txt");
+                        StreamWriter ultimaruta = new StreamWriter(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Ruta.txt");
                         ultimaruta.Flush(); ultimaruta.Close();
-                        StreamWriter ultimaruta2 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Ruta.txt");
+                        StreamWriter ultimaruta2 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Ruta.txt");
                         ultimaruta2.WriteLine(ultimarutavista + ";"); ultimaruta2.Close();
                         this.Close();
                         break;
@@ -290,19 +286,19 @@ namespace See_More
             String[] users = File.ReadAllLines(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
             tamaño = (users.Length * 4) / 4;
             int contador = 0;
-            Configuracion.BuscarAddon.hayIntercambio = false;
-            Configuracion.BuscarAddon.UsuarioTemporal = "";
-            Configuracion.UsuariosNombre = new string[tamaño];
-            Configuracion.UsuariosContra = new string[tamaño];
-            Configuracion.UsuariosImagen = new string[tamaño];
-            Configuracion.UsuariosSexo = new string[tamaño];
+            Configuracion.DatosReproductor.hayIntercambio = false;
+            Configuracion.DatosReproductor.UsuarioTemporal = "";
+            Configuracion.DatosInicioSesionAuto.UsuariosNombre = new string[tamaño];
+            Configuracion.DatosInicioSesionAuto.UsuariosContra = new string[tamaño];
+            Configuracion.DatosInicioSesionAuto.UsuariosImagen = new string[tamaño];
+            Configuracion.DatosInicioSesionAuto.UsuariosSexo = new string[tamaño];
             foreach (String linea in users)
             {
-                Configuracion.Usuarios = linea.Split(';');
-                Configuracion.UsuariosNombre[contador] = Configuracion.Usuarios[0];
-                Configuracion.UsuariosContra[contador] = Configuracion.Usuarios[1];
-                Configuracion.UsuariosImagen[contador] = Configuracion.Usuarios[2];
-                Configuracion.UsuariosSexo[contador] = Configuracion.Usuarios[3];
+                Configuracion.DatosInicioSesionAuto.Usuarios = linea.Split(';');
+                Configuracion.DatosInicioSesionAuto.UsuariosNombre[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[0];
+                Configuracion.DatosInicioSesionAuto.UsuariosContra[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[1];
+                Configuracion.DatosInicioSesionAuto.UsuariosImagen[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[2];
+                Configuracion.DatosInicioSesionAuto.UsuariosSexo[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[3];
                 contador += 1;
             }
         } 
@@ -322,25 +318,25 @@ namespace See_More
             sw7.Flush(); sw7.Close();
             sw1 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
             string result = string.Empty;
-            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(Configuracion.BuscarAddon.Usuario);
+            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(Configuracion.DatosUsuario.Usuario);
             result = Convert.ToBase64String(encryted);
             sw1.WriteLine(result);
             sw1.Close();
             sw2 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
             string resultado = string.Empty;
-            byte[] encriptar = System.Text.Encoding.Unicode.GetBytes(Configuracion.BuscarAddon.Contraseña);
+            byte[] encriptar = System.Text.Encoding.Unicode.GetBytes(Configuracion.DatosUsuario.Contraseña);
             resultado = Convert.ToBase64String(encriptar);
             sw2.WriteLine(resultado);
             sw2.Close();
             sw3 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
-            sw3.WriteLine(Configuracion.BuscarAddon.Imagen);
+            sw3.WriteLine(Configuracion.DatosUsuario.Imagen);
             sw3.Close();
             try
             {
                 String camino = string.Empty;
-                String[] ruta = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Ruta.txt");
-                String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
-                animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+                String[] ruta = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Ruta.txt");
+                String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt");
+                animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt");
                 String[] caminos = new string[1]; String[] separar;
                 try
                 {
@@ -382,23 +378,22 @@ namespace See_More
                     for (int j = 0; j < tamaño; j++)
                     {
                         string res = string.Empty;
-                        byte[] decryted = Convert.FromBase64String(Configuracion.UsuariosContra[j]);
+                        byte[] decryted = Convert.FromBase64String(Configuracion.DatosInicioSesionAuto.UsuariosContra[j]);
                         res = System.Text.Encoding.Unicode.GetString(decryted);
-                        if (Configuracion.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
+                        if (Configuracion.DatosInicioSesionAuto.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
                         {
                             sinCoencidencia = true;
-                            Configuracion.BuscarAddon.Usuario = Configuracion.UsuariosNombre[j];
-                            Configuracion.BuscarAddon.Contraseña = res;
-                            Configuracion.BuscarAddon.Imagen = Configuracion.UsuariosImagen[j];
-                            Configuracion.BuscarAddon.Sexo = Configuracion.UsuariosSexo[j];
-                            Configuracion.nombre = txtUsuario.Text;
-                            Configuracion.usuario = txtUsuario.Text;
-                            Configuracion.contraseña = txtContraseña.Text;
+                            Configuracion.DatosUsuario.Usuario = Configuracion.DatosInicioSesionAuto.UsuariosNombre[j];
+                            Configuracion.DatosUsuario.Contraseña = res;
+                            Configuracion.DatosUsuario.Imagen = Configuracion.DatosInicioSesionAuto.UsuariosImagen[j];
+                            Configuracion.DatosUsuario.Sexo = Configuracion.DatosInicioSesionAuto.UsuariosSexo[j];
+                            Configuracion.DatosUsuario.Usuario = txtUsuario.Text;
+                            Configuracion.DatosUsuario.Contraseña = txtContraseña.Text;
                             string resulta = string.Empty;
-                            byte[] desin = Convert.FromBase64String(Configuracion.BuscarAddon.Imagen);
+                            byte[] desin = Convert.FromBase64String(Configuracion.DatosUsuario.Imagen);
                             resulta = System.Text.Encoding.Unicode.GetString(desin);
-                            Configuracion.imagen = resulta;
-                            Configuracion.loCerroelUsuario = false;
+                            Configuracion.DatosUsuario.Imagen = resulta;
+                            Configuracion.Informacion.loCerroelUsuario = false;
                             CargarDatos();
                             break;
                         }
@@ -421,23 +416,21 @@ namespace See_More
                     for (int j = 0; j < tamaño; j++)
                     {
                         string res = string.Empty;
-                        byte[] decryted = Convert.FromBase64String(Configuracion.UsuariosContra[j]);
+                        byte[] decryted = Convert.FromBase64String(Configuracion.DatosInicioSesionAuto.UsuariosContra[j]);
                         res = System.Text.Encoding.Unicode.GetString(decryted);
-                        if (Configuracion.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
+                        if (Configuracion.DatosInicioSesionAuto.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
                         {
                             sinCoencidencia = true;
-                            Configuracion.BuscarAddon.Usuario = Configuracion.UsuariosNombre[j];
-                            Configuracion.BuscarAddon.Contraseña = res;
-                            Configuracion.BuscarAddon.Imagen = Configuracion.UsuariosImagen[j];
-                            Configuracion.BuscarAddon.Sexo = Configuracion.UsuariosSexo[j];
-                            Configuracion.nombre = txtUsuario.Text;
-                            Configuracion.usuario = txtUsuario.Text;
-                            Configuracion.contraseña = txtContraseña.Text;
+                            Configuracion.DatosUsuario.Usuario = Configuracion.DatosInicioSesionAuto.UsuariosNombre[j];
+                            Configuracion.DatosUsuario.Contraseña = res;
+                            Configuracion.DatosUsuario.Imagen = Configuracion.DatosInicioSesionAuto.UsuariosImagen[j];
+                            Configuracion.DatosUsuario.Sexo = Configuracion.DatosInicioSesionAuto.UsuariosSexo[j];
+                            Configuracion.DatosUsuario.Contraseña = txtContraseña.Text;
                             string resulta = string.Empty;
-                            byte[] desin = Convert.FromBase64String(Configuracion.BuscarAddon.Imagen);
+                            byte[] desin = Convert.FromBase64String(Configuracion.DatosUsuario.Imagen);
                             resulta = System.Text.Encoding.Unicode.GetString(desin);
-                            Configuracion.imagen = resulta;
-                            Configuracion.loCerroelUsuario = false;
+                            Configuracion.DatosUsuario.Imagen = resulta;
+                            Configuracion.Informacion.loCerroelUsuario = false;
                             CargarDatos();
                             break;
                         }
@@ -455,7 +448,7 @@ namespace See_More
             if (rutaCamino != @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos")
             {
                 pnlRespaldo.Controls.Clear();
-                animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+                animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt");
                 try
                 {
                     String[] rutaCambio = rutaCamino.Split(new string[] { @"\" }, StringSplitOptions.None);
@@ -489,7 +482,7 @@ namespace See_More
         {
             pnlRespaldo.Controls.Clear();
             rutaCamino = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
-            animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+            animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt");
             try
             {
                 DirectoryInfo directory = new DirectoryInfo(@"C:\Users\" + Configuracion.UsuarioActual + @"\Videos");
@@ -503,36 +496,36 @@ namespace See_More
         }       
         private void button1_Click(object sender, EventArgs e)
         {
-            Configuracion.BuscarAddon.hayIntercambio = false;
+            Configuracion.DatosReproductor.hayIntercambio = false;
                 String[] users = File.ReadAllLines(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
                 tamaño = (users.Length * 4) / 4;
                 int contador = 0;
-                Configuracion.UsuariosNombre = new string[tamaño];
-                Configuracion.UsuariosContra = new string[tamaño];
-                Configuracion.UsuariosImagen = new string[tamaño];
-                Configuracion.UsuariosSexo = new string[tamaño];
+                Configuracion.DatosInicioSesionAuto.UsuariosNombre = new string[tamaño];
+                Configuracion.DatosInicioSesionAuto.UsuariosContra = new string[tamaño];
+                Configuracion.DatosInicioSesionAuto.UsuariosImagen = new string[tamaño];
+                Configuracion.DatosInicioSesionAuto.UsuariosSexo = new string[tamaño];
                 foreach (String linea in users)
                 {
                     //Aqui hay un error, tratar de no reescribir sobre el arreglo
-                    Configuracion.Usuarios = linea.Split(';');
-                    Configuracion.UsuariosNombre[contador] = Configuracion.Usuarios[0];
-                    Configuracion.UsuariosContra[contador] = Configuracion.Usuarios[1];
-                    Configuracion.UsuariosImagen[contador] = Configuracion.Usuarios[2];
-                    Configuracion.UsuariosSexo[contador] = Configuracion.Usuarios[3];
+                    Configuracion.DatosInicioSesionAuto.Usuarios = linea.Split(';');
+                    Configuracion.DatosInicioSesionAuto.UsuariosNombre[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[0];
+                    Configuracion.DatosInicioSesionAuto.UsuariosContra[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[1];
+                    Configuracion.DatosInicioSesionAuto.UsuariosImagen[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[2];
+                    Configuracion.DatosInicioSesionAuto.UsuariosSexo[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[3];
                     contador += 1;
                 }
                 Boolean sinCoencidencia = false;
                 for (int j = 0; j < tamaño; j++)
                 {
                     string res = string.Empty;
-                    byte[] decryted = Convert.FromBase64String(Configuracion.UsuariosContra[j]);
+                    byte[] decryted = Convert.FromBase64String(Configuracion.DatosInicioSesionAuto.UsuariosContra[j]);
                     res = System.Text.Encoding.Unicode.GetString(decryted);
-                    if (Configuracion.UsuariosNombre[j] == textBox2.Text && res == textBox1.Text)
+                    if (Configuracion.DatosInicioSesionAuto.UsuariosNombre[j] == textBox2.Text && res == textBox1.Text)
                     {
                         sinCoencidencia = true;
                         MessageBox.Show("Procediendo a intercambio de información, puede continuar viendo videos");
-                        Configuracion.BuscarAddon.UsuarioTemporal = textBox2.Text;
-                        Configuracion.BuscarAddon.hayIntercambio = true;
+                        Configuracion.DatosReproductor.UsuarioTemporal = textBox2.Text;
+                        Configuracion.DatosReproductor.hayIntercambio = true;
                         break;
                     }
                 }
@@ -584,7 +577,7 @@ namespace See_More
                 {
                         pnlRespaldo.Controls.Clear();
                         oracion = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
-                        animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+                        animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt");
                         try
                         {
                             DirectoryInfo directory = new DirectoryInfo(@"C:\Users\" + Configuracion.UsuarioActual + @"\Videos");
@@ -609,7 +602,7 @@ namespace See_More
                         rutaCamino = Path.GetDirectoryName(abrir.FileName);
                         ultimarutavista = rutaCamino;
                         pnlRespaldo.Controls.Clear();
-                        animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+                        animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt");
                         try
                         {
                             DirectoryInfo directory = new DirectoryInfo(rutaCamino);
@@ -676,7 +669,7 @@ namespace See_More
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             pnlRespaldo.Controls.Clear();
-            animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.usuario + "Animes.txt");
+            animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt");
             try
             {
                 DirectoryInfo directory = new DirectoryInfo(rutaCamino);

@@ -104,22 +104,22 @@ namespace See_More
                 {
                     String[] users = File.ReadAllLines(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
                     int tamaño = (users.Length * 4) / 4;
-                    Configuracion.TempNombre = new string[tamaño];
-                    Configuracion.TempContra = new string[tamaño];
-                    Configuracion.TempImagen = new string[tamaño];
-                    Configuracion.TempSexo = new string[tamaño];
+                    Configuracion.DatosInicioSesionTemp.TempNombre = new string[tamaño];
+                    Configuracion.DatosInicioSesionTemp.TempContra = new string[tamaño];
+                    Configuracion.DatosInicioSesionTemp.TempImagen = new string[tamaño];
+                    Configuracion.DatosInicioSesionTemp.TempSexo = new string[tamaño];
                     int contador = 0;
                     foreach (String linea in users)
                     {
-                        Configuracion.Usuarios = linea.Split(';');
-                        Configuracion.TempNombre[contador] = Configuracion.Usuarios[0];
-                        Configuracion.TempContra[contador] = Configuracion.Usuarios[1];
-                        Configuracion.TempImagen[contador] = Configuracion.Usuarios[2];
-                        Configuracion.TempSexo[contador] = Configuracion.Usuarios[3];
-                        if (txtEliminarUser.Text.Trim() != Configuracion.TempNombre[contador])
+                        Configuracion.DatosInicioSesionAuto.Usuarios = linea.Split(';');
+                        Configuracion.DatosInicioSesionTemp.TempNombre[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[0];
+                        Configuracion.DatosInicioSesionTemp.TempContra[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[1];
+                        Configuracion.DatosInicioSesionTemp.TempImagen[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[2];
+                        Configuracion.DatosInicioSesionTemp.TempSexo[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[3];
+                        if (txtEliminarUser.Text.Trim() != Configuracion.DatosInicioSesionTemp.TempNombre[contador])
                         {
                             StreamWriter sw = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\temp.txt");
-                            sw.WriteLine(Configuracion.TempNombre[contador] + ";" + Configuracion.TempContra[contador] + ";" + Configuracion.TempImagen[contador] + ";" + Configuracion.TempSexo[contador]);
+                            sw.WriteLine(Configuracion.DatosInicioSesionTemp.TempNombre[contador] + ";" + Configuracion.DatosInicioSesionTemp.TempContra[contador] + ";" + Configuracion.DatosInicioSesionTemp.TempImagen[contador] + ";" + Configuracion.DatosInicioSesionTemp.TempSexo[contador]);
                             sw.Close();
                         }
                         contador += 1;

@@ -7,10 +7,6 @@ namespace See_More
 {
     public partial class Iniciar_Sesion : Form
     {
-        public String Usuario { get; set; }
-        public String Imagen { get; set; }
-        public String Sexo { get; set; }
-        public String Contraseña { get; set; }
         int tamaño;
         public Iniciar_Sesion()
         {
@@ -22,18 +18,18 @@ namespace See_More
             String[] users = File.ReadAllLines(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
             tamaño = (users.Length * 4) / 4;
             int contador = 0;
-            Configuracion.UsuariosNombre = new string[tamaño];
-            Configuracion.UsuariosContra = new string[tamaño];
-            Configuracion.UsuariosImagen = new string[tamaño];
-            Configuracion.UsuariosSexo = new string[tamaño];
+            Configuracion.DatosInicioSesionAuto.UsuariosNombre = new string[tamaño];
+            Configuracion.DatosInicioSesionAuto.UsuariosContra = new string[tamaño];
+            Configuracion.DatosInicioSesionAuto.UsuariosImagen = new string[tamaño];
+            Configuracion.DatosInicioSesionAuto.UsuariosSexo = new string[tamaño];
             foreach (String linea in users)
             {
                 //Aqui hay un error, tratar de no reescribir sobre el arreglo
-                Configuracion.Usuarios = linea.Split(';');
-                Configuracion.UsuariosNombre[contador] = Configuracion.Usuarios[0];
-                Configuracion.UsuariosContra[contador] = Configuracion.Usuarios[1];
-                Configuracion.UsuariosImagen[contador] = Configuracion.Usuarios[2];
-                Configuracion.UsuariosSexo[contador] = Configuracion.Usuarios[3];
+                Configuracion.DatosInicioSesionAuto.Usuarios = linea.Split(';');
+                Configuracion.DatosInicioSesionAuto.UsuariosNombre[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[0];
+                Configuracion.DatosInicioSesionAuto.UsuariosContra[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[1];
+                Configuracion.DatosInicioSesionAuto.UsuariosImagen[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[2];
+                Configuracion.DatosInicioSesionAuto.UsuariosSexo[contador] = Configuracion.DatosInicioSesionAuto.Usuarios[3];
                 contador += 1;
             }
         }
@@ -47,23 +43,20 @@ namespace See_More
                 for (int j = 0; j < tamaño; j++)
                 {
                     string res = string.Empty;
-                    byte[] decryted = Convert.FromBase64String(Configuracion.UsuariosContra[j]);
+                    byte[] decryted = Convert.FromBase64String(Configuracion.DatosInicioSesionAuto.UsuariosContra[j]);
                     res = System.Text.Encoding.Unicode.GetString(decryted);
-                    if (Configuracion.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
+                    if (Configuracion.DatosInicioSesionAuto.UsuariosNombre[j] == txtUsuario.Text && res == txtContraseña.Text)
                     {
                         sinCoencidencia = true;
-                        Usuario = Configuracion.UsuariosNombre[j];
-                        Contraseña = res;
-                        Imagen = Configuracion.UsuariosImagen[j];
-                        Sexo = Configuracion.UsuariosSexo[j];
-                        Configuracion.nombre = txtUsuario.Text;
-                        Configuracion.usuario = txtUsuario.Text;
-                        Configuracion.contraseña = txtContraseña.Text;
+                        Configuracion.DatosUsuario.Usuario = Configuracion.DatosInicioSesionAuto.UsuariosNombre[j];
+                        Configuracion.DatosUsuario.Contraseña = res;
+                        Configuracion.DatosUsuario.Imagen = Configuracion.DatosInicioSesionAuto.UsuariosImagen[j];
+                        Configuracion.DatosUsuario.Sexo = Configuracion.DatosInicioSesionAuto.UsuariosSexo[j];
                         string resulta = string.Empty;
-                        byte[] desin = Convert.FromBase64String(Imagen);
+                        byte[] desin = Convert.FromBase64String(Configuracion.DatosUsuario.Imagen);
                         resulta = System.Text.Encoding.Unicode.GetString(desin);
-                        Configuracion.imagen = resulta;
-                        Configuracion.loCerroelUsuario = false;
+                        Configuracion.Informacion.ImagenUsable = resulta;
+                        Configuracion.Informacion.loCerroelUsuario = false;
                         this.Close();
                         break;
                     }
@@ -78,10 +71,10 @@ namespace See_More
         }
         private void Iniciar_Sesion_Load(object sender, EventArgs e)
         {
-            if (Configuracion.usuario != "" && Configuracion.contraseña != "")
+            if (Configuracion.DatosUsuario.Usuario != "" && Configuracion.DatosUsuario.Contraseña != "")
             {
-                txtUsuario.Text = Configuracion.usuario;
-                txtContraseña.Text = Configuracion.contraseña;
+                txtUsuario.Text = Configuracion.DatosUsuario.Usuario;
+                txtContraseña.Text = Configuracion.DatosUsuario.Contraseña;
                 iniciarSesiónToolStripMenuItem.PerformClick();
             }
         }
