@@ -71,7 +71,7 @@ namespace See_More
         }
         private void Iniciar_Sesion_Load(object sender, EventArgs e)
         {
-            if (Configuracion.DatosUsuario.Usuario != "" && Configuracion.DatosUsuario.Contraseña != "")
+            if (Configuracion.DatosUsuario.Usuario != null && Configuracion.DatosUsuario.Contraseña != null)
             {
                 txtUsuario.Text = Configuracion.DatosUsuario.Usuario;
                 txtContraseña.Text = Configuracion.DatosUsuario.Contraseña;

@@ -36,18 +36,17 @@ namespace See_More
             player.CreateControl();
             player.settings.setMode("loop", false);
             playlist = player.playlistCollection.newPlaylist("List");
-            if (Configuracion.DatosUsuario.Usuario != "" && Configuracion.DatosUsuario.Contraseña != "")
+            if (Configuracion.DatosUsuario.Usuario != null && Configuracion.DatosUsuario.Contraseña != null)
             {
                 txtUsuario.Text = Configuracion.DatosUsuario.Usuario;
                 txtContraseña.Text = Configuracion.DatosUsuario.Contraseña;
-                try
+                StreamReader rdUsuario = new StreamReader(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Busqueda.txt");
+                leni = rdUsuario.ReadLine();
+                if(leni != null)
                 {
-                    StreamReader rdUsuario = new StreamReader(Application.StartupPath+@"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario +"Busqueda.txt");
-                    leni = rdUsuario.ReadLine();
                     txtNombreSerie.Text = leni;
-                    rdUsuario.Close();
                 }
-                catch (Exception) { }
+                rdUsuario.Close();
             }
             else
             {
@@ -58,70 +57,68 @@ namespace See_More
                 regresarALaCarpetaAnteriorToolStripMenuItem.Enabled = false;
                 regresarARaizToolStripMenuItem.Enabled = false;
             }
-            try
+            StreamReader rd = new StreamReader(Application.StartupPath + @"\See More\Configuraciones SeeMore\buscar.txt");
+            line = rd.ReadLine();
+            if(line != null)
             {
-                StreamReader rd = new StreamReader(Application.StartupPath+@"\See More\Configuraciones SeeMore\buscar.txt");
-                line = rd.ReadLine(); 
                 this.BackgroundImage = Image.FromFile(line);
                 this.BackgroundImageLayout = ImageLayout.Stretch;
-                rd.Close();
             }
-            catch (Exception) { }
-                pnlRespaldo.Visible = true;
-                regresarARaizToolStripMenuItem.Visible = true;
-                regresarALaCarpetaAnteriorToolStripMenuItem.Visible = true;
-                lblCreacionApartado.Visible = false;
-                lblApartado.Visible = false;
-                lblApartadoE.Visible = false;
-                lblNombreApar.Visible = false;
-                lblSerie.Visible = false;
-                lblDatoInfo.Visible = false;
-                txtCrearApartado.Visible = false;
-                txtBuscarApartado.Visible = false;
-                txtNombreApartado.Visible = false;
-                txtSerie.Visible = false;
-                lblFiltros.Visible = true;
-                cboFiltros.Visible = true;
-                pnlRespaldo.Controls.Clear();
-                pnlRespaldo.AutoScroll = true;
-                tmrRefresco.Start();
-                try
+            rd.Close();
+            pnlRespaldo.Visible = true;
+            regresarARaizToolStripMenuItem.Visible = true;
+            regresarALaCarpetaAnteriorToolStripMenuItem.Visible = true;
+            lblCreacionApartado.Visible = false;
+            lblApartado.Visible = false;
+            lblApartadoE.Visible = false;
+            lblNombreApar.Visible = false;
+            lblSerie.Visible = false;
+            lblDatoInfo.Visible = false;
+            txtCrearApartado.Visible = false;
+            txtBuscarApartado.Visible = false;
+            txtNombreApartado.Visible = false;
+            txtSerie.Visible = false;
+            lblFiltros.Visible = true;
+            cboFiltros.Visible = true;
+            pnlRespaldo.Controls.Clear();
+            pnlRespaldo.AutoScroll = true;
+            tmrRefresco.Start();
+            String camino = string.Empty;
+            String[] caminos = new string[1]; String[] separar;
+            if (Configuracion.DatosUsuario.Usuario != null)
+            {
+                String[] ruta = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Ruta.txt");
+                String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt");
+                animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt");
+                if (animesVistos[0] != null && animesVis[0] != null) { hayAnimes = true; }
+                else { hayAnimes = false; }
+                foreach (String linea in ruta)
                 {
-                    String camino = string.Empty;
-                    String[] ruta = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\"+Configuracion.DatosUsuario.Usuario +"Ruta.txt");
-                    //Posible eliminacion
-                    String[] animesVistos = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt");
-                    animesVis = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + "Animes.txt");
-                    String[] caminos = new string[1]; String[] separar;
-                    try
-                    {
-                        if(animesVistos[0] != null && animesVis[0] != null) { hayAnimes = true; }
-                    }
-                    catch (Exception) { hayAnimes = false; }
-                    foreach(String linea in ruta)
-                    {
-                        separar = linea.Split(';');
-                        caminos[0] = separar[0];
-                    }
-                    if (caminos[0] == null)
-                    {     
-                        camino = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
-                        rutaCamino = camino;
-                    }
-                    else
-                    {
-                        camino = caminos[0];
-                        rutaCamino = camino;
-                    }
-                    ultimarutavista = camino;
-                    DirectoryInfo directory = new DirectoryInfo(camino);
-                    FileInfo[] files = directory.GetFiles("*.mp4");
-                    DirectoryInfo[] directories = directory.GetDirectories();
-                    DirectoryInfo[] directorios = RevisarDirectorio(directories);
-                    IteracionCarpetas(directorios.Length, directorios);
-                    IterarVideos(files.Length, files);
+                    separar = linea.Split(';');
+                    caminos[0] = separar[0];
                 }
-                catch (Exception) { }
+                if (caminos[0] == null)
+                {
+                    camino = @"C:\Users\" + Configuracion.UsuarioActual + @"\Videos";
+                    rutaCamino = camino;
+                }
+                else
+                {
+                    camino = caminos[0];
+                    rutaCamino = camino;
+                }
+                ultimarutavista = camino;
+                DirectoryInfo directory = new DirectoryInfo(camino);
+                FileInfo[] files = directory.GetFiles("*.mp4");
+                DirectoryInfo[] directories = directory.GetDirectories();
+                DirectoryInfo[] directorios = RevisarDirectorio(directories);
+                IteracionCarpetas(directorios.Length, directorios);
+                IterarVideos(files.Length, files);
+            }
+            else
+            {
+                MessageBox.Show("No se puede buscar los contenidos porque no hay un usuario iniciado sesión", "Por favor, inicie sesión", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         
         private void mousemove(object mouse, MouseEventArgs args)
