@@ -132,7 +132,8 @@ namespace See_More
                         }
                         catch (Exception) { rd.Close(); }
                         finally { rd.Close(); }
-                    }
+                    }else
+                        this.Close();
                 }
                 catch (Exception) { }         
         }
