@@ -337,134 +337,90 @@ namespace See_More
             if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\actualizar.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\buscar.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\buscar.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\buscar.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\busqueda.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\busqueda.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\busqueda.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\crearcuenta.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\crearcuenta.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\crearcuenta.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\eliminar.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\eliminar.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\eliminar.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\history.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\history.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\history.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\Imagen.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\nuevo.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\nuevo.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\nuevo.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\reproductor.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\reproductor.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\reproductor.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\respaldo.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\respaldo.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\respaldo.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\Usuarios Creados.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\actuaTemp.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\actuaTemp.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\actuaTemp.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\creaTemp.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\creaTemp.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\creaTemp.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\temp.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\temp.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\temp.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\creaciones.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\creaciones.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\creaciones.txt");
-                sw4.Close();
             }
             if (!File.Exists(Application.StartupPath + @"\See More\Inicios SeeMore\actualizaciones.txt"))
             {
                 File.CreateText(Application.StartupPath + @"\See More\Inicios SeeMore\actualizaciones.txt");
-                sw4 = new StreamWriter(Application.StartupPath + @"\See More\Inicios SeeMore\actualizaciones.txt");
-                sw4.Close();
             }
         }
         public void Verificar()
@@ -520,14 +476,14 @@ namespace See_More
                 String linea;
                 String linea2;
                 String linea3;
-                try
+                StreamReader rd = new StreamReader(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
+                StreamReader rd2 = new StreamReader(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
+                StreamReader rd3 = new StreamReader(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
+                linea = rd.ReadLine();
+                linea2 = rd2.ReadLine();
+                linea3 = rd3.ReadLine();
+                if(linea != null && linea2 != null && linea3 != null)
                 {
-                    StreamReader rd = new StreamReader(Application.StartupPath + @"\See More\Inicios SeeMore\Usuario.txt");
-                    StreamReader rd2 = new StreamReader(Application.StartupPath + @"\See More\Inicios SeeMore\Contraseña.txt");
-                    StreamReader rd3 = new StreamReader(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
-                    linea = rd.ReadLine();
-                    linea2 = rd2.ReadLine();
-                    linea3 = rd3.ReadLine();
                     byte[] decryted = Convert.FromBase64String(linea);
                     result = System.Text.Encoding.Unicode.GetString(decryted);
                     Configuracion.DatosUsuario.Usuario = result;
@@ -538,13 +494,12 @@ namespace See_More
                     resul = System.Text.Encoding.Unicode.GetString(decryted3);
                     Configuracion.DatosUsuario.Imagen = resul;
                 }
-                catch (Exception) { }
                 wmpCentral.settings.volume = 50;
                 wmpCentral.uiMode = "none";
                 wmpCentral.stretchToFit = true;
                 lblVolumen.Text = "Volumen: " + volumen;
                 tmrBateria.Start();
-                if (Configuracion.DatosUsuario.Usuario != "")
+                if (Configuracion.DatosUsuario.Usuario != null)
                 {
                     iniciarSesiónToolStripMenuItem.Text = Configuracion.DatosUsuario.Usuario;
                     menuToolStripMenuItem.Text = "Ir a perfil de " + Configuracion.DatosUsuario.Usuario;
@@ -567,21 +522,20 @@ namespace See_More
                 }
                 this.MouseWheel += new MouseEventHandler(Form1_MouseWheel);
                 String line; String line2;
-                try
+                StreamReader read = new StreamReader(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
+                StreamReader read2 = new StreamReader(Application.StartupPath + @"\See More\Configuraciones SeeMore\reproductor.txt");
+                line = read.ReadLine();
+                line2 = read2.ReadLine();
+                if (line == null)
+                    this.Text = "See More";
+                else
+                    this.Text = "Ultimo video visto: " + line;
+                if(line2 != null)
                 {
-                    StreamReader rd = new StreamReader(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
-                    StreamReader rd2 = new StreamReader(Application.StartupPath + @"\See More\Configuraciones SeeMore\reproductor.txt");
-                    line = rd.ReadLine();
-                    line2 = rd2.ReadLine();
-                    if (line == null)
-                        this.Text = "See More";
-                    else
-                        this.Text = "Ultimo video visto: " + line;
                     this.BackgroundImage = Image.FromFile(line2);
                     this.BackgroundImageLayout = ImageLayout.Stretch;
-                    rd.Close();
                 }
-                catch (Exception) { }
+                read.Close(); read2.Close();
             }
             else
             {
@@ -911,10 +865,7 @@ namespace See_More
                     {
                         File.CreateText(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
                     }
-                    string resulta = string.Empty;
-                    byte[] decrytede = Convert.FromBase64String(Configuracion.DatosUsuario.Imagen);
-                    resulta = System.Text.Encoding.Unicode.GetString(decrytede);
-                    picUsuario.Image = Image.FromFile(resulta);
+                    picUsuario.Image = Image.FromFile(Configuracion.DatosUsuario.Imagen);
                     entra = true;
                     nombre = true;
                     ruta = string.Empty;
@@ -970,90 +921,90 @@ namespace See_More
                 }
                 if (Configuracion.DatosReproductor.NombreVideo != null && Configuracion.DatosReproductor.RutaVideo != null)
                 {
-                    todo = "" + Configuracion.DatosReproductor.NombreVideo + " - " + Configuracion.DatosUsuario.Usuario;
-                    auxiliarNombre = Configuracion.DatosReproductor.NombreVideo;
-                    usuario = "" + Configuracion.DatosUsuario.Usuario;
-                    wmpCentral.URL = Configuracion.DatosReproductor.RutaVideo;
-                    this.Text = "Viendo - " + todo;
-                    tmrProgreso.Start();
-                    String[] porVer = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
-                    String[] vacio;
-                    foreach (String linea in porVer)
+                    if (wmpCentral.URL != Configuracion.DatosReproductor.RutaVideo)
                     {
-                        vacio = linea.Split('{');
-                        if (vacio[0] == auxiliarNombre)
+                        todo = "" + Configuracion.DatosReproductor.NombreVideo + " - " + Configuracion.DatosUsuario.Usuario;
+                        auxiliarNombre = Configuracion.DatosReproductor.NombreVideo;
+                        usuario = "" + Configuracion.DatosUsuario.Usuario;
+                        wmpCentral.URL = Configuracion.DatosReproductor.RutaVideo;
+                        this.Text = "Viendo - " + todo;
+                        tmrProgreso.Start();
+                        String[] porVer = File.ReadAllLines(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
+                        String[] vacio;
+                        foreach (String linea in porVer)
                         {
-                            wmpCentral.Ctlcontrols.currentPosition = double.Parse(vacio[1]);
-                        }
-                        else
-                        {
-                            StreamWriter escribir = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
-                            escribir.WriteLine(vacio[0] + "{" + vacio[1]);
-                            escribir.Close();
-                        }
-                    }
-                    File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
-                    File.Move(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt", Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
-                    if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt"))
-                    {
-                        File.CreateText(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
-                    }
-                    string resulta = string.Empty;
-                    byte[] decrytede = Convert.FromBase64String(Configuracion.DatosUsuario.Imagen);
-                    resulta = System.Text.Encoding.Unicode.GetString(decrytede);
-                    picUsuario.Image = Image.FromFile(resulta);
-                    entra = true;
-                    nombre = true;
-                    ruta = string.Empty;
-                    try
-                    {
-                        StreamWriter escribir = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
-                        escribir.Flush(); escribir.Close();
-                        sw = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
-                        sw2 = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt");
-                        sw.WriteLine(Configuracion.DatosReproductor.NombreVideo + "");
-                        String b = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
-                        sw2.WriteLine(Configuracion.DatosReproductor.NombreVideo + " " + b);
-                        sw.Close();
-                        sw2.Close();
-                        if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt"))
-                        {
-                            if (Configuracion.DatosReproductor.hayIntercambio)
+                            vacio = linea.Split('{');
+                            if (vacio[0] == auxiliarNombre)
                             {
-                                sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
-                                sw3.WriteLine(Configuracion.DatosReproductor.NombreVideo + " " + b);
-                                sw3.Close();
-                                sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosReproductor.UsuarioTemporal + ".txt");
-                                sw3.WriteLine(Configuracion.DatosReproductor.NombreVideo + " " + b);
-                                sw3.Close();
+                                wmpCentral.Ctlcontrols.currentPosition = double.Parse(vacio[1]);
                             }
                             else
                             {
-                                sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
-                                sw3.WriteLine(Configuracion.DatosReproductor.NombreVideo + " " + b);
-                                sw3.Close();
+                                StreamWriter escribir = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
+                                escribir.WriteLine(vacio[0] + "{" + vacio[1]);
+                                escribir.Close();
                             }
                         }
-                        else
+                        File.Delete(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
+                        File.Move(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt", Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + "Inte.txt");
+                        if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt"))
                         {
-                            if (Configuracion.DatosReproductor.hayIntercambio)
+                            File.CreateText(Application.StartupPath + @"\See More\Usuarios SeeMore\temp.txt");
+                        }
+                        picUsuario.Image = Image.FromFile(Configuracion.DatosUsuario.Imagen);
+                        entra = true;
+                        nombre = true;
+                        ruta = string.Empty;
+                        try
+                        {
+                            StreamWriter escribir = new StreamWriter(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
+                            escribir.Flush(); escribir.Close();
+                            sw = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\visto.txt");
+                            sw2 = File.AppendText(Application.StartupPath + @"\See More\Configuraciones SeeMore\historial.txt");
+                            sw.WriteLine(Configuracion.DatosReproductor.NombreVideo + "");
+                            String b = DateTime.Now.Year + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day;
+                            sw2.WriteLine(Configuracion.DatosReproductor.NombreVideo + " " + b);
+                            sw.Close();
+                            sw2.Close();
+                            if (!File.Exists(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt"))
                             {
-                                sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
-                                sw3.WriteLine(Configuracion.DatosReproductor.NombreVideo + " " + b);
-                                sw3.Close();
-                                sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosReproductor.UsuarioTemporal + ".txt");
-                                sw3.WriteLine(Configuracion.DatosReproductor.NombreVideo + " " + b);
-                                sw3.Close();
+                                if (Configuracion.DatosReproductor.hayIntercambio)
+                                {
+                                    sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
+                                    sw3.WriteLine(Configuracion.DatosReproductor.NombreVideo + " " + b);
+                                    sw3.Close();
+                                    sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosReproductor.UsuarioTemporal + ".txt");
+                                    sw3.WriteLine(Configuracion.DatosReproductor.NombreVideo + " " + b);
+                                    sw3.Close();
+                                }
+                                else
+                                {
+                                    sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
+                                    sw3.WriteLine(Configuracion.DatosReproductor.NombreVideo + " " + b);
+                                    sw3.Close();
+                                }
                             }
                             else
                             {
-                                sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
-                                sw3.WriteLine(Configuracion.DatosReproductor.NombreVideo + " " + b);
-                                sw3.Close();
+                                if (Configuracion.DatosReproductor.hayIntercambio)
+                                {
+                                    sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
+                                    sw3.WriteLine(Configuracion.DatosReproductor.NombreVideo + " " + b);
+                                    sw3.Close();
+                                    sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosReproductor.UsuarioTemporal + ".txt");
+                                    sw3.WriteLine(Configuracion.DatosReproductor.NombreVideo + " " + b);
+                                    sw3.Close();
+                                }
+                                else
+                                {
+                                    sw3 = File.AppendText(Application.StartupPath + @"\See More\Usuarios SeeMore\" + usuario + ".txt");
+                                    sw3.WriteLine(Configuracion.DatosReproductor.NombreVideo + " " + b);
+                                    sw3.Close();
+                                }
                             }
                         }
+                        catch (Exception ex) { MessageBox.Show(ex.Message); }
                     }
-                    catch (Exception ex) { MessageBox.Show(ex.Message); }
                 }
             }
             catch (Exception)
@@ -1122,7 +1073,7 @@ namespace See_More
         }
         public void Evento()
         {
-            if (Configuracion.DatosUsuario.Usuario != "")
+            if (Configuracion.DatosUsuario.Usuario != null)
             {
                 iniciarSesiónToolStripMenuItem.Text = Configuracion.DatosUsuario.Usuario;
                 menuToolStripMenuItem.Text = "Ir a perfil de " + Configuracion.DatosUsuario.Usuario;
