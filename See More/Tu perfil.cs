@@ -59,9 +59,7 @@ namespace See_More
             txtConfirmarContraseña.Text = "";
             Iniciar_Sesion frm = new Iniciar_Sesion();
             frm.ShowDialog(); 
-                try
-                {
-                    if (Configuracion.DatosUsuario.Usuario != null)
+                    if (Configuracion.DatosUsuario.Usuario != null && Configuracion.DatosUsuario.Contraseña != null && Configuracion.DatosUsuario.Imagen != null)
                     {
                         lblSeries.Visible = true;
                         txtSeries.Visible = true;
@@ -87,7 +85,8 @@ namespace See_More
                         sw2.WriteLine(resultado);
                         sw2.Close();
                         sw3 = File.AppendText(Application.StartupPath + @"\See More\Inicios SeeMore\Imagen.txt");
-                        sw3.WriteLine(Configuracion.DatosUsuario.Imagen);
+                        byte[] data = System.Text.Encoding.Unicode.GetBytes(Configuracion.DatosUsuario.Imagen);
+                        sw3.WriteLine(Convert.ToBase64String(data));
                         sw3.Close();
                         if (Configuracion.DatosUsuario.Sexo == "Hombre")
                         {
@@ -104,10 +103,7 @@ namespace See_More
                             genero = Configuracion.DatosUsuario.Sexo;
                             this.Text = "Bienvenido/a - " + Configuracion.DatosUsuario.Usuario;
                         }
-                        string res = string.Empty;
-                        byte[] decryted = Convert.FromBase64String(Configuracion.DatosUsuario.Imagen);
-                        res = System.Text.Encoding.Unicode.GetString(decryted);
-                        picUsuario.Image = Image.FromFile(res);
+                        picUsuario.Image = Image.FromFile(Configuracion.DatosUsuario.Imagen);
                         picUsuario.BackgroundImageLayout = ImageLayout.Stretch;
                         lblUsuario.Text = "Este es tu historial de videos - " + Configuracion.DatosUsuario.Usuario;
                         String ruta = Application.StartupPath + @"\See More\Usuarios SeeMore\" + Configuracion.DatosUsuario.Usuario + ".txt";
@@ -133,9 +129,7 @@ namespace See_More
                         catch (Exception) { rd.Close(); }
                         finally { rd.Close(); }
                     }else
-                        this.Close();
-                }
-                catch (Exception) { }         
+                        this.Close();       
         }
         private void label2_Click(object sender, EventArgs e)
         {

@@ -162,12 +162,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DATOS_SEEMORE\DATOS_SEEMORE.csproj">
-      <Project>{6ef097d5-cbaa-4991-9988-ecc5bae9a0c6}</Project>
-      <Name>DATOS_SEEMORE</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <COMReference Include="AxWMPLib">
       <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -211,6 +205,12 @@
     <None Include="Properties\SeeMoreIcon.ico" />
     <None Include="Resources\SeeMore.ico" />
     <Content Include="SeeMoreIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DATOS_SEEMORE\DATOS_SEEMORE.csproj">
+      <Project>{6ef097d5-cbaa-4991-9988-ecc5bae9a0c6}</Project>
+      <Name>DATOS_SEEMORE</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

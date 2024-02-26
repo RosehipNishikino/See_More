@@ -50,12 +50,10 @@ namespace See_More
                         sinCoencidencia = true;
                         Configuracion.DatosUsuario.Usuario = Configuracion.DatosInicioSesionAuto.UsuariosNombre[j];
                         Configuracion.DatosUsuario.Contraseña = res;
-                        Configuracion.DatosUsuario.Imagen = Configuracion.DatosInicioSesionAuto.UsuariosImagen[j];
+                        byte[] data = Convert.FromBase64String(Configuracion.DatosInicioSesionAuto.UsuariosImagen[j]);
+                        Configuracion.DatosUsuario.Imagen = System.Text.Encoding.Unicode.GetString(data);
                         Configuracion.DatosUsuario.Sexo = Configuracion.DatosInicioSesionAuto.UsuariosSexo[j];
-                        string resulta = string.Empty;
-                        byte[] desin = Convert.FromBase64String(Configuracion.DatosUsuario.Imagen);
-                        resulta = System.Text.Encoding.Unicode.GetString(desin);
-                        Configuracion.Informacion.ImagenUsable = resulta;
+                        Configuracion.Informacion.ImagenUsable = Configuracion.DatosUsuario.Imagen;
                         Configuracion.Informacion.loCerroelUsuario = false;
                         this.Close();
                         break;
